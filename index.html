@@ -201,6 +201,22 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
 .mks .m.pp{background:var(--pp-soft);color:var(--pp)}
 .mks .m.ppc{background:var(--ppc-soft);color:var(--ppc)}
 .pocket{font-size:1.02rem;margin-top:14px}
+.ldots{display:flex;gap:6px;margin:4px 0 14px}
+.ldot{width:7px;height:7px;border-radius:50%;background:#2A322D;transition:all .15s}
+.ldot.on{background:var(--ink);transform:scale(1.3)}
+.ldot.done{background:var(--ppc)}
+.lcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-height:230px}
+.lt{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+.lq{font-size:1.05rem;margin:6px 0}
+.lbig{font-family:var(--serif);font-size:1.55rem;font-weight:600;margin:10px 0;color:var(--ink)}
+.cpp{color:var(--pp)} .csp{color:var(--sp)} .cpc{color:var(--ppc)}
+.lrow{padding:11px 0}
+.lrow+.lrow{border-top:1px dashed var(--line)}
+.len{font-family:var(--serif);font-size:1.12rem}
+.lpt{color:var(--mut);font-size:.88rem;margin-top:2px}
+.lnext{margin-top:18px;padding:11px 22px;font-size:.95rem}
+.lfb{margin-top:12px;font-size:.95rem}
+.refbar{margin:18px 0 6px}
 .play{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--btntx);border-radius:999px;padding:13px 24px;font-weight:600;font-size:1rem;font-family:var(--ui)}
 .play:active{transform:scale(.98)}
 .spk{border:1.5px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;font-family:var(--ui);color:var(--mut);margin-left:8px;vertical-align:2px}
@@ -250,28 +266,11 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
     </svg>
     <section class="hero">
       <h1>Três tempos, uma pergunta: toca o agora?</h1>
-      <p>Se ainda toca o agora, é Perfect. Se ficou no passado, é Simple Past. Sessões curtas com repetição espaçada treinam essa decisão até virar reflexo, no olho e no ouvido.</p>
+      <p>Sim: Perfect. Não: Simple Past. Uma lição de 3 minutos para entender, sessões de 4 para nunca mais esquecer.</p>
     </section>
     <div class="stats" id="homeStats"></div>
-    <button class="cta" id="startBtn">Começar sessão<span aria-hidden="true">→</span></button>
-    <div class="duo">
-      <div class="mini pp">
-        <h3>Present Perfect</h3>
-        <p>O ponto que toca o agora: resultado, experiência, contagem.</p>
-        <p class="ex">I've lost my keys.</p>
-      </div>
-      <div class="mini ppc">
-        <h3>Perfect Continuous</h3>
-        <p>A linha que chega ao agora: duração, atividade, evidência.</p>
-        <p class="ex">I've been waiting for an hour.</p>
-      </div>
-      <div class="mini sp">
-        <h3>Simple Past</h3>
-        <p>O ponto que ficou lá atrás: tempo terminado, história fechada.</p>
-        <p class="ex">I called him yesterday.</p>
-      </div>
-    </div>
-  </main>
+    <div class="row" style="margin-top:2px"><button class="cta" id="startBtn">Começar sessão<span aria-hidden="true">→</span></button><button class="ghost" id="lessonBtn">Lição de 3 min</button></div>
+      </main>
 
   <main id="learn" class="screen hidden"></main>
 
@@ -301,7 +300,7 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
   <main id="done" class="screen hidden"></main>
   <main id="prog" class="screen hidden"></main>
 
-  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v6.1 · inglês de trabalho</footer>
+  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v7 · lição guiada</footer>
 </div>
 <script>
 /* ===== dados ===== */
@@ -959,13 +958,85 @@ const FSQ=[
  ["They've known each other ___ ages.","for","ages é um período, ainda que vago."],
  ["It's been raining ___ I woke up.","since","frase inteira marcando o ponto: since + oração."]
 ];
+const LESSON=[
+ {k:"i",h:'<div class="lq">O português conjuga direto. O inglês faz uma pergunta antes:</div><div class="lbig">isso ainda toca o agora?</div><div class="lq">Sim: <b class="cpp">Perfect</b>. Não: <b class="csp">Simple Past</b>. Essa pergunta decide 90% dos casos.</div>'},
+ {k:"i",t:"A mesma história, três tempos",p:[["I lost my keys yesterday.","Tem data: acabou, virou registro."],["I've lost my keys.","Sem data e ainda estou sem elas: toca o agora."],["I've been looking for them all morning.","A busca continua: a linha chega ao agora."]]},
+ {k:"t",id:"tft1",l:"Se a frase diz quando, o jogo acaba na hora"},
+ {k:"t",id:"spp2",l:"Sem data e o efeito valendo agora"},
+ {k:"i",t:"for e since em uma linha",p:[["I've been here for two years.","for mede a duração: quanto tempo?"],["I've been here since 2019.","since crava o início: desde quando?"]]},
+ {k:"t",id:"dur8",l:"for mede, since crava"},
+ {k:"i",t:"O truque do been",p:[["She's been promoting the product.","been + ing: ela vem fazendo."],["She's been promoted.","been + particípio: foi feito com ela."]]},
+ {k:"t",id:"pas4",l:"O que vem depois do been decide"},
+ {k:"i",t:"Sua carreira em três frases",p:[["I've led tech teams for over a decade.","O Perfect abre a manchete."],["At my last company, I grew the team from 15 to 50.","O Past conta o caso, com data e empresa."],["Lately, I've been focusing on reliability.","O contínuo situa o agora."]]},
+ {k:"t",id:"job14",l:"In my last role fecha o capítulo"},
+ {k:"t",id:"job4",l:"A pergunta de experiência da entrevista"},
+ {k:"i",t:"Blocos prontos que destravam a conversa",p:[["How have you been?","O cumprimento padrão."],["What have you been working on?","O abre-papo de trabalho."],["I've been meaning to ask you something.","Puxa qualquer assunto."],["It's been a pleasure talking to you.","Fecha a entrevista com elegância."]]},
+ {k:"d"}
+];
+let li=0;
+function lessonShell(){return '<div class="ldots" id="lDots"></div><div class="lcard" id="lCard"></div><div class="refbar"><button class="ghost" id="refToggle">Abrir a consulta completa</button></div><div id="refWrap" class="hidden">';}
+function lNext(){ if(li<LESSON.length-1){ li++; lShow(); } }
+function lShow(){
+  let d=""; for(let i=0;i<LESSON.length;i++) d+='<span class="ldot '+(i<li?"done":i===li?"on":"")+'"></span>';
+  $("#lDots").innerHTML=d;
+  const s=LESSON[li], c=$("#lCard"); c.innerHTML="";
+  if(s.k==="i"){
+    let hh=s.h||"";
+    if(s.t) hh='<div class="lt">'+s.t+'</div>'+hh;
+    c.innerHTML=hh;
+    (s.p||[]).forEach(pr=>{
+      const r=document.createElement("div"); r.className="lrow";
+      r.innerHTML='<div class="len">'+esc(pr[0])+'</div><div class="lpt">'+esc(pr[1])+'</div>';
+      if(TTS) r.querySelector(".len").appendChild(spkBtn(pr[0]));
+      c.appendChild(r);
+    });
+    const b=document.createElement("button"); b.className="cta lnext"; b.innerHTML='Continuar<span aria-hidden="true">&#8594;</span>';
+    b.addEventListener("click",lNext); c.appendChild(b);
+  }else if(s.k==="t"){
+    const it=ITEMS.find(x=>x.id===s.id);
+    c.innerHTML='<div class="lt">'+s.l+'</div><div class="qtext">'+esc(it.q).replace("___",'<span class="gap">&nbsp;</span>')+'</div>';
+    const box=document.createElement("div"); box.className="opts"; c.appendChild(box);
+    const fb=document.createElement("div"); fb.className="lfb"; c.appendChild(fb);
+    const order=it.o.map((_,i)=>i); shuffle(order); let done=false;
+    order.forEach(oi=>{
+      const b=document.createElement("button"); b.className="opt"; b.dataset.oi=oi;
+      b.innerHTML='<span>'+esc(it.o[oi])+'</span>';
+      b.addEventListener("click",()=>{
+        if(done) return; done=true;
+        box.querySelectorAll(".opt").forEach(x=>{
+          x.disabled=true;
+          if(+x.dataset.oi===it.a) x.classList.add("right");
+          else if(x===b) x.classList.add("wrong");
+          else x.classList.add("dim");
+        });
+        const first=it.x.split(". ")[0]+(it.x.includes(". ")?".":"");
+        fb.innerHTML=(oi===it.a?"<b>Certo.</b> ":"<b>Quase.</b> ")+esc(first)+"<br>";
+        if(TTS) fb.appendChild(spkBtn(it.q.replace("___",it.o[it.a])));
+        const n=document.createElement("button"); n.className="cta lnext"; n.innerHTML='Continuar<span aria-hidden="true">&#8594;</span>';
+        n.addEventListener("click",lNext); fb.appendChild(n);
+      });
+      box.appendChild(b);
+    });
+  }else{
+    c.innerHTML='<div class="lt">A regra de bolso</div><div class="lq">Toca o agora? <b class="cpp">Perfect</b>. Tem data? <b class="csp">Past</b>. Dura até agora? <b class="cpc">been + ing</b>.</div><div class="lq">Entendeu em 3 minutos. Agora o app garante que você não esqueça: 10 questões por sessão.</div>';
+    const row=document.createElement("div"); row.className="row";
+    const p=document.createElement("button"); p.className="cta"; p.innerHTML='Praticar agora<span aria-hidden="true">&#8594;</span>'; p.addEventListener("click",startSession);
+    const r=document.createElement("button"); r.className="ghost"; r.textContent="Refazer a lição"; r.addEventListener("click",()=>{li=0;lShow();});
+    row.appendChild(p); row.appendChild(r); c.appendChild(row);
+  }
+}
 const CAMS={
   sp:{s:"I lost my keys yesterday.",c:"Fato datado e arquivado. Aconteceu, acabou, virou registro. Se a frase diz quando, a câmera é essa."},
   pp:{s:"I've lost my keys.",c:"A foto é antiga, mas está colada no seu presente: você está sem as chaves agora. Ninguém pergunta quando."},
   ppc:{s:"I've been looking for them all morning.",c:"A luz vermelha ainda pisca: a busca escorre pelo tempo e chega ao agora, ainda quente e inacabada."}
 };
 function renderLearn(){
-  $("#learn").innerHTML=THEORY;
+  $("#learn").innerHTML=lessonShell()+THEORY+'</div>';
+  li=0; lShow();
+  $("#refToggle").addEventListener("click",()=>{
+    const on=$("#refWrap").classList.toggle("hidden");
+    $("#refToggle").textContent=on?"Abrir a consulta completa":"Fechar a consulta";
+  });
   $("#learn [data-go-practice]").addEventListener("click",startSession);
   if(TTS) $("#camSent").appendChild(spkBtn($("#camSent").textContent));
   document.querySelectorAll("#learn .cam").forEach(b=>b.addEventListener("click",()=>{
@@ -1064,6 +1135,7 @@ function startSession(){
   go("quiz"); renderQ();
 }
 $("#startBtn").addEventListener("click",startSession);
+$("#lessonBtn").addEventListener("click",()=>go("learn"));
 $("#quitBtn").addEventListener("click",()=>go("home"));
 
 const KINDS={c:"Complete a frase",s:"Escolha a frase correta",f:"Digite a forma do verbo",t:"Traduza para o inglês",m:"Reescreva a frase",l:"Ditado: ouça e escreva"};
