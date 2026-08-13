@@ -1,0 +1,1577 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0F1412">
+<title>até agora · Simple Past, Present Perfect e Continuous</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --paper:#0F1412; --card:#171D1A; --ink:#E7ECE8; --mut:#A2B0A8; --line:#2B332E;
+  --pp:#E886AC; --pp-soft:rgba(232,134,172,.16); --ppc:#5BC0D6; --ppc-soft:rgba(91,192,214,.16);
+  --sp:#B49BE0; --sp-soft:rgba(180,155,224,.16);
+  --ok:#53C98D; --ok-soft:rgba(83,201,141,.16); --bad:#E57A7A; --bad-soft:rgba(229,122,122,.16);
+  --gold:#D9B45C; --btn:#E7ECE8; --btntx:#121714; --btnhv:#F7FBF7; --r:14px;
+  --ui:"Bricolage Grotesque",system-ui,sans-serif;
+  --serif:"Source Serif 4",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--paper)}
+body::before{content:"";position:fixed;inset:0;background:var(--paper);z-index:-1}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:var(--ui);font-size:16px;line-height:1.55;min-height:100dvh}
+.wrap{max-width:660px;margin:0 auto;padding:20px 18px 56px}
+button{font-family:var(--ui);cursor:pointer;border:none;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--ppc);outline-offset:2px;border-radius:6px}
+
+/* topo */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.brand{font-weight:700;font-size:1.05rem;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.brand .dot{width:9px;height:9px;border-radius:50%;background:var(--pp);display:inline-block}
+.tabs{display:flex;background:#1D2420;border-radius:999px;padding:3px;gap:2px}
+.tabs button{padding:7px 13px;border-radius:999px;font-weight:600;font-size:.86rem;color:var(--mut)}
+.tabs button[aria-selected="true"]{background:#2A322C;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.4)}
+
+/* assinatura: linha do agora */
+.tl{width:100%;height:auto;display:block}
+.tl .axis{stroke:var(--ink);stroke-width:2}
+.tl .lab{font:600 11px var(--ui);fill:var(--mut);letter-spacing:.06em}
+.tl .now{font:700 12px var(--ui);fill:var(--ink)}
+.tl .pdot{fill:var(--pp)} .tl .sdot{fill:var(--sp)}
+.tl .pline{stroke:var(--ppc);stroke-width:6;stroke-linecap:round}
+@media (prefers-reduced-motion:no-preference){
+  .tl .pline{stroke-dasharray:340;stroke-dashoffset:340;animation:draw 1.1s .2s ease-out forwards}
+  .tl .pdot,.tl .sdot{transform-origin:center;animation:pop .5s 1s cubic-bezier(.2,1.6,.4,1) backwards}
+  .tl .sdot{animation-delay:1.15s}
+  @keyframes draw{to{stroke-dashoffset:0}}
+  @keyframes pop{from{transform:scale(0)}}
+}
+
+/* home */
+.hero h1{font-size:clamp(1.7rem,5.5vw,2.25rem);font-weight:700;letter-spacing:-.02em;line-height:1.12;margin:18px 0 8px}
+.hero p{color:var(--mut);max-width:46ch}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0 14px}
+.chip{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:.88rem;font-weight:600}
+.chip b{font-weight:700}
+.chip .g{color:var(--gold)} .chip .t{color:var(--ppc)}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--btntx);font-weight:600;font-size:1rem;padding:14px 26px;border-radius:999px;transition:transform .12s ease,background .12s ease}
+.cta:hover{background:var(--btnhv);transform:translateY(-1px)}
+.cta:active{transform:translateY(0)}
+.duo{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:26px}
+@media(max-width:600px){.duo{grid-template-columns:1fr}}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px}
+.mini h3{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.mini.pp h3{color:var(--pp)} .mini.ppc h3{color:var(--ppc)} .mini.sp h3{color:var(--sp)}
+.mini p{font-size:.9rem;color:var(--mut)}
+.mini .ex{font-family:var(--serif);color:var(--ink);font-size:.98rem;margin-top:8px}
+
+/* teoria */
+.sec{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:14px}
+.sec h2{font-size:1.15rem;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:9px;margin-bottom:4px}
+.tag{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.tag.pp{background:var(--pp-soft);color:var(--pp)} .tag.ppc{background:var(--ppc-soft);color:var(--ppc)}
+.tag.mix{background:#262E29;color:var(--mut)} .tag.sp{background:var(--sp-soft);color:var(--sp)}
+.sec .use{margin:12px 0 0;padding-left:0;list-style:none}
+.sec .use li{padding:9px 0;border-top:1px dashed var(--line)}
+.sec .use li:first-child{border-top:none}
+.sec .use b{font-weight:600}
+.sec .en{font-family:var(--serif);display:block;margin-top:3px;font-size:1.02rem}
+.sec .ptt{color:var(--mut);font-size:.86rem}
+.alert{background:rgba(217,180,92,.10);border:1px solid rgba(217,180,92,.35);border-radius:10px;padding:12px 14px;font-size:.9rem;margin-top:14px}
+.vs{width:100%;border-collapse:collapse;margin-top:10px;font-size:.92rem}
+.vs td{padding:9px 10px;border-top:1px dashed var(--line);vertical-align:top}
+.vs td:first-child{width:50%}
+.vs .en{font-family:var(--serif)}
+.vs .who{font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.vs .who.pp{color:var(--pp)} .vs .who.ppc{color:var(--ppc)} .vs .who.sp{color:var(--sp)}
+
+/* sessão */
+.shead{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.track{display:flex;align-items:center;gap:6px;flex:1}
+.track .seg{height:5px;flex:1;border-radius:99px;background:#2A322D}
+.track .seg.ok{background:var(--ok)} .track .seg.bad{background:var(--bad)} .track .seg.cur{background:var(--ink)}
+.track .nowlab{font:700 10px var(--ui);color:var(--mut);letter-spacing:.08em;margin-left:4px}
+.quit{color:var(--mut);font-size:.85rem;font-weight:600;margin-left:14px}
+.qcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.kind{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin-bottom:12px}
+.qtext{font-family:var(--serif);font-size:1.28rem;line-height:1.5}
+.qtext .gap{display:inline-block;min-width:86px;border-bottom:2px solid var(--ink);text-align:center;color:var(--ppc);font-weight:600}
+.hintv{font-size:.85rem;color:var(--mut);margin-top:8px;font-family:var(--ui)}
+.opts{display:grid;gap:10px;margin-top:20px}
+.opt{display:flex;align-items:flex-start;gap:12px;text-align:left;background:#1C231F;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;font-family:var(--serif);font-size:1.06rem;transition:border-color .1s,background .1s}
+.opt:hover{border-color:var(--ink)}
+.opt .key{font:700 .72rem var(--ui);color:var(--mut);border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-top:2px;flex:none}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft);animation:shake .3s}
+.opt.dim{opacity:.5}
+.opt:disabled{cursor:default}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.opt.wrong{animation:none}.tl .pline{animation:none;stroke-dashoffset:0}.tl .pdot,.tl .sdot{animation:none}}
+.tin{display:flex;gap:10px;margin-top:20px}
+.tin input{flex:1;font-family:var(--serif);font-size:1.06rem;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:#1C231F;color:var(--ink)}
+.tin input:focus{outline:none;border-color:var(--ppc)}
+.tin button{background:var(--btn);color:var(--btntx);font-weight:600;padding:0 20px;border-radius:12px}
+.fb{margin-top:16px;border-radius:12px;padding:15px 16px;display:none}
+.fb.show{display:block;animation:up .18s ease-out}
+@keyframes up{from{opacity:0;transform:translateY(6px)}}
+.fb.good{background:var(--ok-soft)} .fb.poor{background:var(--bad-soft)}
+.fb .verdict{font-weight:700;font-size:.95rem;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.fb.good .verdict{color:var(--ok)} .fb.poor .verdict{color:var(--bad)}
+.fb .ans{font-family:var(--serif);font-size:1.05rem;margin-top:6px}
+.fb .why{font-size:.9rem;color:#C7D2CB;margin-top:6px}
+.fb .next{margin-top:12px;background:var(--btn);color:var(--btntx);font-weight:600;padding:10px 20px;border-radius:999px}
+.kbd{font-size:.78rem;color:var(--mut)}
+
+/* fim de sessão e progresso */
+.big{font-size:clamp(1.5rem,5vw,2rem);font-weight:700;letter-spacing:-.02em;margin:6px 0 4px}
+.sub{color:var(--mut)}
+.score{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.bars{margin-top:8px}
+.bar{margin:13px 0}
+.bar .lb{display:flex;justify-content:space-between;font-size:.86rem;font-weight:600;margin-bottom:5px}
+.bar .lb span:last-child{color:var(--mut);font-weight:500}
+.bar .tr{height:8px;background:#242B27;border-radius:99px;overflow:hidden}
+.bar .fl{height:100%;border-radius:99px;background:var(--ink);transition:width .5s ease}
+.bar.pp .fl{background:var(--pp)} .bar.ppc .fl{background:var(--ppc)} .bar.sp .fl{background:var(--sp)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.ghost{border:1.5px solid var(--line);border-radius:999px;padding:12px 22px;font-weight:600;background:var(--card)}
+.danger{color:var(--bad);font-size:.85rem;font-weight:600;margin-top:28px}
+.hidden{display:none}
+footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
+
+/* aula */
+.lede{font-size:1.05rem;max-width:56ch}
+.lede b{font-weight:700}
+.cams{display:flex;gap:8px;margin:16px 0 4px}
+.cam{flex:1;text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;background:#1C231F;transition:border-color .12s,background .12s}
+.cam small{display:block;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.cam span{font-weight:600;font-size:.9rem}
+.cam.on.sp{border-color:var(--sp);background:var(--sp-soft)}
+.cam.on.pp{border-color:var(--pp);background:var(--pp-soft)}
+.cam.on.ppc{border-color:var(--ppc);background:var(--ppc-soft)}
+.rec{display:inline-block;width:7px;height:7px;border-radius:50%;background:#C43D3D;margin-right:5px;vertical-align:1px}
+@media (prefers-reduced-motion:no-preference){.cam.on .rec{animation:blink 1.1s infinite}@keyframes blink{50%{opacity:.2}}}
+.stage{margin-top:10px}
+.stage .g{opacity:0;transition:opacity .35s ease}
+.stage .g.on{opacity:1}
+.stage .pulse{transform-origin:486px 52px}
+@media (prefers-reduced-motion:no-preference){
+  .stage .g.on .pulse{animation:ring 1.6s ease-out infinite}
+  @keyframes ring{from{transform:scale(.4);opacity:.8}to{transform:scale(1.6);opacity:0}}
+  .stage .flowline{stroke-dasharray:340;stroke-dashoffset:340;transition:stroke-dashoffset .9s ease-out}
+  .stage .g.on .flowline{stroke-dashoffset:0}
+}
+.camsent{font-family:var(--serif);font-size:1.22rem;margin-top:12px}
+.capn{color:var(--mut);font-size:.92rem;margin-top:4px;min-height:3.2em}
+.flow{margin-top:14px}
+.node{border-left:3px solid var(--line);padding:10px 0 10px 16px;margin-left:4px;transition:opacity .2s,border-color .2s}
+.node h4{font-size:.98rem;font-weight:700}
+.node .mk{color:var(--mut);font-size:.84rem;margin:2px 0 4px}
+.node .out{font-size:.86rem;font-weight:700}
+.node .out .en{font-weight:400}
+.node.sp .out{color:var(--sp)} .node.pp .out{color:var(--pp)} .node.ppc .out{color:var(--ppc)}
+.node.lit{border-color:currentColor}
+.node.lit.sp{border-color:var(--sp);background:linear-gradient(90deg,var(--sp-soft),transparent)}
+.node.lit.pp{border-color:var(--pp);background:linear-gradient(90deg,var(--pp-soft),transparent)}
+.node.lit.ppc{border-color:var(--ppc);background:linear-gradient(90deg,var(--ppc-soft),transparent)}
+.node.dim{opacity:.4}
+.tryl{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--mut);margin:16px 0 8px}
+.pchips{display:flex;flex-wrap:wrap;gap:8px}
+.pchip{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-size:.88rem;font-weight:600;background:var(--card);transition:all .12s}
+.pchip:hover{border-color:var(--ink)}
+.pchip.on{background:var(--btn);border-color:var(--btn);color:var(--btntx)}
+.ansl{margin-top:12px;display:none}
+.ansl.show{display:block;animation:up .18s ease-out}
+.ansl .en{font-family:var(--serif);font-size:1.12rem}
+.ansl .nt{font-size:.86rem;color:var(--mut)}
+.emb{font-size:.8rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:2px}
+.sec.spc .emb{color:var(--sp)} .sec.ppcd .emb{color:var(--pp)} .sec.ppcc .emb{color:var(--ppc)}
+.bridge{margin-top:12px;border-top:1px dashed var(--line)}
+.bridge .br{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:baseline;padding:8px 0;border-bottom:1px dashed var(--line);font-size:.93rem}
+.bridge .br .pt{color:var(--mut)}
+.bridge .br .ar{color:var(--mut)}
+.bridge .br .en{font-family:var(--serif);font-size:1rem}
+.mks{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.mks .m{font-size:.8rem;font-weight:600;padding:4px 11px;border-radius:999px}
+.mks .m.sp{background:var(--sp-soft);color:var(--sp)}
+.mks .m.pp{background:var(--pp-soft);color:var(--pp)}
+.mks .m.ppc{background:var(--ppc-soft);color:var(--ppc)}
+.pocket{font-size:1.02rem;margin-top:14px}
+.ldots{display:flex;gap:6px;margin:4px 0 14px}
+.ldot{width:7px;height:7px;border-radius:50%;background:#2A322D;transition:all .15s}
+.ldot.on{background:var(--ink);transform:scale(1.3)}
+.ldot.done{background:var(--ppc)}
+.lcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;min-height:230px}
+.lt{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);margin-bottom:10px}
+.lq{font-size:1.05rem;margin:6px 0}
+.lbig{font-family:var(--serif);font-size:1.55rem;font-weight:600;margin:10px 0;color:var(--ink)}
+.cpp{color:var(--pp)} .csp{color:var(--sp)} .cpc{color:var(--ppc)}
+.lrow{padding:11px 0}
+.lrow+.lrow{border-top:1px dashed var(--line)}
+.len{font-family:var(--serif);font-size:1.12rem}
+.lpt{color:var(--mut);font-size:.88rem;margin-top:2px}
+.lnext{margin-top:18px;padding:11px 22px;font-size:.95rem}
+.lfb{margin-top:12px;font-size:.95rem}
+.refbar{margin:18px 0 6px}
+.recbtn{width:78px;height:78px;border-radius:50%;background:var(--bad);border:none;margin:18px auto 6px;display:block;position:relative}
+.recbtn::after{content:"";position:absolute;inset:26px;border-radius:6px;background:#fff}
+.recbtn.idle::after{inset:22px;border-radius:50%}
+@media (prefers-reduced-motion:no-preference){.recbtn.rec{animation:pulse 1.2s infinite}@keyframes pulse{50%{box-shadow:0 0 0 14px rgba(229,122,122,.18)}}}
+.reclab{text-align:center;color:var(--mut);font-size:.86rem;margin-bottom:6px}
+.spkrow{margin-top:14px}
+.spkrow audio{width:100%;margin-top:6px}
+.spklab{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mut)}
+.spkmodel{font-family:var(--serif);font-size:1.15rem;margin-top:4px}
+.micoff{color:var(--mut);font-size:.95rem;line-height:1.6}
+.cam.on{border-color:var(--gold);background:rgba(217,180,92,.14)}
+#speak .cams{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;padding-bottom:2px}
+#speak .cam{flex:0 0 auto}
+#speak .cam span{font-size:.82rem}
+.scnbtn{display:block;width:100%;text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:13px 15px;margin-top:10px;background:#1C231F;color:var(--ink);font-weight:600}
+.scnbtn:hover{border-color:var(--ink)}
+.simq{font-family:var(--serif);font-size:1.22rem;margin-top:6px}
+.simrev{margin-top:14px;border-top:1px dashed var(--line);padding-top:10px}
+.simrev .sq{font-size:.88rem;color:var(--mut)}
+.epi{font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.5;margin:8px 0 4px}
+.epia{color:var(--mut);font-size:.88rem;margin-bottom:20px}
+.ptoday{font-size:1.08rem;line-height:1.7}
+.pday{display:flex;gap:12px;padding:9px 10px;border-radius:10px;font-size:.95rem}
+.pday b{min-width:42px;color:var(--mut);font-weight:700}
+.pday.today{background:var(--ppc-soft);border:1px solid rgba(91,192,214,.35)}
+.pday.today b{color:var(--ppc)}
+.mk{padding:11px 0;border-top:1px dashed var(--line);font-size:.98rem}
+.mk:first-of-type{border-top:none}
+.mk .st{color:var(--mut);font-size:.86rem;margin-top:2px}
+.mk.done .st{color:var(--ok);font-weight:600}
+.play{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--btntx);border-radius:999px;padding:13px 24px;font-weight:600;font-size:1rem;font-family:var(--ui)}
+.play:active{transform:scale(.98)}
+.spk{border:1.5px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;font-family:var(--ui);color:var(--mut);margin-left:8px;vertical-align:2px}
+.spk:hover{border-color:var(--ink);color:var(--ink)}
+.youwrote{font-size:.86rem;color:var(--mut);margin-top:4px;font-family:var(--ui)}
+.sf{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+@media(max-width:600px){.sf{grid-template-columns:1fr}}
+.sfc{border:1px solid var(--line);border-radius:12px;padding:13px 15px;background:#141A17}
+.sfc h4{font-size:.95rem;font-weight:700;margin-bottom:4px}
+.sfc.forc h4{color:var(--ppc)} .sfc.sinc h4{color:var(--gold)}
+.sfc p{font-size:.9rem;color:var(--mut)}
+.sfc .en{font-family:var(--serif);color:var(--ink)}
+.fsq{font-family:var(--serif);font-size:1.18rem;margin-top:10px;min-height:1.6em}
+.fsq .gap{display:inline-block;min-width:70px;border-bottom:2px solid var(--ink);text-align:center;color:var(--ppc);font-weight:600}
+.fsbtns{display:flex;gap:10px;margin-top:12px}
+.fsbtn{border:1.5px solid var(--line);border-radius:999px;padding:10px 30px;font-weight:700;font-size:1rem;background:#1C231F;color:var(--ink)}
+.fsbtn:hover{border-color:var(--ink)}
+.fsbtn.right{border-color:var(--ok);background:var(--ok-soft)}
+.fsbtn.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fsnt{font-size:.88rem;color:var(--mut);margin-top:8px;min-height:1.4em}
+.fsscore{font-size:.8rem;font-weight:700;color:var(--mut);letter-spacing:.05em}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand"><span class="dot"></span>até agora</div>
+    <nav class="tabs" role="tablist">
+      <button role="tab" aria-selected="true" data-go="home">Início</button>
+      <button role="tab" aria-selected="false" data-go="learn">Aprender</button>
+      <button role="tab" aria-selected="false" data-go="plan">Plano</button>
+      <button role="tab" aria-selected="false" data-go="prog">Progresso</button>
+    </nav>
+  </header>
+
+  <main id="home" class="screen">
+    <svg class="tl" viewBox="0 0 600 86" aria-hidden="true">
+      <line class="axis" x1="20" y1="52" x2="580" y2="52"/>
+      <polygon points="580,52 568,46 568,58" fill="var(--ink)"/>
+      <text class="lab" x="20" y="76">PASSADO</text>
+      <text class="now" x="470" y="76">AGORA</text>
+      <circle class="sdot" cx="92" cy="52" r="8"/>
+      <text class="lab" x="70" y="26" fill="var(--sp)">did</text>
+      <line class="pline" x1="190" y1="34" x2="486" y2="34"/>
+      <circle class="pdot" cx="486" cy="52" r="8"/>
+      <text class="lab" x="190" y="24" fill="var(--ppc)">have been doing</text>
+      <text class="lab" x="500" y="46" fill="var(--pp)">have done</text>
+    </svg>
+    <section class="hero">
+      <h1>Três tempos, uma pergunta: toca o agora?</h1>
+      <p>Sim: Perfect. Não: Simple Past. Uma lição de 3 minutos para entender, sessões de 4 para nunca mais esquecer.</p>
+    </section>
+    <div class="stats" id="homeStats"></div>
+    <div class="row" style="margin-top:2px"><button class="cta" id="startBtn">Começar sessão<span aria-hidden="true">→</span></button><button class="ghost" id="lessonBtn">Lição de 3 min</button><button class="ghost" id="speakBtn">Treinar a fala</button></div>
+      </main>
+
+  <main id="learn" class="screen hidden"></main>
+
+  <main id="quiz" class="screen hidden">
+    <div class="shead">
+      <div class="track" id="track"></div>
+      <button class="quit" id="quitBtn">Sair</button>
+    </div>
+    <div class="qcard">
+      <div class="kind" id="qKind"></div>
+      <div class="qtext" id="qText"></div>
+      <div class="hintv" id="qHint"></div>
+      <div class="opts" id="qOpts"></div>
+      <div class="tin hidden" id="qType">
+        <input id="qInput" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Digite aqui">
+        <button id="qCheck">Conferir</button>
+      </div>
+      <div class="fb" id="fb">
+        <div class="verdict"><span id="fbV"></span><span class="kbd">Enter continua</span></div>
+        <div class="ans" id="fbA"></div>
+        <div class="why" id="fbW"></div>
+        <button class="next" id="nextBtn">Continuar</button>
+      </div>
+    </div>
+  </main>
+
+  <main id="done" class="screen hidden"></main>
+
+  <main id="speak" class="screen hidden">
+    <div class="shead">
+      <div class="cams" style="flex:1;margin:0">
+        <button class="cam ppc on" data-m="r"><small>Responder</small><span>PT para EN</span></button>
+        <button class="cam pp" data-m="b"><small>Blocos</small><span>Frases prontas</span></button>
+        <button class="cam sp" data-m="e"><small>Eco</small><span>Ouça e repita</span></button>
+        <button class="cam" data-m="s"><small>Simulação</small><span>Cena real</span></button>
+        <button class="cam" data-m="m"><small>Monólogo</small><span>Um minuto seu</span></button>
+      </div>
+      <button class="quit" id="spkQuit">Sair</button>
+    </div>
+    <div class="qcard" id="spkCard"></div>
+  </main>
+  <main id="plan" class="screen hidden"></main>
+  <main id="prog" class="screen hidden"></main>
+
+  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v10 · plano</footer>
+</div>
+<script>
+/* ===== dados ===== */
+const RULES = {
+  res:{n:"Resultado agora", t:"pp"},
+  exp:{n:"Experiências de vida", t:"pp"},
+  jay:{n:"just, already, yet", t:"pp"},
+  dur:{n:"Duração com for e since", t:"ppc"},
+  evi:{n:"Evidência recente", t:"ppc"},
+  pvr:{n:"Processo vs resultado", t:"mix"},
+  sta:{n:"Verbos de estado", t:"pp"},
+  qtd:{n:"Quantidade vs duração", t:"mix"},
+  tft:{n:"Tempo terminado", t:"sp"},
+  spp:{n:"Passado vs Perfect", t:"mix"},
+  frm:{n:"Forma: did, have e particípios", t:"mix"},
+  dit:{n:"Ouvido: contrações", t:"mix"},
+  pas:{n:"Voz passiva: been + particípio", t:"mix"},
+  conv:{n:"Frases de todo dia", t:"mix"},
+  job:{n:"Entrevista e reunião", t:"mix"}
+};
+
+/* kinds: c = escolha na lacuna, s = frase correta, f = digite a forma, t = traduza */
+const ITEMS = [
+/* Resultado agora (PP) */
+{id:"res1",r:"res",k:"c",q:"Someone ___ the window. There's glass all over the floor.",o:["has broken","has been breaking"],a:0,x:"Ação pontual com resultado visível agora. Quebrar não se estende no tempo, então o contínuo não cabe."},
+{id:"res2",r:"res",k:"c",q:"I can't find my badge. I think I ___ it.",o:["have lost","have been losing"],a:0,x:"O que importa é o efeito presente: estou sem o crachá. Perder é pontual."},
+{id:"res3",r:"res",k:"f",q:"She ___ the report, so we can review it now.",v:"finish",ans:"has finished",acc:["has finished"],x:"Tarefa concluída com efeito agora: por isso dá para revisar."},
+{id:"res4",r:"res",k:"t",q:"Perdi minhas chaves (e continuo sem elas).",v:"lose",ans:"I have lost my keys.",acc:["i have lost my keys","ive lost my keys"],x:"Resultado presente: a perda passada explica a situação atual."},
+{id:"res5",r:"res",k:"s",o:["The taxi has arrived. Let's go!","The taxi has been arriving. Let's go!"],a:0,x:"Chegar é pontual: o táxi está aqui. Sem duração, sem contínuo."},
+{id:"res6",r:"res",k:"c",q:"Good news: we ___ the venue. It's booked for May.",o:["have chosen","have been choosing"],a:0,x:"Decisão fechada, resultado válido agora: forma simples."},
+{id:"res7",r:"res",k:"f",q:"They ___ the bug. The app works again.",v:"fix",ans:"have fixed",acc:["have fixed"],x:"Conserto concluído, efeito no presente: o app funciona."},
+
+/* Experiências (PP) */
+{id:"exp1",r:"exp",k:"c",q:"Have you ever ___ sushi?",o:["tried","been trying"],a:0,x:"Experiência de vida com ever: forma simples, sem foco em duração."},
+{id:"exp2",r:"exp",k:"c",q:"She ___ to Japan twice.",o:["has been","has been going"],a:0,x:"has been to = já esteve. Contar vezes pede a forma simples."},
+{id:"exp3",r:"exp",k:"f",q:"I have never ___ snow.",v:"see",ans:"seen",acc:["seen"],x:"Particípio de see é seen. O never fica entre have e o particípio."},
+{id:"exp4",r:"exp",k:"t",q:"Você já esteve em Londres?",v:"be",ans:"Have you ever been to London?",acc:["have you ever been to london","have you been to london"],x:"Pergunta de experiência: Have you (ever) been to...?"},
+{id:"exp5",r:"exp",k:"s",o:["I have watched that movie three times.","I have been watching that movie three times."],a:0,x:"three times fecha a conta: experiência contada usa a forma simples."},
+{id:"exp6",r:"exp",k:"c",q:"This is the first time I ___ a demo to investors.",o:["have given","have been giving"],a:0,x:"A estrutura the first time (that)... pede Present Perfect simples."},
+{id:"exp7",r:"exp",k:"f",q:"He ___ in three different countries.",v:"work",ans:"has worked",acc:["has worked"],x:"Experiência acumulada, contagem de países: simples. Compare com has been working here for years, que foca na duração."},
+
+/* just, already, yet (PP) */
+{id:"jay1",r:"jay",k:"c",q:"They ___ the contract. We can start.",o:["have just signed","have just been signing"],a:0,x:"just = acabou de: evento pontual recém concluído."},
+{id:"jay2",r:"jay",k:"f",q:"The meeting ___. Hurry up!",v:"already / start",ans:"has already started",acc:["has already started","already started"],x:"already vai entre has e o particípio: has already started. No falado americano, The meeting already started também é padrão."},
+{id:"jay3",r:"jay",k:"c",q:"She hasn't replied ___.",o:["yet","already"],a:0,x:"yet fecha frases negativas e perguntas: ainda não aconteceu."},
+{id:"jay4",r:"jay",k:"s",o:["He hasn't answered my email yet.","He hasn't been answering my email yet."],a:0,x:"yet olha para o resultado que ainda não veio, não para uma atividade em curso."},
+{id:"jay5",r:"jay",k:"t",q:"Eles acabaram de chegar.",v:"arrive",ans:"They have just arrived.",acc:["they have just arrived","theyve just arrived","they just arrived"],x:"Acabar de = have just + particípio. No falado americano, They just arrived, com Simple Past, é igualmente padrão; o app aceita os dois."},
+{id:"jay6",r:"jay",k:"c",q:"I've ___ sent the invoice. You don't need to remind me.",o:["already","yet"],a:0,x:"already em afirmativas: já feito, antes do esperado."},
+{id:"jay7",r:"jay",k:"f",q:"We ___ the new feature.",v:"just / launch",ans:"have just launched",acc:["have just launched","just launched"],x:"have + just + particípio: lançamento recém concluído."},
+
+/* Duração for e since (PPC) */
+{id:"dur1",r:"dur",k:"c",q:"I ___ in Porto Alegre for five years.",o:["have been living","am living"],a:0,x:"Erro clássico: o presente contínuo não carrega for + período até agora. A ponte entre passado e presente é o perfect."},
+{id:"dur2",r:"dur",k:"c",q:"She ___ English since January.",o:["has been studying","studies"],a:0,x:"since ancora no passado e chega ao agora: o presente simples não faz essa ponte."},
+{id:"dur3",r:"dur",k:"f",q:"How long have you ___?",v:"wait",ans:"been waiting",acc:["been waiting"],x:"How long + ação em andamento: have been + verbo com ing."},
+{id:"dur4",r:"dur",k:"t",q:"Trabalho aqui há dois anos.",v:"work",ans:"I have been working here for two years.",acc:["i have been working here for two years","ive been working here for two years"],x:"O português usa presente (trabalho há...); o inglês exige perfect para duração até agora."},
+{id:"dur5",r:"dur",k:"c",q:"We ___ about this decision for weeks.",o:["have been talking","are talking"],a:0,x:"for weeks mede a duração até o presente: perfect continuous."},
+{id:"dur6",r:"dur",k:"s",o:["He has been leading the team since April.","He is leading the team since April."],a:0,x:"since exige perfect. O presente contínuo sozinho não conecta o início no passado."},
+{id:"dur7",r:"dur",k:"f",q:"They ___ with the vendor since Monday.",v:"negotiate",ans:"have been negotiating",acc:["have been negotiating"],x:"Negociação em curso desde um ponto no passado: have been + ing."},
+{id:"dur8",r:"dur",k:"c",q:"I've been at this company ___ 2021.",o:["since","for"],a:0,x:"since + ponto no tempo: 2021, Monday, January."},
+{id:"dur9",r:"dur",k:"c",q:"She's been on the road ___ two weeks.",o:["for","since"],a:0,x:"for + período: two weeks, five years, a long time."},
+
+/* Evidência recente (PPC) */
+{id:"evi1",r:"evi",k:"c",q:"Your eyes are red, but you seem calm now. ___?",o:["Have you been crying","Are you crying"],a:0,x:"A evidência aponta para uma atividade recente, não atual: have been + ing."},
+{id:"evi2",r:"evi",k:"c",q:"The ground is wet, but the sky is clear. It ___.",o:["has been raining","is raining"],a:0,x:"Choveu há pouco e sobrou a marca: perfect continuous explica a evidência."},
+{id:"evi3",r:"evi",k:"f",q:"You're out of breath. Have you ___?",v:"run",ans:"been running",acc:["been running"],x:"Falta de ar agora, corrida há pouco: have you been running."},
+{id:"evi4",r:"evi",k:"s",o:["There's paint on your hands. Have you been painting?","There's paint on your hands. Have you painted?"],a:0,x:"A marca presente aponta para a atividade recente: o contínuo soa natural. O simples perguntaria pelo resultado pronto."},
+{id:"evi5",r:"evi",k:"t",q:"Alguém andou fazendo café: a cozinha está cheirando bem.",v:"somebody / make",ans:"Somebody has been making coffee.",acc:["somebody has been making coffee","someone has been making coffee","somebodys been making coffee","someones been making coffee"],x:"Andou fazendo = have been + ing: atividade recente que deixou evidência."},
+{id:"evi6",r:"evi",k:"c",q:"Why are your boots muddy? ___ in the garden?",o:["Have you been working","Do you work"],a:0,x:"Botas sujas agora, trabalho recente: perfect continuous."},
+
+/* Processo vs resultado (contraste) */
+{id:"pvr1",r:"pvr",k:"c",q:"I ___ the room. It looks great now.",o:["have painted","have been painting"],a:0,x:"Foco no resultado pronto: a sala está ótima."},
+{id:"pvr2",r:"pvr",k:"c",q:"I'm exhausted. I ___ the room all morning.",o:["have been painting","have painted"],a:0,x:"Foco na atividade e na duração, não no resultado. Talvez nem tenha terminado."},
+{id:"pvr3",r:"pvr",k:"c",q:"She ___ that novel. She knows how it ends.",o:["has read","has been reading"],a:0,x:"Ela sabe o final: leitura concluída, forma simples."},
+{id:"pvr4",r:"pvr",k:"c",q:"She ___ that novel. She's on chapter five.",o:["has been reading","has read"],a:0,x:"No capítulo cinco: leitura em andamento, contínuo."},
+{id:"pvr5",r:"pvr",k:"s",o:["I've been writing the proposal, but it isn't ready yet.","I've written the proposal, but it isn't ready yet."],a:0,x:"isn't ready yet trava o resultado: a atividade continua aberta, então contínuo."},
+{id:"pvr6",r:"pvr",k:"t",q:"Ando lendo esse relatório.",v:"read",ans:"I have been reading this report.",acc:["i have been reading this report","ive been reading this report","i have been reading that report","ive been reading that report"],x:"Ando fazendo = have been + ing: atividade recente, possivelmente inacabada."},
+{id:"pvr7",r:"pvr",k:"f",q:"We ___ the demo, so there are cables everywhere.",v:"prepare",ans:"have been preparing",acc:["have been preparing"],x:"O foco é a atividade que explica a bagunça, não um resultado pronto."},
+{id:"pvr8",r:"pvr",k:"c",q:"They ___ the migration. Everything runs on the new server now.",o:["have completed","have been completing"],a:0,x:"Migração encerrada com efeito presente: forma simples."},
+
+/* Verbos de estado (PP) */
+{id:"sta1",r:"sta",k:"c",q:"I ___ him since college.",o:["have known","have been knowing"],a:0,x:"know é verbo de estado: fica no simples mesmo com duração."},
+{id:"sta2",r:"sta",k:"c",q:"She ___ this car for ten years.",o:["has owned","has been owning"],a:0,x:"own (possuir) é estado: nunca vai para o contínuo."},
+{id:"sta3",r:"sta",k:"f",q:"We ___ friends since 2010.",v:"be",ans:"have been",acc:["have been"],x:"be é estado: have been friends. A forma have been being não existe no uso."},
+{id:"sta4",r:"sta",k:"s",o:["He has believed in this project from day one.","He has been believing in this project from day one."],a:0,x:"believe é estado mental: forma simples."},
+{id:"sta5",r:"sta",k:"f",q:"How long have you ___ your apartment?",v:"have",ans:"had",acc:["had"],x:"have no sentido de posse é estado: How long have you had...?"},
+{id:"sta6",r:"sta",k:"t",q:"Conheço a Maria há muitos anos.",v:"know",ans:"I have known Maria for many years.",acc:["i have known maria for many years","ive known maria for many years"],x:"Estado + duração: perfect simples. O português usa presente, o inglês usa have known."},
+{id:"sta7",r:"sta",k:"c",q:"She ___ more support since the reorg.",o:["has needed","has been needing"],a:0,x:"need é estado: no padrão, fica no simples."},
+
+/* Quantidade vs duração (contraste) */
+{id:"qtd1",r:"qtd",k:"c",q:"I ___ six calls this morning.",o:["have made","have been making"],a:0,x:"Quantidade fechada dentro de um período ainda aberto (this morning): simples."},
+{id:"qtd2",r:"qtd",k:"c",q:"I ___ calls all morning.",o:["have been making","have made"],a:0,x:"all morning mede a atividade, não o placar: contínuo."},
+{id:"qtd3",r:"qtd",k:"c",q:"___ have you written? Ten pages.",o:["How many pages","How long"],a:0,x:"Resposta em quantidade pede How many + forma simples."},
+{id:"qtd4",r:"qtd",k:"c",q:"___ have you been writing? Since 8 a.m.",o:["How long","How many pages"],a:0,x:"Resposta em tempo pede How long + contínuo."},
+{id:"qtd5",r:"qtd",k:"s",o:["She has sent 40 invitations.","She has been sending 40 invitations."],a:0,x:"Número fechado pede o simples. O contínuo mediria o tempo, não a contagem."},
+{id:"qtd6",r:"qtd",k:"f",q:"He ___ three coffees today.",v:"drink",ans:"has drunk",acc:["has drunk"],x:"Particípio: drink, drank, drunk. Contagem em dia ainda aberto: simples."},
+{id:"qtd7",r:"qtd",k:"t",q:"Li três propostas hoje.",v:"read",ans:"I have read three proposals today.",acc:["i have read three proposals today","ive read three proposals today"],x:"hoje ainda não acabou + contagem: Present Perfect. O português usa passado (li), o inglês usa perfect."},
+
+/* Tempo terminado (SP) */
+{id:"tft1",r:"tft",k:"c",q:"I ___ the client yesterday.",o:["called","have called"],a:0,x:"yesterday fecha o período: tempo terminado pede Simple Past."},
+{id:"tft2",r:"tft",k:"c",q:"She ___ the company in 2019.",o:["joined","has joined"],a:0,x:"in 2019: data específica no passado, sem ponte com o agora."},
+{id:"tft3",r:"tft",k:"c",q:"We ___ the contract two weeks ago.",o:["signed","have signed"],a:0,x:"ago sempre pede Simple Past: mede a distância de agora para trás."},
+{id:"tft4",r:"tft",k:"f",q:"They ___ the product last quarter.",v:"launch",ans:"launched",acc:["launched"],x:"last + período (last week, last quarter, last year) fecha o tempo: Simple Past."},
+{id:"tft5",r:"tft",k:"c",q:"When ___ you arrive?",o:["did","have"],a:0,x:"When pergunta por um ponto específico: sempre Simple Past. When have you...? não existe."},
+{id:"tft6",r:"tft",k:"s",o:["I saw that movie last night.","I have seen that movie last night."],a:0,x:"last night trava o passado: have seen não convive com marcador de tempo terminado."},
+{id:"tft7",r:"tft",k:"t",q:"Eu trabalhei lá em 2020.",v:"work",ans:"I worked there in 2020.",acc:["i worked there in 2020"],x:"Data fechada: Simple Past. Aqui o português e o inglês coincidem."},
+{id:"tft8",r:"tft",k:"f",q:"He ___ the office an hour ago.",v:"leave",ans:"left",acc:["left"],x:"ago: Simple Past. Irregular: leave, left, left."},
+{id:"tft9",r:"tft",k:"c",q:"I ___ him when I lived in São Paulo.",o:["met","have met"],a:0,x:"when I lived...: capítulo encerrado da vida, Simple Past."},
+
+/* Passado vs Perfect (contraste) */
+{id:"spp1",r:"spp",k:"c",q:"I ___ my keys, but I found them later.",o:["lost","have lost"],a:0,x:"Achou depois: o efeito acabou, a história fechou. Perfect só vale se o resultado ainda está de pé."},
+{id:"spp2",r:"spp",k:"c",q:"I can't find my keys anywhere. I ___ them.",o:["have lost","have been losing"],a:0,x:"Resultado de pé: have lost. No falado americano, I lost my keys também se diz nessa cena; o que nunca cabe é o contínuo num ato pontual."},
+{id:"spp3",r:"spp",k:"c",q:"Steve Jobs ___ the iPhone.",o:["created","has created"],a:0,x:"Pessoa que já morreu: a vida fechou, Simple Past. O Perfect exige possibilidade de continuação."},
+{id:"spp4",r:"spp",k:"c",q:"She ___ three companies in her career so far.",o:["has founded","founded"],a:0,x:"so far: a carreira segue aberta e a conta pode subir. Perfect."},
+{id:"spp5",r:"spp",k:"s",o:["We moved to Porto Alegre in 2021.","We have moved to Porto Alegre in 2021."],a:0,x:"in 2021 fecha a data: Simple Past. Sem a data, We have moved (resultado presente) também seria correto."},
+{id:"spp6",r:"spp",k:"t",q:"Ela saiu há dez minutos.",v:"leave",ans:"She left ten minutes ago.",acc:["she left ten minutes ago","she left 10 minutes ago"],x:"O há do português tem dois empregos: ponto no passado (saiu há 10 min) vira ago + Simple Past; duração até agora (moro há 2 anos) vira for + Perfect."},
+{id:"spp7",r:"spp",k:"c",q:"We ___ two offices since the merger.",o:["have opened","opened"],a:0,x:"since = desde: período aberto até agora, Perfect. opened pediria tempo fechado (in 2023)."},
+{id:"spp8",r:"spp",k:"f",q:"Shakespeare ___ 37 plays.",v:"write",ans:"wrote",acc:["wrote"],x:"Autor morto, obra encerrada: Simple Past. Compare: My favorite author has written ten books (e pode escrever mais)."},
+{id:"spp9",r:"spp",k:"c",q:"My manager ___ ten books this year, and it's only August.",o:["has read","has been reading"],a:0,x:"this year ainda está aberto + contagem: Perfect simples. has been reading ten books mediria processo, não placar."},
+{id:"spp10",r:"spp",k:"t",q:"Nós nos conhecemos em 2015.",v:"meet",ans:"We met in 2015.",acc:["we met in 2015"],x:"Data fechada: met. Sem data, We have met muda o sentido para experiência (já nos conhecemos)."},
+
+/* 3 opções, reescrita e reforços: Resultado */
+{id:"res8",r:"res",k:"c",q:"I ___ my laptop. Can I borrow yours?",o:["have forgotten","have been forgetting"],a:0,x:"Resultado presente: estou sem ele. No falado americano, I forgot my laptop é o mais comum aqui; o app treina a forma do Perfect, e o contínuo segue impossível num ato pontual."},
+{id:"res9",r:"res",k:"c",q:"The system is down because someone ___ the config.",o:["has changed","has been changing"],a:0,x:"Efeito presente e sem data: Perfect. O contínuo diria que a mexida ainda está acontecendo. No falado, someone changed the config também se diz."},
+{id:"res10",r:"res",k:"m",q:"Tire a data e mostre o efeito valendo agora.",b:"She fixed the bug yesterday.",ans:"She has fixed the bug.",acc:["she has fixed the bug","shes fixed the bug"],x:"Sem marcador de tempo e com resultado de pé, o Perfect assume."},
+{id:"res11",r:"res",k:"f",q:"Our biggest client ___ the renewal. Champagne time.",v:"sign",ans:"has signed",acc:["has signed"],x:"Assinatura concluída, efeito agora: comemoração."},
+{id:"res12",r:"res",k:"t",q:"Quebrei meu celular (a tela está rachada).",v:"break",ans:"I have broken my phone.",acc:["i have broken my phone","ive broken my phone"],x:"Resultado visível agora: Perfect. Irregular: break, broke, broken."},
+{id:"res13",r:"res",k:"s",o:["We've moved the launch to Friday.","We've been moving the launch to Friday."],a:0,x:"Decisão pontual, já tomada: forma simples."},
+
+/* Experiências + been vs gone */
+{id:"exp8",r:"exp",k:"c",q:"Where's Ana? She ___ to the bank. She'll be back soon.",o:["has gone","has been"],a:0,x:"has gone to = foi e ainda está lá. has been to = foi e voltou."},
+{id:"exp9",r:"exp",k:"c",q:"I ___ to that restaurant twice. Great pasta.",o:["have been","have been going"],a:0,x:"Contagem de visitas: have been to, forma simples. O contínuo não combina com twice."},
+{id:"exp10",r:"exp",k:"c",q:"It's the best talk I ___.",o:["have ever seen","have ever been seeing"],a:0,x:"Superlativo + ever: the best I have ever seen. Na rua também sai the best talk I ever saw, sem o have; entenda ao ouvir."},
+{id:"exp11",r:"exp",k:"f",q:"She has never ___ business class.",v:"fly",ans:"flown",acc:["flown"],x:"Particípio irregular: fly, flew, flown."},
+{id:"exp12",r:"exp",k:"t",q:"Nunca vi nada parecido.",v:"see",ans:"I have never seen anything like it.",acc:["i have never seen anything like it","ive never seen anything like it","i have never seen anything like this","ive never seen anything like this"],x:"Experiência negada: have never seen."},
+{id:"exp13",r:"exp",k:"m",q:"Transforme em experiência de vida, sem data.",b:"I visited Rome in 2015.",ans:"I have visited Rome.",acc:["i have visited rome","ive visited rome","i have been to rome","ive been to rome"],x:"Sem a data, vira experiência: have visited ou have been to."},
+{id:"exp14",r:"exp",k:"s",o:["This is the second time she has missed the deadline.","This is the second time she has been missing the deadline."],a:0,x:"the second time (that)... pede o Perfect simples: contagem, não processo."},
+
+/* just, already, yet */
+{id:"jay8",r:"jay",k:"f",q:"Don't buy the book for her. She ___ it.",v:"already / read",ans:"has already read",acc:["has already read","already read"],x:"already entre has e o particípio."},
+{id:"jay9",r:"jay",k:"c",q:"Is the doc ready? Not ___. Give me an hour.",o:["yet","already"],a:0,x:"Not yet: a resposta curta clássica para o que ainda não veio."},
+{id:"jay10",r:"jay",k:"m",q:"Diga que isso acabou de acontecer.",b:"They signed the contract.",ans:"They have just signed the contract.",acc:["they have just signed the contract","theyve just signed the contract","they just signed the contract"],x:"have just + particípio: recém concluído. No falado: They just signed the contract também vale."},
+{id:"jay11",r:"jay",k:"t",q:"Ainda não terminei a apresentação.",v:"finish",ans:"I haven't finished the presentation yet.",acc:["i havent finished the presentation yet","i have not finished the presentation yet","i didnt finish the presentation yet","i did not finish the presentation yet"],x:"Negativa + yet no final: haven't finished... yet. No falado americano, I didn't finish it yet também circula."},
+{id:"jay12",r:"jay",k:"c",q:"___ the invite yet?",o:["Have you sent","Did you sent","Have you been sending"],a:0,x:"Have you sent... yet: a pergunta de expectativa. Did you sent é impossível: depois de did, o verbo fica na base. E no falado americano, Did you send it yet? também é padrão."},
+
+/* Duração */
+{id:"dur10",r:"dur",k:"c",q:"They ___ for the results since Monday.",o:["have been waiting","are waiting","waited"],a:0,x:"since + agora ainda esperando: a ponte é o Perfect Continuous."},
+{id:"dur11",r:"dur",k:"f",q:"It ___ for three days straight.",v:"rain",ans:"has been raining",acc:["has been raining"],x:"Duração contínua até agora: has been raining."},
+{id:"dur12",r:"dur",k:"t",q:"Discutimos isso desde segunda-feira.",v:"discuss",ans:"We have been discussing this since Monday.",acc:["we have been discussing this since monday","weve been discussing this since monday","we have discussed this since monday","weve discussed this since monday"],x:"Duração de atividade: o contínuo é o natural; o simples também é gramatical aqui."},
+{id:"dur13",r:"dur",k:"m",q:"Junte tudo numa frase só, com for.",b:"She started living in Recife five years ago. She still lives there.",ans:"She has been living in Recife for five years.",acc:["she has been living in recife for five years","shes been living in recife for five years","she has lived in recife for five years","shes lived in recife for five years"],x:"Começou no passado e continua: has been living. has lived também é correto; o contínuo é mais comum para morar."},
+{id:"dur14",r:"dur",k:"c",q:"How long ___ Portuguese classes?",o:["have you been taking","do you take"],a:0,x:"How long + atividade em curso: have you been taking."},
+{id:"dur15",r:"dur",k:"s",o:["I've been trying to reach him all day.","I'm trying to reach him all day."],a:0,x:"all day mede o esforço até agora: o presente contínuo sozinho não carrega esse período."},
+{id:"dur16",r:"dur",k:"c",q:"He's been off work ___ last Tuesday.",o:["since","for"],a:0,x:"since + ponto no tempo: last Tuesday."},
+
+/* Evidência */
+{id:"evi7",r:"evi",k:"c",q:"Your Portuguese sounds sharper. ___?",o:["Have you been practicing","Did you practice","Do you practice"],a:0,x:"A melhora é a evidência de prática recente e continuada: Perfect Continuous."},
+{id:"evi8",r:"evi",k:"f",q:"The kitchen smells amazing. Someone ___.",v:"bake",ans:"has been baking",acc:["has been baking"],x:"O cheiro é a marca da atividade recente."},
+{id:"evi9",r:"evi",k:"t",q:"Sua voz está rouca. Você andou gritando?",v:"shout",ans:"Have you been shouting?",acc:["have you been shouting"],x:"Evidência presente, atividade recente: have you been + ing."},
+{id:"evi10",r:"evi",k:"s",o:["He's out of breath. He's been running.","He's out of breath. He ran."],a:0,x:"A evidência fresca pede o contínuo. He ran contaria um fato solto, sem ligação com o fôlego."},
+{id:"evi11",r:"evi",k:"c",q:"Why is your desk covered in receipts? ___ expenses?",o:["Have you been doing","Have you done"],a:0,x:"A bagunça mostra o processo em andamento, não um resultado fechado."},
+
+/* Processo vs resultado */
+{id:"pvr9",r:"pvr",k:"c",q:"We ___ the pricing model. Here's the final version.",o:["have finalized","have been finalizing"],a:0,x:"final version na mão: resultado, forma simples."},
+{id:"pvr10",r:"pvr",k:"c",q:"Sorry for the mess. I ___ the storage room.",o:["have been organizing","have organized"],a:0,x:"A bagunça diz que o processo está no meio: contínuo."},
+{id:"pvr11",r:"pvr",k:"m",q:"Mostre que o trabalho segue em andamento.",b:"I have written the report.",ans:"I have been writing the report.",acc:["i have been writing the report","ive been writing the report"],x:"Do resultado para o processo: have been writing."},
+{id:"pvr12",r:"pvr",k:"m",q:"Mostre o trabalho concluído.",b:"She has been painting the office.",ans:"She has painted the office.",acc:["she has painted the office","shes painted the office"],x:"Do processo para o resultado: has painted."},
+{id:"pvr13",r:"pvr",k:"f",q:"They ___ the new flow all week, and it finally passed today.",v:"test",ans:"have been testing",acc:["have been testing"],x:"all week mede a atividade; a aprovação de hoje é outro evento."},
+{id:"pvr14",r:"pvr",k:"t",q:"Estou preparando a apresentação desde as 7h.",v:"prepare",ans:"I have been preparing the presentation since 7.",acc:["i have been preparing the presentation since 7","ive been preparing the presentation since 7","i have been preparing the presentation since 7 am","ive been preparing the presentation since 7 am","i have been preparing the presentation since 7am"],x:"Atividade em curso desde um ponto: have been preparing since..."},
+{id:"pvr15",r:"pvr",k:"s",o:["I've read your email and I agree.","I've been reading your email and I agree."],a:0,x:"Concordar exige leitura concluída: forma simples."},
+
+/* Verbos de estado */
+{id:"sta8",r:"sta",k:"c",q:"We ___ each other since our first job.",o:["have known","have been knowing","know"],a:0,x:"know é estado: Perfect simples, mesmo com since."},
+{id:"sta9",r:"sta",k:"f",q:"How long ___ this house?",v:"they / own",ans:"have they owned",acc:["have they owned"],x:"own é estado: have they owned, nunca been owning."},
+{id:"sta10",r:"sta",k:"t",q:"Tenho esse carro desde 2020.",v:"have",ans:"I have had this car since 2020.",acc:["i have had this car since 2020","ive had this car since 2020"],x:"have de posse é estado: have had."},
+{id:"sta11",r:"sta",k:"s",o:["She has wanted this promotion for years.","She has been wanting this promotion for years."],a:0,x:"No padrão, want fica no simples; been wanting aparece só na fala bem informal."},
+{id:"sta12",r:"sta",k:"c",q:"I ___ what you mean since the first slide.",o:["have understood","have been understanding"],a:0,x:"understand é estado mental: forma simples."},
+
+/* Quantidade vs duração */
+{id:"qtd8",r:"qtd",k:"c",q:"She ___ five candidates today, and two more are coming.",o:["has interviewed","has been interviewing"],a:0,x:"Conta fechada em dia aberto: simples. O contínuo mediria a tarde, não o número."},
+{id:"qtd9",r:"qtd",k:"f",q:"We ___ 120 invites so far.",v:"send",ans:"have sent",acc:["have sent"],x:"so far + número: Perfect simples."},
+{id:"qtd10",r:"qtd",k:"m",q:"Troque o foco para o placar: oito ligações.",b:"I have been calling clients all afternoon.",ans:"I have made eight calls this afternoon.",acc:["i have made eight calls this afternoon","ive made eight calls this afternoon"],x:"Da duração para a contagem: have made eight calls."},
+{id:"qtd11",r:"qtd",k:"t",q:"Ele já entrevistou três agências este mês.",v:"interview",ans:"He has interviewed three agencies this month.",acc:["he has interviewed three agencies this month","hes interviewed three agencies this month"],x:"this month aberto + contagem: Perfect simples."},
+{id:"qtd12",r:"qtd",k:"s",o:["How many episodes have you watched?","How many episodes have you been watching?"],a:0,x:"How many pergunta pela conta: forma simples."},
+
+/* Tempo terminado */
+{id:"tft10",r:"tft",k:"c",q:"I ___ my MBA in 2018.",o:["finished","have finished","have been finishing"],a:0,x:"in 2018: data fechada, Simple Past."},
+{id:"tft11",r:"tft",k:"f",q:"We ___ the investors last Thursday.",v:"meet",ans:"met",acc:["met"],x:"last Thursday: Simple Past. Irregular: meet, met, met."},
+{id:"tft12",r:"tft",k:"m",q:"Acrescente last night e ajuste o tempo.",b:"I have seen that documentary.",ans:"I saw that documentary last night.",acc:["i saw that documentary last night"],x:"Marcador fechado entra, Perfect sai: saw."},
+{id:"tft13",r:"tft",k:"t",q:"Comecei no novo emprego em abril.",v:"start",ans:"I started the new job in April.",acc:["i started the new job in april","i started my new job in april"],x:"Mês nomeado no passado: Simple Past."},
+{id:"tft14",r:"tft",k:"c",q:"She ___ me an hour ago, but I missed it.",o:["called","has called"],a:0,x:"an hour ago fecha o ponto: called."},
+{id:"tft15",r:"tft",k:"s",o:["When did they launch the app?","When have they launched the app?"],a:0,x:"When + ponto específico: sempre did."},
+
+/* Passado vs Perfect */
+{id:"spp11",r:"spp",k:"c",q:"Our CFO ___ three startups before joining us.",o:["founded","has founded","has been founding"],a:0,x:"before joining us fecha o capítulo: narrativa no Simple Past."},
+{id:"spp12",r:"spp",k:"t",q:"Escrevi para ele duas vezes esta semana, e nada de resposta.",v:"write",ans:"I have written to him twice this week.",acc:["i have written to him twice this week","ive written to him twice this week","i wrote to him twice this week","i wrote him twice this week","i have written him twice this week","ive written him twice this week"],x:"this week aberto: o Perfect marca melhor o período. No falado americano, I wrote (to) him twice this week também é padrão; o app aceita os dois. Compare com last week, onde só o wrote serve."},
+{id:"spp13",r:"spp",k:"c",q:"I ___ to him twice last week, and nothing.",o:["wrote","have written"],a:0,x:"last week fechou: Simple Past. Compare com o item irmão de this week."},
+{id:"spp14",r:"spp",k:"m",q:"Acrescente in January e ajuste o tempo.",b:"She has left the company.",ans:"She left the company in January.",acc:["she left the company in january"],x:"Com a data, o Perfect cede ao Simple Past."},
+{id:"spp15",r:"spp",k:"m",q:"Tire a data e apresente como conquista que ainda vale.",b:"We opened an office in Miami in 2023.",ans:"We have opened an office in Miami.",acc:["we have opened an office in miami","weve opened an office in miami"],x:"Sem data e com efeito presente: Perfect."},
+{id:"spp16",r:"spp",k:"t",q:"Você já leu o contrato? (pergunta aberta, sem data)",v:"read",ans:"Have you read the contract?",acc:["have you read the contract","have you read the contract yet","have you already read the contract","did you read the contract","did you read the contract yet"],x:"Expectativa aberta: Have you read...? No falado americano, Did you read the contract (yet)? é igualmente comum; o app aceita os dois."},
+{id:"spp17",r:"spp",k:"t",q:"Li o contrato ontem à noite.",v:"read",ans:"I read the contract last night.",acc:["i read the contract last night"],x:"ontem à noite: Simple Past. read no passado se escreve igual e soa red."},
+{id:"spp18",r:"spp",k:"c",q:"The team ___ two releases this quarter, and there's a month left.",o:["has shipped","has been shipping"],a:0,x:"Contagem em trimestre aberto: Perfect simples. No falado, shipped também aparece; o contínuo com número fechado, não."},
+
+/* Forma: perguntas, negativas e particípios */
+{id:"frm1",r:"frm",k:"c",q:"He didn't ___ to the meeting.",o:["go","went"],a:0,x:"Depois de did ou didn't, o verbo volta à base: didn't go. O passado já mora no did."},
+{id:"frm2",r:"frm",k:"c",q:"___ she reply yesterday?",o:["Did","Has"],a:0,x:"yesterday fecha o tempo e a forma reply é base: Did she reply. Has pediria replied e frase sem data."},
+{id:"frm3",r:"frm",k:"f",q:"I have never ___ to Asia.",v:"go",ans:"gone",acc:["gone","been"],x:"Depois de have: particípio. gone (ou been, com sentido de já estive)."},
+{id:"frm4",r:"frm",k:"c",q:"Have you ___ the numbers yet?",o:["seen","saw"],a:0,x:"Depois de have, sempre particípio: seen. saw é o passado simples."},
+{id:"frm5",r:"frm",k:"f",q:"She has ___ three days off this month.",v:"take",ans:"taken",acc:["taken"],x:"Particípio irregular: take, took, taken."},
+{id:"frm6",r:"frm",k:"c",q:"We ___ have time to test it yesterday.",o:["didn't","haven't"],a:0,x:"yesterday + negativa: didn't have. haven't não convive com data fechada."},
+{id:"frm7",r:"frm",k:"f",q:"He hasn't ___ the summary yet.",v:"write",ans:"written",acc:["written"],x:"Particípio irregular: write, wrote, written."},
+{id:"frm8",r:"frm",k:"c",q:"___ they ever missed a deadline?",o:["Have","Did"],a:0,x:"missed é particípio depois do auxiliar: Have they ever missed. Did exigiria a base miss."},
+{id:"frm9",r:"frm",k:"m",q:"Transforme em pergunta.",b:"She has finished the audit.",ans:"Has she finished the audit?",acc:["has she finished the audit"],x:"Inversão: o auxiliar has vai para a frente."},
+{id:"frm10",r:"frm",k:"m",q:"Transforme em negativa.",b:"They updated the roadmap.",ans:"They didn't update the roadmap.",acc:["they didnt update the roadmap","they did not update the roadmap"],x:"didn't + base: update volta à forma sem passado."},
+{id:"frm11",r:"frm",k:"f",q:"I've ___ everything on the list.",v:"do",ans:"done",acc:["done"],x:"Particípio: do, did, done."},
+{id:"frm12",r:"frm",k:"t",q:"Ela não veio ontem.",v:"come",ans:"She didn't come yesterday.",acc:["she didnt come yesterday","she did not come yesterday"],x:"Negativa com data fechada: didn't come."},
+
+/* Ditado: o ouvido nas contrações */
+{id:"dit1",r:"dit",k:"l",ans:"I've been working from home.",x:"O 've quase some na fala. Sem ele, a frase viraria presente contínuo, outro tempo."},
+{id:"dit2",r:"dit",k:"l",ans:"I'm working from home.",x:"Compare com o item irmão: aqui é I'm, presente puro, sem passado nenhum."},
+{id:"dit3",r:"dit",k:"l",ans:"She's finished the report.",x:"Esse 's é has: She has finished. O ouvido decide o tempo."},
+{id:"dit4",r:"dit",k:"l",ans:"She finished the report.",x:"Sem o 's: Simple Past seco. Um som a menos, outro tempo."},
+{id:"dit5",r:"dit",k:"l",ans:"He's been calling you.",x:"he's been = he has been: atividade recente e repetida."},
+{id:"dit6",r:"dit",k:"l",ans:"We've already ordered.",x:"we've = we have; already gruda no meio."},
+{id:"dit7",r:"dit",k:"l",ans:"They haven't arrived yet.",x:"haven't + yet no final: a dupla da expectativa aberta."},
+{id:"dit8",r:"dit",k:"l",ans:"I've lost my glasses.",x:"I've lost: resultado presente. Sem o 've, viraria passado fechado."},
+{id:"dit9",r:"dit",k:"l",ans:"It's been raining all day.",x:"it's been = it has been: duração com evidência."},
+{id:"dit10",r:"dit",k:"l",ans:"How long have you been waiting?",x:"A pergunta clássica de duração, inteira no ouvido."},
+{id:"dit11",r:"dit",k:"l",ans:"I didn't see your message.",x:"didn't + base see: o passado mora no auxiliar."},
+{id:"dit12",r:"dit",k:"l",ans:"We've been friends for years.",x:"we've been + for: estado com duração."},
+
+/* Voz passiva */
+{id:"pas1",r:"pas",k:"c",q:"Your event ___ for Friday at 3.",o:["has been scheduled","has scheduled","has been scheduling"],a:0,x:"Passiva do Perfect: o evento recebe a ação. has scheduled diria que o evento agendou algo."},
+{id:"pas2",r:"pas",k:"c",q:"Your payment ___. You're all set.",o:["has been processed","has processed"],a:0,x:"E-mail de sistema clássico: resultado valendo agora, sujeito recebendo a ação."},
+{id:"pas3",r:"pas",k:"c",q:"The flight ___ due to weather.",o:["has been canceled","has been canceling"],a:0,x:"Depois de been, particípio = passiva. E canceled com um L só é a grafia americana."},
+{id:"pas4",r:"pas",k:"c",q:"She ___ to VP of Engineering.",o:["has been promoted","has been promoting"],a:0,x:"promoted: foi promovida. promoting diria que ela vem promovendo algo."},
+{id:"pas5",r:"pas",k:"c",q:"He ___ the new product all quarter.",o:["has been promoting","has been promoted"],a:0,x:"O par espelho: aqui ele faz a ação, vem promovendo. O -ing devolve a voz ativa."},
+{id:"pas6",r:"pas",k:"c",q:"Heads up: the meeting ___ to Thursday.",o:["has been moved","has been moving"],a:0,x:"A reunião foi movida (por alguém): been + particípio."},
+{id:"pas7",r:"pas",k:"c",q:"The decision ___ at last month's board meeting.",o:["was made","has been made"],a:0,x:"Data fechada manda na passiva também: was made. Sem a data, has been made."},
+{id:"pas8",r:"pas",k:"f",q:"Your account ___. Welcome aboard!",v:"create",ans:"has been created",acc:["has been created"],x:"Conta criada, valendo agora: has been created."},
+{id:"pas9",r:"pas",k:"f",q:"The invoice ___.",v:"already / pay",ans:"has already been paid",acc:["has already been paid"],x:"O already entra entre has e been: has already been paid."},
+{id:"pas10",r:"pas",k:"m",q:"Reescreva na passiva, sem dizer quem fez.",b:"Someone has updated the roadmap.",ans:"The roadmap has been updated.",acc:["the roadmap has been updated"],x:"O objeto vira sujeito e o someone some: has been updated."},
+{id:"pas11",r:"pas",k:"t",q:"Seu pedido foi enviado (e está a caminho).",v:"ship",ans:"Your order has been shipped.",acc:["your order has been shipped"],x:"O e-mail de compra que você recebe toda semana: has been shipped."},
+{id:"pas12",r:"pas",k:"l",ans:"Your card has been charged.",acc:["your card has been charged","your cards been charged"],x:"Seu cartão foi cobrado: a passiva de todo dia, no ouvido."},
+{id:"pas13",r:"pas",k:"s",o:["The contract has been signed by both sides.","The contract has been signing by both sides."],a:0,x:"O contrato recebe a assinatura: been + signed."},
+
+/* Frases de todo dia */
+{id:"conv1",r:"conv",k:"t",q:"Como você tem passado?",v:"be",ans:"How have you been?",acc:["how have you been","how have you been doing","how you been"],x:"O cumprimento padrão entre quem não se vê há um tempo. Resposta real: Pretty good, you?"},
+{id:"conv2",r:"conv",k:"l",ans:"What have you been up to?",x:"O que você anda fazendo da vida: o abre-papo americano. Na fala sai What've you been up to."},
+{id:"conv3",r:"conv",k:"t",q:"Faz tempo que a gente não se vê.",v:"be",ans:"It's been a while.",acc:["its been a while","it has been a while","its been a long time","it has been a long time","its been so long","it has been so long"],x:"It's been a while: o faz tempo pronto. Versão dramática: It's been forever."},
+{id:"conv4",r:"conv",k:"f",q:"I've been ___ to call you.",v:"mean",ans:"meaning",acc:["meaning"],x:"I've been meaning to...: ando querendo. O jeito americano de dizer que a intenção existe há tempo."},
+{id:"conv5",r:"conv",k:"l",ans:"I've been meaning to ask you something.",x:"Ando querendo te perguntar uma coisa: assim se abre assunto."},
+{id:"conv6",r:"conv",k:"t",q:"Tenho estado muito ocupado ultimamente.",v:"be",ans:"I've been really busy lately.",acc:["ive been really busy lately","i have been really busy lately","ive been very busy lately","i have been very busy lately","ive been so busy lately","i have been so busy lately"],x:"lately gruda no contínuo. Versão local: I've been swamped."},
+{id:"conv7",r:"conv",k:"c",q:"This is the best bagel I ___.",o:["have ever had","have ever been having"],a:0,x:"Superlativo + ever: the best I've ever had. Na rua também se ouve the best bagel I ever had, o mesmo elogio sem o have."},
+{id:"conv8",r:"conv",k:"l",ans:"I haven't seen you in forever.",x:"in forever: o exagero carinhoso para faz séculos."},
+{id:"conv9",r:"conv",k:"t",q:"Acabei de chegar.",v:"get",ans:"I just got here.",acc:["i just got here","ive just gotten here","i have just gotten here","i just arrived","ive just arrived","i have just arrived"],x:"No americano falado, just + Simple Past é o padrão: I just got here. O Perfect (I've just gotten here) também é correto, mais formal."},
+{id:"conv10",r:"conv",k:"c",q:"A: How have you been? B: ___, you?",o:["Pretty good","Pretty well"],a:0,x:"A resposta que existe de verdade: Pretty good, you? Ninguém responde essa pergunta com well no café."},
+
+/* for com período fechado, as soon as */
+{id:"spp19",r:"spp",k:"c",q:"I ___ there for five years. Great chapter of my life.",o:["worked","have worked"],a:0,x:"for + período encerrado (saí de lá): Simple Past. O for não obriga Perfect; quem decide é o vínculo com o agora."},
+{id:"spp20",r:"spp",k:"c",q:"I ___ here for five years, and counting.",o:["have worked","worked"],a:0,x:"Mesmo for, vínculo aberto (and counting): Perfect."},
+{id:"spp21",r:"spp",k:"t",q:"Morei em Nova York por dois anos (depois voltei).",v:"live",ans:"I lived in New York for two years.",acc:["i lived in new york for two years"],x:"Período fechado com for: Simple Past. Se ainda morasse lá: I've been living in New York for two years."},
+{id:"spp22",r:"spp",k:"c",q:"I'll send it over as soon as I ___ it.",o:["have reviewed","will review"],a:0,x:"Depois de as soon as e when, nada de will: as soon as I have reviewed (ou as soon as I review). Frase padrão de e-mail de trabalho."},
+
+/* Duração na negativa */
+{id:"dur17",r:"dur",k:"c",q:"I ___ him since March.",o:["haven't seen","haven't been seeing"],a:0,x:"Na negativa, a duração prefere o Perfect simples: haven't seen since March."},
+{id:"dur18",r:"dur",k:"f",q:"She ___ for two years.",v:"not / smoke",ans:"hasn't smoked",acc:["hasnt smoked","has not smoked"],x:"Dois anos sem: hasn't smoked for two years. A negativa dispensa o contínuo."},
+{id:"dur19",r:"dur",k:"c",q:"I haven't been to the gym ___ two weeks.",o:["in","since"],a:0,x:"Na negativa, o americano usa in + período: in two weeks, in years, in forever. O for também é correto; o since pediria um ponto (since Monday)."},
+
+/* Forma: was e were, gotten, respostas curtas */
+{id:"frm13",r:"frm",k:"c",q:"___ you at the meeting yesterday?",o:["Were","Did"],a:0,x:"be não usa did: Were you...? O did é para os outros verbos."},
+{id:"frm14",r:"frm",k:"c",q:"She ___ happy with the results back then.",o:["was","has been"],a:0,x:"back then fecha o tempo: was. has been pediria vínculo com o agora."},
+{id:"frm15",r:"frm",k:"f",q:"They ___ in the office on Friday.",v:"not / be",ans:"weren't",acc:["werent","were not"],x:"Negativa de be no passado: weren't. Sem did."},
+{id:"frm16",r:"frm",k:"f",q:"It has ___ a lot colder this week.",v:"get",ans:"gotten",acc:["gotten"],x:"Particípio americano de get: gotten. It's gotten cold, I've gotten better. (No britânico: got.)"},
+{id:"frm17",r:"frm",k:"c",q:"She's ___ really good at this.",o:["gotten","got"],a:0,x:"Ficou boa nisso: gotten, o particípio americano. I've got = eu tenho (posse), outra história."},
+{id:"frm18",r:"frm",k:"c",q:"Have you finished? ___",o:["Yes, I have.","Yes, I do."],a:0,x:"Resposta curta ecoa o auxiliar da pergunta: Have...? Yes, I have. Did...? Yes, I did."},
+{id:"frm19",r:"frm",k:"c",q:"Did she call back? ___",o:["No, she didn't.","No, she hasn't."],a:0,x:"O eco: Did...? she didn't. Se a pergunta fosse Has she called back?, aí sim hasn't."},
+
+/* Ouvido: -ed e frases reais */
+{id:"dit13",r:"dit",k:"l",ans:"It worked.",x:"O -ed aqui soa t: workt. Uma sílaba só."},
+{id:"dit14",r:"dit",k:"l",ans:"We waited for an hour.",x:"Depois de t ou d, o -ed ganha sílaba: wait-ed."},
+{id:"dit15",r:"dit",k:"l",ans:"I've gotten used to it.",x:"gotten used to: me acostumei. Trio americano de ouro."},
+{id:"dit16",r:"dit",k:"l",ans:"I haven't been sleeping well.",x:"Negativa do contínuo: ando dormindo mal. Muito dita, pouco ensinada."},
+
+/* Entrevista e reunião */
+{id:"job1",r:"job",k:"t",q:"Trabalho com tecnologia há quinze anos.",v:"work",ans:"I have been working in technology for fifteen years.",acc:["i have been working in technology for fifteen years","ive been working in technology for fifteen years","i have worked in technology for fifteen years","ive worked in technology for fifteen years","i have been working in tech for fifteen years","ive been working in tech for fifteen years","i have worked in tech for fifteen years","ive worked in tech for fifteen years"],x:"A frase de abertura de qualquer entrevista. Contínuo ou simples, os dois servem; o que não serve é I work in technology for fifteen years."},
+{id:"job2",r:"job",k:"c",q:"Tell me about yourself. Well, I ___ tech teams for over a decade.",o:["have led","am leading"],a:0,x:"Década de bagagem até agora: Perfect. am leading falaria só do momento presente, jogando a bagagem fora."},
+{id:"job3",r:"job",k:"m",q:"Agora dê o detalhe da última, com data: entrei em 2023.",b:"I have worked at three startups.",ans:"I joined the last one in 2023.",acc:["i joined the last one in 2023","i joined the last startup in 2023"],x:"A coreografia da entrevista: o Perfect abre o tópico, o Simple Past conta o caso datado."},
+{id:"job4",r:"job",k:"c",q:"___ you ever managed a remote team?",o:["Have","Did"],a:0,x:"A pergunta de experiência da entrevista: Have you ever + particípio. Resposta: Yes, I have. I managed one for two years at my last company: os detalhes vêm no passado."},
+{id:"job5",r:"job",k:"t",q:"Estou na empresa atual desde abril de 2025.",v:"be",ans:"I have been at my current company since April 2025.",acc:["i have been at my current company since april 2025","ive been at my current company since april 2025","i have been with my current company since april 2025","ive been with my current company since april 2025"],x:"at ou with + empresa, tanto faz. since + data: Perfect obrigatório. I am at... since é o erro que denuncia o brasileiro na entrevista."},
+{id:"job6",r:"job",k:"c",q:"Quick update: I ___ the payment bug. It's in review.",o:["have fixed","have been fixing"],a:0,x:"Status de daily: consertado e em review = resultado, Perfect simples. have been fixing diria que ainda está no meio."},
+{id:"job7",r:"job",k:"c",q:"I ___ on the migration all week. Should be done tomorrow.",o:["have been working","have worked"],a:0,x:"Em andamento com previsão: contínuo. O par com o item anterior é a alma do standup."},
+{id:"job8",r:"job",k:"l",ans:"What have you been working on?",x:"A pergunta do standup e do networking. Na fala: What've you been working on."},
+{id:"job9",r:"job",k:"l",ans:"I've been leading a team of fifty.",x:"Frase de elevator pitch: liderança em curso, tamanho do time junto."},
+{id:"job10",r:"job",k:"t",q:"Acabei de sair de uma reunião com o time.",v:"get",ans:"I just got out of a meeting with the team.",acc:["i just got out of a meeting with the team","i just got out of a meeting","ive just gotten out of a meeting with the team","i have just gotten out of a meeting with the team","ive just gotten out of a meeting","i have just gotten out of a meeting"],x:"just got out of a meeting: a frase universal do escritório americano."},
+{id:"job11",r:"job",k:"c",q:"So far, we ___ two of the three milestones.",o:["have hit","have been hitting"],a:0,x:"so far chama o Perfect: placar parcial de período aberto. O contínuo não mede placar."},
+{id:"job12",r:"job",k:"t",q:"Ainda não tive a chance de revisar o documento.",v:"have",ans:"I haven't had a chance to review the document yet.",acc:["i havent had a chance to review the document yet","i have not had a chance to review the document yet","i havent had the chance to review the document yet","i have not had the chance to review the document yet","i havent gotten a chance to review the document yet","i have not gotten a chance to review the document yet"],x:"I haven't had a chance to... yet: o jeito padrão e educado de dizer que não deu tempo, sem soar desculpa."},
+{id:"job13",r:"job",k:"l",ans:"It's been a pleasure talking to you.",x:"O fecho de entrevista: It's been a pleasure. O Perfect encerra o encontro que acabou de acontecer."},
+{id:"job14",r:"job",k:"c",q:"In my last role, I ___ the data platform from scratch.",o:["built","have built"],a:0,x:"In my last role fecha o capítulo: Simple Past. have built sem âncora só caberia se o cargo fosse o atual."}
+];
+
+const THEORY = `
+<section class="sec">
+  <h2>A grande ideia</h2>
+  <p class="lede">O português arquiva quase tudo num passado só: perdi, liguei, trabalhei. O inglês não. Antes de conjugar, ele exige uma decisão que o português nunca pediu de você: <b>isso ainda toca o agora?</b> Os três tempos são três câmeras apontadas para o mesmo fato.</p>
+</section>
+
+<section class="sec">
+  <h2>Uma história, três câmeras</h2>
+  <p class="sub">Suas chaves sumiram. Toque em cada câmera e veja o mesmo fato mudar de sentido.</p>
+  <div class="cams">
+    <button class="cam sp on" data-cam="sp"><small>Simple Past</small><span>A foto no álbum</span></button>
+    <button class="cam pp" data-cam="pp"><small>Present Perfect</small><span>O ímã na geladeira</span></button>
+    <button class="cam ppc" data-cam="ppc"><small>Perfect Continuous</small><span><i class="rec"></i>A câmera gravando</span></button>
+  </div>
+  <div class="stage">
+    <svg class="tl" viewBox="0 0 600 96" aria-hidden="true" style="height:auto">
+      <line x1="20" y1="52" x2="580" y2="52" stroke="var(--ink)" stroke-width="2"/>
+      <polygon points="580,52 568,46 568,58" fill="var(--ink)"/>
+      <text class="lab" x="20" y="80">PASSADO</text>
+      <text class="now" x="470" y="80">AGORA</text>
+      <g class="g on" id="gSp">
+        <circle cx="120" cy="52" r="8" fill="var(--sp)"/>
+        <text class="lab" x="96" y="30" fill="var(--sp)">yesterday</text>
+        <line x1="120" y1="38" x2="120" y2="44" stroke="var(--sp)" stroke-width="2"/>
+      </g>
+      <g class="g" id="gPp">
+        <circle class="pulse" cx="486" cy="52" r="9" fill="none" stroke="var(--pp)" stroke-width="2"/>
+        <circle cx="486" cy="52" r="8" fill="var(--pp)"/>
+        <text class="lab" x="452" y="30" fill="var(--pp)">ainda vale</text>
+      </g>
+      <g class="g" id="gPpc">
+        <line class="flowline" x1="160" y1="52" x2="486" y2="52" stroke="var(--ppc)" stroke-width="7" stroke-linecap="round"/>
+        <text class="lab" x="160" y="30" fill="var(--ppc)">all morning</text>
+      </g>
+    </svg>
+    <div class="camsent" id="camSent">I lost my keys yesterday.</div>
+    <div class="capn" id="camCap">Fato datado e arquivado. Aconteceu, acabou, virou registro. Se a frase diz quando, a câmera é essa.</div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>O teste do agora</h2>
+  <p class="sub">Três perguntas, sempre nesta ordem. A primeira que der sim decide o tempo.</p>
+  <div class="flow">
+    <div class="node sp" data-node="sp">
+      <h4>1 · A frase diz quando?</h4>
+      <div class="mk">yesterday · in 2020 · two weeks ago · last month · when I was...</div>
+      <div class="out">Simple Past <span class="en">· I sent it yesterday.</span></div>
+    </div>
+    <div class="node pp" data-node="pp">
+      <h4>2 · Sem data. O que importa é o resultado ou a conta?</h4>
+      <div class="mk">perdi e estou sem · já enviei · três reuniões hoje · alguma vez na vida</div>
+      <div class="out">Present Perfect <span class="en">· I've sent it.</span></div>
+    </div>
+    <div class="node ppc" data-node="ppc">
+      <h4>3 · O que importa é a atividade e quanto tempo ela dura até agora?</h4>
+      <div class="mk">há duas horas · a manhã toda · desde segunda · ando fazendo</div>
+      <div class="out">Perfect Continuous <span class="en">· I've been writing it since 9.</span></div>
+    </div>
+  </div>
+  <div class="tryl">Teste você mesmo: toque numa frase</div>
+  <div class="pchips">
+    <button class="pchip" data-t="sp" data-en="I sent the contract yesterday." data-nt="Disse quando (ontem): pergunta 1 responde sim e o jogo acaba ali.">Enviei o contrato ontem.</button>
+    <button class="pchip" data-t="pp" data-en="I've sent the contract." data-nt="Sem data, com resultado valendo agora: está na caixa de entrada.">Enviei o contrato: está na sua caixa.</button>
+    <button class="pchip" data-t="ppc" data-en="I've been writing the contract since 9 a.m." data-nt="O foco é a atividade escorrendo até agora: desde as 9h.">Estou escrevendo o contrato desde as 9h.</button>
+    <button class="pchip" data-t="ppc" data-en="I've been living in Porto Alegre for five years." data-nt="O português usa presente (moro há...), mas a duração até agora pede Perfect Continuous.">Moro em Porto Alegre há cinco anos.</button>
+  </div>
+  <div class="ansl" id="flowAns"><div class="en" id="flowEn"></div><div class="nt" id="flowNt"></div></div>
+</section>
+
+<section class="sec spc">
+  <div class="emb">A foto no álbum</div>
+  <h2>Simple Past <span class="tag sp">verbo no passado · did</span></h2>
+  <p class="sub">Fato encerrado, com hora e lugar. Você olha para o passado e ele fica lá.</p>
+  <div class="bridge">
+    <div class="br"><span class="pt">Liguei para o cliente ontem.</span><span class="ar">→</span><span class="en">I called the client yesterday.</span></div>
+    <div class="br"><span class="pt">Ela saiu há dez minutos.</span><span class="ar">→</span><span class="en">She left ten minutes ago.</span></div>
+    <div class="br"><span class="pt">Quando você chegou?</span><span class="ar">→</span><span class="en">When did you arrive?</span></div>
+  </div>
+  <ul class="use">
+    <li><b>Narrativa: um fato após o outro.</b><span class="en">She opened the door, saw the mess and called security.</span></li>
+    <li><b>Capítulos encerrados.</b><span class="en">Steve Jobs created the iPhone.</span><span class="ptt">Pessoa falecida ou fase concluída da vida.</span></li>
+  </ul>
+  <div class="alert"><b>O há do português engana:</b> saiu há 10 minutos (ponto) vira <span class="en" style="display:inline">She left ten minutes ago.</span> Moro aqui há 2 anos (duração até agora) vira <span class="en" style="display:inline">I've been living here for two years.</span></div>
+</section>
+
+<section class="sec ppcd">
+  <div class="emb">O ímã na geladeira</div>
+  <h2>Present Perfect <span class="tag pp">have + particípio</span></h2>
+  <p class="sub">A foto é antiga, mas está colada no seu presente. Ninguém pergunta quando: pergunta e agora?</p>
+  <div class="bridge">
+    <div class="br"><span class="pt">Perdi minhas chaves (estou sem elas).</span><span class="ar">→</span><span class="en">I've lost my keys.</span></div>
+    <div class="br"><span class="pt">Já almocei.</span><span class="ar">→</span><span class="en">I've already had lunch.<span class="ptt">No falado: I already had lunch.</span></span></div>
+    <div class="br"><span class="pt">Fiz três reuniões hoje.</span><span class="ar">→</span><span class="en">I've had three meetings today.</span></div>
+  </div>
+  <ul class="use">
+    <li><b>Resultado de pé agora.</b><span class="en">Someone has broken the window.</span><span class="ptt">O vidro está no chão.</span></li>
+    <li><b>Experiência de vida, sem data.</b><span class="en">She has visited Japan twice.</span><span class="ptt">Com ever, never, times.</span></li>
+    <li><b>just, already, yet.</b><span class="en">They've just arrived. Have you finished yet?</span></li>
+    <li><b>Conta em período ainda aberto.</b><span class="en">I've read ten books this year.</span><span class="ptt">this year segue valendo; last year fecharia e viraria Simple Past.</span></li>
+  </ul>
+  <div class="alert"><b>Regra de ouro:</b> marcador de tempo fechado mata o Perfect. "I've seen it yesterday" não existe: com data dita, volte para o Simple Past. E o particípio americano de get é gotten: It's gotten cold, I've gotten better.</div>
+</section>
+
+<section class="sec ppcc">
+  <div class="emb">A câmera gravando</div>
+  <h2>Present Perfect Continuous <span class="tag ppc">have been + ing</span></h2>
+  <p class="sub">A luz vermelha ainda pisca: a ação escorre do passado e chega ao agora quente, talvez inacabada.</p>
+  <div class="bridge">
+    <div class="br"><span class="pt">Trabalho aqui há dois anos.</span><span class="ar">→</span><span class="en">I've been working here for two years.</span></div>
+    <div class="br"><span class="pt">Ando lendo o relatório.</span><span class="ar">→</span><span class="en">I've been reading the report.</span></div>
+    <div class="br"><span class="pt">Você andou chorando?</span><span class="ar">→</span><span class="en">Have you been crying?</span></div>
+  </div>
+  <ul class="use">
+    <li><b>Duração até agora.</b><span class="en">How long have you been waiting?</span><span class="ptt">Com for, since, all morning.</span></li>
+    <li><b>Evidência recente.</b><span class="en">The ground is wet. It's been raining.</span><span class="ptt">A atividade parou, a marca ficou.</span></li>
+    <li><b>Processo em aberto.</b><span class="en">I've been writing the proposal.</span><span class="ptt">Ainda não terminei.</span></li>
+  </ul>
+  <div class="alert"><b>Verbos de estado</b> (know, own, believe, need, love...) não gravam vídeo: ficam no Perfect simples mesmo com duração. <span class="en" style="display:inline">I've known him for years.</span> Nunca "I've been knowing".</div>
+</section>
+
+<section class="sec">
+  <h2>for e since, de uma vez por todas <span class="tag mix">a dupla da duração</span></h2>
+  <p class="sub">Os dois acompanham o Perfect para falar de tempo até agora. A diferença: um mede a linha, o outro crava onde ela começa.</p>
+  <svg class="tl" viewBox="0 0 600 108" aria-hidden="true" style="height:auto;margin-top:8px">
+    <line x1="20" y1="46" x2="580" y2="46" stroke="var(--ink)" stroke-width="2"/>
+    <polygon points="580,46 568,40 568,52" fill="var(--ink)"/>
+    <text class="lab" x="20" y="24">PASSADO</text>
+    <text class="now" x="468" y="24">AGORA</text>
+    <line x1="180" y1="30" x2="180" y2="62" stroke="var(--gold)" stroke-width="3"/>
+    <circle cx="180" cy="46" r="5" fill="var(--gold)"/>
+    <text class="lab" x="140" y="78" fill="var(--gold)">since 2024</text>
+    <path d="M180,88 v8 h306 v-8" fill="none" stroke="var(--ppc)" stroke-width="2.5"/>
+    <text class="lab" x="282" y="84" fill="var(--ppc)">for two years</text>
+  </svg>
+  <div class="sf">
+    <div class="sfc forc">
+      <h4>for = o comprimento da linha</h4>
+      <p>Responde a <b>quanto tempo?</b> Uma quantidade que se conta: <span class="en">for two hours · for five years · for a long time · for ages</span></p>
+      <p>No português é o há / faz + tempo: moro aqui há cinco anos = <span class="en">I've been living here for five years.</span></p>
+    </div>
+    <div class="sfc sinc">
+      <h4>since = o ponto de partida</h4>
+      <p>Responde a <b>desde quando?</b> Um ponto de calendário ou relógio: <span class="en">since 2019 · since Monday · since 9 a.m. · since the merger</span></p>
+      <p>No português é o desde. E aceita frase inteira como ponto: <span class="en">since I joined the company.</span></p>
+    </div>
+  </div>
+  <div class="alert"><b>O truque de bolso:</b> cabe num ponto do calendário? since. É uma quantidade contada nos dedos? for. O since sempre pede Perfect: "I am here since 2020" é o erro clássico; o certo é <span class="en" style="display:inline">I've been here since 2020.</span> Já o for acompanha o que o vínculo pedir: aberto até agora, Perfect (I've worked here for five years); encerrado, Simple Past (I worked there for five years, e saí). Detalhe de fala: o for às vezes some no americano (I've been here two years); o since nunca some. E na negativa, o americano prefere in + período: I haven't seen him in years.</div>
+  <div class="tryl">Decida em cinco <span class="fsscore" id="fsScore"></span></div>
+  <div class="fsq" id="fsTxt"></div>
+  <div class="fsbtns" id="fsBtns">
+    <button class="fsbtn" data-w="for">for</button>
+    <button class="fsbtn" data-w="since">since</button>
+  </div>
+  <div class="fsnt" id="fsNt"></div>
+  <button class="ghost" id="fsAgain" style="display:none;margin-top:8px">Refazer</button>
+</section>
+
+<section class="sec">
+  <h2>Os três papéis do been <span class="tag mix">o que vem depois decide</span></h2>
+  <p class="sub">been é o particípio de be, e aparece com três fantasias. Olhe o que vem logo depois dele.</p>
+  <div class="bridge">
+    <div class="br"><span class="pt">been + lugar ou adjetivo: o próprio be</span><span class="ar">→</span><span class="en">I've been busy. I've been to London.</span></div>
+    <div class="br"><span class="pt">been + verbo em -ing: contínuo ativo</span><span class="ar">→</span><span class="en">She's been promoting the product.<span class="ptt">Ela vem promovendo.</span></span></div>
+    <div class="br"><span class="pt">been + particípio: voz passiva</span><span class="ar">→</span><span class="en">She's been promoted.<span class="ptt">Ela foi promovida.</span></span></div>
+  </div>
+  <div class="alert"><b>A pergunta de bolso vale na passiva também:</b> <span class="en" style="display:inline">Your payment has been processed</span> (resultado agora, sem data) contra <span class="en" style="display:inline">The decision was made last month</span> (data fechada). E uma economia honesta: a passiva do contínuo (has been being...) existe na gramática e não existe na boca de ninguém; não gaste energia com ela.</div>
+</section>
+
+<section class="sec">
+  <h2>A coreografia da entrevista <span class="tag mix">os três tempos no palco</span></h2>
+  <p class="sub">Falar da própria carreira em inglês é revezar os três tempos numa ordem que se repete sempre.</p>
+  <div class="bridge">
+    <div class="br"><span class="pt">1. O Perfect abre a manchete</span><span class="ar">→</span><span class="en">I've led engineering teams for over a decade.</span></div>
+    <div class="br"><span class="pt">2. O Simple Past conta o caso, com data e empresa</span><span class="ar">→</span><span class="en">At my last company, I grew the team from 15 to 50.</span></div>
+    <div class="br"><span class="pt">3. O contínuo situa o agora</span><span class="ar">→</span><span class="en">Lately, I've been focusing on platform reliability.</span></div>
+  </div>
+  <div class="alert"><b>As perguntas que você vai ouvir já escolhem o tempo da resposta:</b> Tell me about yourself (manchete no Perfect) · Have you ever...? (Yes, I have + caso no passado) · How long have you been...? (for/since) · What have you been working on? (contínuo) · Why did you leave...? (passado, capítulo fechado). Erro que denuncia na hora: I am at the company since 2025. O certo: <span class="en" style="display:inline">I've been at the company since 2025.</span></div>
+</section>
+
+<section class="sec">
+  <h2>A mesma frase, outro filme <span class="tag mix">pares mínimos</span></h2>
+  <p class="sub">Trocar o tempo não muda o fato: muda o que você quer dizer sobre ele.</p>
+  <table class="vs">
+    <tr><td><span class="who pp">perfect</span><span class="en">She has read the novel.</span><span class="ptt">Sabe o final.</span></td><td><span class="who ppc">contínuo</span><span class="en">She has been reading the novel.</span><span class="ptt">Está no capítulo cinco.</span></td></tr>
+    <tr><td><span class="who pp">perfect</span><span class="en">I've painted the room.</span><span class="ptt">Sala pronta.</span></td><td><span class="who ppc">contínuo</span><span class="en">I've been painting the room.</span><span class="ptt">Estou coberto de tinta.</span></td></tr>
+    <tr><td><span class="who sp">simple past</span><span class="en">I lost my keys, but I found them.</span><span class="ptt">História encerrada.</span></td><td><span class="who pp">perfect</span><span class="en">I've lost my keys.</span><span class="ptt">Resultado ainda de pé.</span></td></tr>
+    <tr><td><span class="who sp">simple past</span><span class="en">I read ten books last year.</span><span class="ptt">Período fechado.</span></td><td><span class="who pp">perfect</span><span class="en">I've read ten books this year.</span><span class="ptt">Período ainda aberto.</span></td></tr>
+  </table>
+  <div class="alert"><b>O inglês falado da América:</b> com just, already e yet, os dois tempos são padrão: I just got here e I've just gotten here, Did you eat yet? e Have you eaten yet?. O app aceita os dois nas respostas digitadas; na escrita profissional, o Perfect soa mais polido. Onde a troca não acontece: duração até agora com for, since e How long, que vivem no Perfect: I've been here since March.</div>
+</section>
+
+<section class="sec">
+  <h2>Cola de bolso</h2>
+  <p class="sub">Viu um destes marcadores? A decisão já está tomada.</p>
+  <div class="mks">
+    <span class="m sp">yesterday</span><span class="m sp">ago</span><span class="m sp">in 2020</span><span class="m sp">last week</span><span class="m sp">When...?</span>
+    <span class="m pp">ever · never</span><span class="m pp">just · already · yet</span><span class="m pp">so far</span><span class="m pp">twice · three times</span><span class="m pp">this year (conta)</span>
+    <span class="m ppc">for + período</span><span class="m ppc">since + ponto</span><span class="m ppc">How long...?</span><span class="m ppc">all morning</span><span class="m ppc">lately</span>
+  </div>
+  <p class="pocket">Sem marcador? Volte à pergunta de bolso: <b>isso ainda toca o agora?</b></p>
+</section>
+<button class="cta" data-go-practice>Praticar agora<span aria-hidden="true">→</span></button>
+`;
+
+/* ===== voz ===== */
+const TTS="speechSynthesis" in window && typeof SpeechSynthesisUtterance!=="undefined";
+let VOICE=null;
+function pickVoice(){
+  if(!TTS) return;
+  const vs=speechSynthesis.getVoices();
+  VOICE=vs.find(v=>/en[-_]US/i.test(v.lang)&&/Samantha|Google US/i.test(v.name))||vs.find(v=>/en[-_]US/i.test(v.lang))||vs.find(v=>/^en/i.test(v.lang))||null;
+}
+if(TTS){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice; }
+function speak(t){
+  if(!TTS) return;
+  try{
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(t);
+    u.lang="en-US"; u.rate=.92; if(VOICE) u.voice=VOICE;
+    speechSynthesis.speak(u);
+  }catch(e){}
+}
+function spkBtn(t){
+  const b=document.createElement("button");
+  b.className="spk"; b.textContent="ouvir"; b.type="button";
+  b.addEventListener("click",ev=>{ev.stopPropagation();speak(t);});
+  return b;
+}
+
+/* ===== estado e armazenamento ===== */
+const KEY="ppppc-v1";
+const mem={};
+async function load(){
+  try{ if(window.storage){ const r=await window.storage.get(KEY); if(r&&r.value) return JSON.parse(r.value); } }
+  catch(e){}
+  try{ if(!window.storage&&window.localStorage){ const s=localStorage.getItem(KEY); if(s) return JSON.parse(s); } }
+  catch(e){}
+  return mem[KEY]?JSON.parse(mem[KEY]):null;
+}
+let saveT=null;
+function save(){
+  clearTimeout(saveT);
+  saveT=setTimeout(async()=>{
+    const s=JSON.stringify(S);
+    mem[KEY]=s;
+    try{ if(window.storage) await window.storage.set(KEY,s); }catch(e){}
+    try{ if(!window.storage&&window.localStorage) localStorage.setItem(KEY,s); }catch(e){}
+  },250);
+}
+function fresh(){ return {v:1,xp:0,sd:0,ld:"",it:{},tot:[0,0]}; }
+let S=fresh();
+
+const IVL=[0,10*60e3,864e5,3*864e5,7*864e5,21*864e5]; /* box 0..5 */
+function rec(id){ return S.it[id]||(S.it[id]=[0,0,0,0]); } /* [box,due,certos,erros] */
+function today(){ const d=new Date(); return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0"); }
+function bumpStreak(){
+  const t=today();
+  if(S.ld===t) return;
+  const y=new Date(Date.now()-864e5);
+  const ys=y.getFullYear()+"-"+String(y.getMonth()+1).padStart(2,"0")+"-"+String(y.getDate()).padStart(2,"0");
+  S.sd=(S.ld===ys)?S.sd+1:1;
+  S.ld=t;
+}
+function answered(id,ok){
+  const r=rec(id);
+  if(ok){ r[0]=Math.min(5,r[0]+1); r[2]++; S.xp+=10; S.tot[1]++; }
+  else{ r[0]=1; r[3]++; S.xp+=3; }
+  r[1]=Date.now()+IVL[r[0]];
+  S.tot[0]++;
+  bumpStreak();
+  save();
+}
+
+/* ===== normalização de respostas digitadas ===== */
+const CONTR=[["i've","i have"],["you've","you have"],["we've","we have"],["they've","they have"],["who've","who have"],["he's been","he has been"],["she's been","she has been"],["it's been","it has been"],["somebody's been","somebody has been"],["someone's been","someone has been"],["'s been"," has been"],["he's","he has"],["she's","she has"],["hasn't","has not"],["haven't","have not"],["hadn't","had not"],["didn't","did not"],["isn't","is not"],["aren't","are not"],["wasn't","was not"],["don't","do not"],["doesn't","does not"]];
+const CONTR2=[["ive","i have"],["youve","you have"],["weve","we have"],["theyve","they have"],["hes been","he has been"],["shes been","she has been"],["its been","it has been"],["somebodys been","somebody has been"],["someones been","someone has been"],["hes","he has"],["shes","she has"],["hasnt","has not"],["havent","have not"],["didnt","did not"],["isnt","is not"],["dont","do not"],["doesnt","does not"]];
+const NUMW=[["one","1"],["two","2"],["three","3"],["four","4"],["five","5"],["six","6"],["seven","7"],["eight","8"],["nine","9"],["ten","10"],["twelve","12"],["fifteen","15"],["twenty","20"],["forty","40"],["fifty","50"]];
+function canon(s){
+  s=s.toLowerCase().replace(/[\u2018\u2019\u00B4`]/g,"'");
+  for(const [a,b] of CONTR) s=s.replace(new RegExp("\\b"+a.replace("'","'")+"\\b","g"),b);
+  s=s.replace(/'/g,"");
+  for(const [a,b] of CONTR2) s=s.replace(new RegExp("\\b"+a+"\\b","g"),b);
+  s=s.replace(/[.,!?;:"]/g,"").replace(/\s+/g," ").trim();
+  for(const [a,b] of NUMW) s=s.replace(new RegExp("\\b"+a+"\\b","g"),b);
+  return s;
+}
+
+/* ===== montagem da sessão ===== */
+const LEN=10;
+const PROD={f:1,t:1,m:1,l:1};
+function pool(){ return TTS?ITEMS:ITEMS.filter(i=>i.k!=="l"); }
+function buildSession(){
+  const now=Date.now();
+  const M={}; for(const rid in RULES) M[rid]=ruleMastery(rid);
+  const kp=it=>{ const p=PROD[it.k]?1:0; return M[it.r]>=60 ? 1-p : p; };
+  const due=[],neu=[],rest=[];
+  for(const it of pool()){
+    const r=S.it[it.id];
+    if(!r||r[0]===0) neu.push(it);
+    else if(r[1]<=now) due.push(it);
+    else rest.push(it);
+  }
+  due.sort((a,b)=>rec(a.id)[0]-rec(b.id)[0]||kp(a)-kp(b)||rec(a.id)[1]-rec(b.id)[1]);
+  shuffle(neu); neu.sort((a,b)=>kp(a)-kp(b));
+  rest.sort((a,b)=>rec(a.id)[1]-rec(b.id)[1]);
+  const pick=due.concat(neu,rest).slice(0,LEN);
+  const temTrinca=a=>{ for(let i=2;i<a.length;i++) if(a[i].r===a[i-1].r&&a[i].r===a[i-2].r) return true; return false; };
+  shuffle(pick);
+  for(let t=0;t<12&&temTrinca(pick);t++) shuffle(pick);
+  for(let i=2;i<pick.length;i++){ /* último recurso para composições muito concentradas */
+    if(pick[i].r===pick[i-1].r&&pick[i].r===pick[i-2].r){
+      const j=pick.findIndex((p,k)=>k>i&&p.r!==pick[i].r);
+      if(j>0){ const tmp=pick[i]; pick[i]=pick[j]; pick[j]=tmp; }
+    }
+  }
+  return pick;
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } }
+
+/* ===== navegação ===== */
+const $=s=>document.querySelector(s);
+const screens=["home","learn","quiz","done","prog","plan","speak"];
+function go(id){
+  screens.forEach(x=>$("#"+x).classList.toggle("hidden",x!==id));
+  document.querySelectorAll(".tabs button").forEach(b=>b.setAttribute("aria-selected",String(b.dataset.go===id)));
+  if(id==="home") renderHome();
+  if(id==="learn") renderLearn();
+  if(id==="prog") renderProg();
+  if(id==="speak") renderSpeak();
+  if(id==="plan") renderPlan();
+  window.scrollTo(0,0);
+}
+document.querySelectorAll(".tabs button").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+
+/* ===== telas ===== */
+function counts(){
+  const now=Date.now(); let d=0,n=0,dom=0;
+  for(const it of pool()){
+    const r=S.it[it.id];
+    if(!r||r[0]===0) n++;
+    else{ if(r[1]<=now) d++; if(r[0]>=4) dom++; }
+  }
+  return {d,n,dom};
+}
+function renderHome(){
+  const c=counts();
+  const parts=[];
+  if(S.sd>0) parts.push(`<span class="chip">Sequência: <b class="g">${S.sd} ${S.sd===1?"dia":"dias"}</b></span>`);
+  parts.push(`<span class="chip">XP: <b>${S.xp}</b></span>`);
+  parts.push(`<span class="chip">Para hoje: <b class="t">${c.d} ${c.d===1?"revisão":"revisões"}</b> · ${c.n} novas</span>`);
+  $("#homeStats").innerHTML=parts.join("");
+}
+const FSQ=[
+ ["We've been partners ___ 2019.","since","2019 é um ponto no calendário."],
+ ["She's been in meetings ___ three hours.","for","three hours é quantidade contada."],
+ ["I haven't seen him ___ the offsite.","since","o offsite é o ponto de partida."],
+ ["They've known each other ___ ages.","for","ages é um período, ainda que vago."],
+ ["It's been raining ___ I woke up.","since","frase inteira marcando o ponto: since + oração."]
+];
+const LESSON=[
+ {k:"i",h:'<div class="lq">O português conjuga direto. O inglês faz uma pergunta antes:</div><div class="lbig">isso ainda toca o agora?</div><div class="lq">Sim: <b class="cpp">Perfect</b>. Não: <b class="csp">Simple Past</b>. Essa pergunta decide 90% dos casos.</div>'},
+ {k:"i",t:"A mesma história, três tempos",p:[["I lost my keys yesterday.","Tem data: acabou, virou registro."],["I've lost my keys.","Sem data e ainda estou sem elas: toca o agora."],["I've been looking for them all morning.","A busca continua: a linha chega ao agora."]]},
+ {k:"t",id:"tft1",l:"Se a frase diz quando, o jogo acaba na hora"},
+ {k:"t",id:"spp2",l:"Sem data e o efeito valendo agora"},
+ {k:"i",t:"for e since em uma linha",p:[["I've been here for two years.","for mede a duração: quanto tempo?"],["I've been here since 2019.","since crava o início: desde quando?"]]},
+ {k:"t",id:"dur8",l:"for mede, since crava"},
+ {k:"i",t:"O truque do been",p:[["She's been promoting the product.","been + ing: ela vem fazendo."],["She's been promoted.","been + particípio: foi feito com ela."]]},
+ {k:"t",id:"pas4",l:"O que vem depois do been decide"},
+ {k:"i",t:"Sua carreira em três frases",p:[["I've led tech teams for over a decade.","O Perfect abre a manchete."],["At my last company, I grew the team from 15 to 50.","O Past conta o caso, com data e empresa."],["Lately, I've been focusing on reliability.","O contínuo situa o agora."]]},
+ {k:"t",id:"job14",l:"In my last role fecha o capítulo"},
+ {k:"t",id:"job4",l:"A pergunta de experiência da entrevista"},
+ {k:"i",t:"Blocos prontos que destravam a conversa",p:[["How have you been?","O cumprimento padrão."],["What have you been working on?","O abre-papo de trabalho."],["I've been meaning to ask you something.","Puxa qualquer assunto."],["It's been a pleasure talking to you.","Fecha a entrevista com elegância."]]},
+ {k:"d"}
+];
+let li=0;
+function lessonShell(){return '<div class="ldots" id="lDots"></div><div class="lcard" id="lCard"></div><div class="refbar"><button class="ghost" id="refToggle">Abrir a consulta completa</button></div><div id="refWrap" class="hidden">';}
+function lNext(){ if(li<LESSON.length-1){ li++; lShow(); } }
+function lShow(){
+  let d=""; for(let i=0;i<LESSON.length;i++) d+='<span class="ldot '+(i<li?"done":i===li?"on":"")+'"></span>';
+  $("#lDots").innerHTML=d;
+  const s=LESSON[li], c=$("#lCard"); c.innerHTML="";
+  if(s.k==="i"){
+    let hh=s.h||"";
+    if(s.t) hh='<div class="lt">'+s.t+'</div>'+hh;
+    c.innerHTML=hh;
+    (s.p||[]).forEach(pr=>{
+      const r=document.createElement("div"); r.className="lrow";
+      r.innerHTML='<div class="len">'+esc(pr[0])+'</div><div class="lpt">'+esc(pr[1])+'</div>';
+      if(TTS) r.querySelector(".len").appendChild(spkBtn(pr[0]));
+      c.appendChild(r);
+    });
+    const b=document.createElement("button"); b.className="cta lnext"; b.innerHTML='Continuar<span aria-hidden="true">&#8594;</span>';
+    b.addEventListener("click",lNext); c.appendChild(b);
+  }else if(s.k==="t"){
+    const it=ITEMS.find(x=>x.id===s.id);
+    c.innerHTML='<div class="lt">'+s.l+'</div><div class="qtext">'+esc(it.q).replace("___",'<span class="gap">&nbsp;</span>')+'</div>';
+    const box=document.createElement("div"); box.className="opts"; c.appendChild(box);
+    const fb=document.createElement("div"); fb.className="lfb"; c.appendChild(fb);
+    const order=it.o.map((_,i)=>i); shuffle(order); let done=false;
+    order.forEach(oi=>{
+      const b=document.createElement("button"); b.className="opt"; b.dataset.oi=oi;
+      b.innerHTML='<span>'+esc(it.o[oi])+'</span>';
+      b.addEventListener("click",()=>{
+        if(done) return; done=true;
+        box.querySelectorAll(".opt").forEach(x=>{
+          x.disabled=true;
+          if(+x.dataset.oi===it.a) x.classList.add("right");
+          else if(x===b) x.classList.add("wrong");
+          else x.classList.add("dim");
+        });
+        const first=it.x.split(". ")[0]+(it.x.includes(". ")?".":"");
+        fb.innerHTML=(oi===it.a?"<b>Certo.</b> ":"<b>Quase.</b> ")+esc(first)+"<br>";
+        if(TTS) fb.appendChild(spkBtn(it.q.replace("___",it.o[it.a])));
+        const n=document.createElement("button"); n.className="cta lnext"; n.innerHTML='Continuar<span aria-hidden="true">&#8594;</span>';
+        n.addEventListener("click",lNext); fb.appendChild(n);
+      });
+      box.appendChild(b);
+    });
+  }else{
+    c.innerHTML='<div class="lt">A regra de bolso</div><div class="lq">Toca o agora? <b class="cpp">Perfect</b>. Tem data? <b class="csp">Past</b>. Dura até agora? <b class="cpc">been + ing</b>.</div><div class="lq">Entendeu em 3 minutos. Agora o app garante que você não esqueça: 10 questões por sessão.</div>';
+    const row=document.createElement("div"); row.className="row";
+    const p=document.createElement("button"); p.className="cta"; p.innerHTML='Praticar agora<span aria-hidden="true">&#8594;</span>'; p.addEventListener("click",startSession);
+    const r=document.createElement("button"); r.className="ghost"; r.textContent="Refazer a lição"; r.addEventListener("click",()=>{li=0;lShow();});
+    row.appendChild(p); row.appendChild(r); c.appendChild(row);
+  }
+}
+const CAMS={
+  sp:{s:"I lost my keys yesterday.",c:"Fato datado e arquivado. Aconteceu, acabou, virou registro. Se a frase diz quando, a câmera é essa."},
+  pp:{s:"I've lost my keys.",c:"A foto é antiga, mas está colada no seu presente: você está sem as chaves agora. Ninguém pergunta quando."},
+  ppc:{s:"I've been looking for them all morning.",c:"A luz vermelha ainda pisca: a busca escorre pelo tempo e chega ao agora, ainda quente e inacabada."}
+};
+function renderLearn(){
+  $("#learn").innerHTML=lessonShell()+THEORY+'</div>';
+  li=0; lShow();
+  $("#refToggle").addEventListener("click",()=>{
+    const on=$("#refWrap").classList.toggle("hidden");
+    $("#refToggle").textContent=on?"Abrir a consulta completa":"Fechar a consulta";
+  });
+  $("#learn [data-go-practice]").addEventListener("click",startSession);
+  if(TTS) $("#camSent").appendChild(spkBtn($("#camSent").textContent));
+  document.querySelectorAll("#learn .cam").forEach(b=>b.addEventListener("click",()=>{
+    const m=b.dataset.cam;
+    document.querySelectorAll("#learn .cam").forEach(x=>x.classList.toggle("on",x===b));
+    ["Sp","Pp","Ppc"].forEach(g=>$("#g"+g).classList.toggle("on",g.toLowerCase()===m));
+    $("#camSent").textContent=CAMS[m].s;
+    if(TTS) $("#camSent").appendChild(spkBtn(CAMS[m].s));
+    $("#camCap").textContent=CAMS[m].c;
+  }));
+  let fi=0,fscore=0,flock=false;
+  const fsShow=()=>{
+    $("#fsScore").textContent=(fi+1)+" de "+FSQ.length;
+    $("#fsTxt").innerHTML=esc(FSQ[fi][0]).replace("___",'<span class="gap">&nbsp;</span>');
+    $("#fsNt").textContent="";
+    document.querySelectorAll("#learn .fsbtn").forEach(x=>{x.classList.remove("right","wrong");x.disabled=false;});
+    flock=false;
+  };
+  const fsEnd=()=>{
+    $("#fsScore").textContent="";
+    $("#fsTxt").textContent=fscore+" de 5. "+(fscore===5?"Fechado: for mede, since crava.":"Quase: for mede a quantidade, since crava o ponto.");
+    $("#fsBtns").style.display="none";
+    $("#fsNt").textContent="";
+    $("#fsAgain").style.display="inline-block";
+  };
+  document.querySelectorAll("#learn .fsbtn").forEach(b=>b.addEventListener("click",()=>{
+    if(flock) return; flock=true;
+    const ok=b.dataset.w===FSQ[fi][1];
+    if(ok) fscore++;
+    document.querySelectorAll("#learn .fsbtn").forEach(x=>{
+      x.disabled=true;
+      if(x.dataset.w===FSQ[fi][1]) x.classList.add("right");
+      else if(x===b) x.classList.add("wrong");
+    });
+    $("#fsNt").textContent=(ok?"Certo. ":"Quase. ")+FSQ[fi][2];
+    setTimeout(()=>{ fi++; if(fi<FSQ.length) fsShow(); else fsEnd(); },1300);
+  }));
+  $("#fsAgain").addEventListener("click",()=>{
+    fi=0;fscore=0;$("#fsBtns").style.display="flex";$("#fsAgain").style.display="none";fsShow();
+  });
+  fsShow();
+  document.querySelectorAll("#learn .pchip").forEach(b=>b.addEventListener("click",()=>{
+    document.querySelectorAll("#learn .pchip").forEach(x=>x.classList.toggle("on",x===b));
+    const t=b.dataset.t;
+    document.querySelectorAll("#learn .node").forEach(n=>{
+      n.classList.toggle("lit",n.dataset.node===t);
+      n.classList.toggle("dim",n.dataset.node!==t);
+    });
+    $("#flowAns").classList.add("show");
+    $("#flowEn").textContent=b.dataset.en;
+    $("#flowNt").textContent=b.dataset.nt;
+  }));
+}
+function ruleMastery(rid){
+  const its=pool().filter(i=>i.r===rid);
+  if(!its.length) return 0;
+  let sum=0; for(const i of its){ const r=S.it[i.id]; sum+=r?Math.min(5,r[0]):0; }
+  return Math.round(100*sum/(5*its.length));
+}
+function renderProg(){
+  const c=counts();
+  const acc=S.tot[0]?Math.round(100*S.tot[1]/S.tot[0]):0;
+  let bars="";
+  for(const rid in RULES){
+    if(!pool().some(i=>i.r===rid)) continue;
+    const m=ruleMastery(rid);
+    bars+=`<div class="bar ${RULES[rid].t}"><div class="lb"><span>${RULES[rid].n}</span><span>${m}%</span></div><div class="tr"><div class="fl" style="width:${m}%"></div></div></div>`;
+  }
+  $("#prog").innerHTML=`
+    <h2 class="big">Seu progresso</h2>
+    <p class="sub">Domínio por regra. A barra sobe quando você acerta um item em revisões cada vez mais espaçadas.</p>
+    <div class="score">
+      <span class="chip">Sequência: <b class="g">${S.sd} ${S.sd===1?"dia":"dias"}</b></span>
+      <span class="chip">XP: <b>${S.xp}</b></span>
+      <span class="chip">Respondidas: <b>${S.tot[0]}</b></span>
+      <span class="chip">Precisão: <b>${acc}%</b></span>
+      <span class="chip">Itens dominados: <b>${c.dom}</b> de ${pool().length}</span>
+      <span class="chip">Falas gravadas: <b>${S.spk||0}</b></span>
+    </div>
+    <div class="bars">${bars}</div>
+    <div class="row"><button class="cta" data-p>Começar sessão<span aria-hidden="true">→</span></button></div>
+    <button class="danger" data-reset>Zerar todo o progresso</button>`;
+  $("#prog [data-p]").addEventListener("click",startSession);
+  $("#prog [data-reset]").addEventListener("click",async()=>{
+    if(!confirm("Apagar todo o progresso? Não dá para desfazer.")) return;
+    S=fresh(); save();
+    try{ if(window.storage) await window.storage.delete(KEY); }catch(e){}
+    try{ if(!window.storage&&window.localStorage) localStorage.removeItem(KEY); }catch(e){}
+    renderProg();
+  });
+}
+
+/* ===== plano ===== */
+const PLAN_D=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
+const PLAN_X=["","Blocos (5 min)","Eco (5 min)","Responder (5 min)","Eco (5 min)","Blocos (5 min)","Simulação: uma cena completa (10 min)"];
+function renderPlan(){
+  const d=new Date().getDay();
+  const jm=ruleMastery("job"), dm=ruleMastery("dur");
+  const hoje = d===0
+    ? "Hoje é domingo: dia leve. Monólogo ao acordar e, se o Início mostrar revisões, faça só elas."
+    : "Hoje ("+PLAN_D[d]+"): monólogo ao acordar (1 min) · uma sessão (4 min) · "+PLAN_X[d]+" · 20 min de inglês no ouvido.";
+  let dias=""; for(let i=0;i<7;i++) dias+='<div class="pday'+(i===d?" today":"")+'"><b>'+PLAN_D[i]+'</b><span>'+(i===0?"Descanso ou só as revisões pendentes":"Base diária + "+PLAN_X[i])+'</span></div>';
+  const mk=(ok,t,st)=>'<div class="mk'+(ok?" done":"")+'">'+t+'<div class="st">'+(ok?"Feito. ":"")+st+'</div></div>';
+  $("#plan").innerHTML=`
+   <div class="epi">"Language is the only thing worth knowing even poorly."</div>
+   <div class="epia">Kató Lomb. Em bom português: a língua é a única coisa que vale a pena saber, mesmo que mal. Falando errado, você já está ganhando.</div>
+   <section class="sec"><h2>Hoje</h2><p class="ptoday">${hoje}</p><p class="sub" style="margin-top:8px">A base diária nunca muda: monólogo ao acordar (a manhã é da palavra, diz a Lomb), uma sessão de prática e 20 minutos de inglês real no ouvido, um podcast de tecnologia que você seguiria por gosto.</p></section>
+   <section class="sec"><h2>A semana</h2>${dias}</section>
+   <section class="sec"><h2>Marcos</h2>
+    ${mk(S.sd>=7,"1. Sete dias seguidos","O hábito instalado. Agora: "+S.sd+" "+(S.sd===1?"dia":"dias")+".")}
+    ${mk(jm>=85&&dm>=85,"2. Entrevista e Duração acima de 85%","Aí me chame no chat para simular entrevista com correção. Agora: "+jm+"% e "+dm+"%.")}
+    ${mk((S.spk||0)>=30,"3. Trinta falas gravadas","Medo domado: leve a fala para humanos e peça correção. Agora: "+(S.spk||0)+".")}
+   </section>`;
+}
+
+/* ===== estúdio de fala ===== */
+const MIC=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
+const SPK_R=["job1","job5","job10","job12","conv1","conv3","conv6","conv9","jay5","jay11","dur4","sta6","evi9","spp16","res4","pvr6"];
+const SPK_B=[
+ ["Oi, tudo bem? (informal de trabalho)","Hey, how's it going?"],
+ ["Obrigado por reservar um tempo.","Thanks for taking the time."],
+ ["Vamos começar?","Should we get started?"],
+ ["Boa pergunta, deixa eu pensar um segundo.","That's a good question, let me think for a second."],
+ ["Deixa eu colocar de outro jeito.","Let me put it another way."],
+ ["Pra ser honesto...","To be honest..."],
+ ["A questão é a seguinte...","Here's the thing..."],
+ ["Onde eu quero chegar é...","My point is..."],
+ ["Desculpa, pode repetir?","Sorry, could you say that again?"],
+ ["O que você quer dizer com isso?","What do you mean by that?"],
+ ["Como se diz... em inglês?","How do you say... in English?"],
+ ["Meu inglês ainda está destravando, tenha paciência comigo.","My English is still a work in progress, bear with me."],
+ ["Deixa eu reformular.","Let me rephrase that."],
+ ["Não entendi direito a última parte.","I didn't quite catch that last part."],
+ ["Vou direto ao ponto.","I'll get straight to the point."],
+ ["Podemos marcar uma call rápida amanhã?","Can we jump on a quick call tomorrow?"],
+ ["Te retorno ainda hoje.","I'll get back to you later today."],
+ ["Faz sentido pra você?","Does that make sense?"],
+ ["Estamos na mesma página.","We're on the same page."],
+ ["Deixa eu compartilhar minha tela.","Let me share my screen."],
+ ["Entendo seu ponto, mas eu veria de outro jeito.","I see your point, but I'd look at it differently."],
+ ["Me corrija se eu estiver errado.","Correct me if I'm wrong."],
+ ["Não consigo até sexta, mas consigo até terça.","I can't make it by Friday, but I can have it by Tuesday."],
+ ["Vamos alinhar as expectativas.","Let's align on expectations."],
+ ["Resumindo...","So, to sum up..."],
+ ["Combinado. Eu mando o resumo por e-mail.","Sounds good. I'll send a recap by email."],
+ ["Qualquer coisa, me chama.","If anything comes up, just ping me."],
+ ["Foi ótimo falar com você.","It was great talking to you."]
+];
+const SPK_E=["dit1","dit3","dit7","dit9","dit10","dit15","dit16","conv2","conv5","conv8","job8","job9","job13","pas12"];
+const SPK_E2=[
+ "That's a really good question. Let me think for a second.",
+ "Here's the thing: we've been growing faster than expected.",
+ "Long story short, we shipped it on time.",
+ "I'll get back to you by the end of the day.",
+ "Correct me if I'm wrong, but that deadline has changed.",
+ "At the end of the day, it's about the customer.",
+ "Let me walk you through what we've been building.",
+ "Sounds good. Let's touch base on Friday."
+];
+const SPK_M=[
+ "Um minuto: o que você anda fazendo no trabalho esta semana (I've been...), uma coisa que já concluiu (I've...) e um caso com data (Last week I...).",
+ "Apresente-se como numa entrevista: a manchete no Perfect, um caso no Past com data, e o agora no contínuo (Lately I've been...).",
+ "Conte a história de um incidente: o que aconteceu (Past), o que já foi resolvido (has been fixed) e o que você tem monitorado desde então.",
+ "Fale do seu time e de um fornecedor: há quanto tempo trabalham juntos (for / since) e o que já entregaram (we've...).",
+ "Ontem em Simple Past, a manhã de hoje em Perfect, e uma coisa que você anda adiando (I've been meaning to...).",
+ "Explique um projeto seu para alguém não técnico, em um minuto.",
+ "Defenda uma decisão técnica que você tomou e conte o que aconteceu depois.",
+ "Descreva seu produto atual como se vendesse para um investidor.",
+ "Conte a história da sua carreira em um minuto, do começo até hoje.",
+ "Dê um feedback difícil para alguém do time, com elegância.",
+ "Explique um atraso a um fornecedor e proponha o novo plano.",
+ "Opinião em um minuto: como a IA vai mudar o trabalho do seu time?"
+];
+const SIMS=[
+ {n:"Entrevista de emprego",q:["So, tell me a little about yourself.","Why are you looking to leave your current company?","Have you ever managed a fully remote team?","What have you been working on lately?","Where do you see yourself in a few years?"]},
+ {n:"Daily com o time",q:["Good morning! What did you work on yesterday?","What are you focusing on today?","Any blockers I should know about?","When do you think the fix will be ready?"]},
+ {n:"Reunião com fornecedor",q:["Thanks for joining. Where are we on the delivery?","The deadline was last Friday. What happened?","What can you commit to for next week?","Is there anything you need from our side?"]},
+ {n:"Café e corredor",q:["Hey! How have you been?","How was your weekend?","Have you been to the new office yet?","Any plans for the holidays?"]}
+];
+let ECO=[];
+let spkMode="r",spkIdx={r:0,b:0,e:0,m:0},spkOrd={},spkPhase="idle",recURL=null;
+let sim={sc:-1,qi:0,urls:[]};
+let mediaStream=null,recDev=null,recChunks=[],recTimer=null;
+function simReset(){ sim.urls.forEach(u=>{try{URL.revokeObjectURL(u)}catch(e){}}); sim={sc:-1,qi:0,urls:[]}; }
+function stopTracks(){ if(mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; } }
+async function startRec(maxMs){
+  if(TTS) try{speechSynthesis.cancel();}catch(e){}
+  try{ mediaStream=await navigator.mediaDevices.getUserMedia({audio:true}); }
+  catch(e){ spkPhase="denied"; renderSpkCard(); return; }
+  recChunks=[];
+  const mime=MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/mp4")?"audio/mp4":(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/webm")?"audio/webm":"");
+  try{ recDev=mime?new MediaRecorder(mediaStream,{mimeType:mime}):new MediaRecorder(mediaStream); }
+  catch(e){ stopTracks(); spkPhase="denied"; renderSpkCard(); return; }
+  recDev.ondataavailable=e=>{ if(e.data&&e.data.size) recChunks.push(e.data); };
+  recDev.onstop=()=>{
+    stopTracks();
+    if(recURL) URL.revokeObjectURL(recURL);
+    recURL=URL.createObjectURL(new Blob(recChunks,{type:recDev.mimeType||"audio/mp4"}));
+    spkPhase="review"; renderSpkCard();
+  };
+  recDev.start();
+  spkPhase="rec"; renderSpkCard();
+  recTimer=setTimeout(stopRecNow,maxMs);
+}
+function stopRecNow(){ clearTimeout(recTimer); if(recDev&&recDev.state==="recording") recDev.stop(); }
+function spkLen(){ return spkMode==="r"?SPK_R.length:spkMode==="b"?SPK_B.length:spkMode==="e"?ECO.length:SPK_M.length; }
+function spkCue(){
+  if(spkMode==="r"){ const it=ITEMS.find(x=>x.id===SPK_R[spkOrd.r[spkIdx.r]]); return {cue:it.q,model:it.ans,hint:"Grave sua resposta antes de ver o modelo. Use: "+it.v}; }
+  if(spkMode==="b"){ const p=SPK_B[spkOrd.b[spkIdx.b]]; return {cue:p[0],model:p[1],hint:"Bloco pronto (Lomb): ele compra tempo enquanto o resto do inglês chega."}; }
+  if(spkMode==="e"){ const s=ECO[spkOrd.e[spkIdx.e]]; return {model:s}; }
+  return {cue:SPK_M[spkOrd.m[spkIdx.m]]};
+}
+function spkAdvance(){ spkIdx[spkMode]=(spkIdx[spkMode]+1)%spkLen(); spkPhase="idle"; renderSpkCard(); }
+function spkDone(xp){ S.xp+=xp; S.spk=(S.spk||0)+1; bumpStreak(); save(); spkAdvance(); }
+function renderSpeak(){
+  if(!ECO.length) ECO=SPK_E.map(id=>ITEMS.find(x=>x.id===id).ans).concat(SPK_E2);
+  ["r","b","e","m"].forEach(m=>{
+    const n=m==="r"?SPK_R.length:m==="b"?SPK_B.length:m==="e"?ECO.length:SPK_M.length;
+    spkOrd[m]=Array.from({length:n},(_,i)=>i); shuffle(spkOrd[m]); spkIdx[m]=0;
+  });
+  spkMode="r"; spkPhase="idle"; simReset();
+  document.querySelectorAll("#speak .cam").forEach(b=>b.classList.toggle("on",b.dataset.m==="r"));
+  renderSpkCard();
+}
+function renderSpkCard(){
+  const c=$("#spkCard"); c.innerHTML="";
+  if(!MIC||spkPhase==="denied"){
+    c.innerHTML='<div class="lt">Microfone indisponível</div><div class="micoff">Este navegador bloqueou a gravação de áudio aqui. Abra o app pelo seu endereço do GitHub Pages no Safari ou no Chrome, toque em Gravar e permita o microfone. A gravação fica só no seu aparelho: nada é enviado.</div>';
+    return;
+  }
+  if(spkMode==="s"){ renderSim(c); return; }
+  const cur=spkCue();
+  if(spkPhase==="idle"){
+    if(spkMode==="e"){
+      c.innerHTML='<div class="lt">Ouça o modelo e repita gravando</div><div class="spkmodel" id="ecoTxt">'+esc(cur.model)+'</div><div class="hintv">Pimsleur: imite o ritmo, não só as palavras.</div>';
+      if(TTS) $("#ecoTxt").appendChild(spkBtn(cur.model));
+    }else if(spkMode==="m"){
+      c.innerHTML='<div class="lt">Monólogo de um minuto (Lomb)</div><div class="qtext" style="font-size:1.08rem">'+esc(cur.cue)+'</div><div class="hintv">Fale sem medo de errar: o objetivo é destravar, não sair perfeito.</div>';
+    }else{
+      c.innerHTML='<div class="lt">Diga em inglês, em voz alta</div><div class="qtext">'+esc(cur.cue)+'</div><div class="hintv">'+esc(cur.hint)+'</div>';
+    }
+    const b=document.createElement("button"); b.className="recbtn idle"; b.setAttribute("aria-label","Gravar");
+    b.addEventListener("click",()=>startRec(spkMode==="m"?75000:20000));
+    c.appendChild(b);
+    const l=document.createElement("div"); l.className="reclab"; l.textContent="Toque para gravar"; c.appendChild(l);
+  }else if(spkPhase==="rec"){
+    const tt=spkMode==="e"?cur.model:cur.cue;
+    c.innerHTML='<div class="lt">Gravando</div><div class="qtext" style="font-size:1.05rem">'+esc(tt)+'</div>';
+    const b=document.createElement("button"); b.className="recbtn rec"; b.setAttribute("aria-label","Parar");
+    b.addEventListener("click",stopRecNow); c.appendChild(b);
+    const l=document.createElement("div"); l.className="reclab"; l.textContent="Fale e toque para parar"; c.appendChild(l);
+  }else{
+    c.innerHTML='<div class="spkrow"><div class="spklab">Sua gravação</div><audio controls src="'+recURL+'"></audio></div>';
+    if(spkMode!=="m"){
+      const m=document.createElement("div"); m.className="spkrow";
+      m.innerHTML='<div class="spklab">Modelo</div><div class="spkmodel">'+esc(cur.model)+'</div>';
+      if(TTS) m.querySelector(".spkmodel").appendChild(spkBtn(cur.model));
+      c.appendChild(m);
+      const h2=document.createElement("div"); h2.className="hintv"; h2.textContent="Compare com o seu ouvido: ritmo, contrações e o som final dos verbos.";
+      c.appendChild(h2);
+    }
+    const row=document.createElement("div"); row.className="row";
+    const ok=document.createElement("button"); ok.className="cta lnext"; ok.style.marginTop="14px";
+    ok.innerHTML=spkMode==="m"?"Concluir (+10 XP)":"Consegui (+5 XP)";
+    ok.addEventListener("click",()=>spkDone(spkMode==="m"?10:5));
+    const rf=document.createElement("button"); rf.className="ghost"; rf.textContent="Refazer";
+    rf.addEventListener("click",()=>{spkPhase="idle";renderSpkCard();});
+    const sk=document.createElement("button"); sk.className="ghost"; sk.textContent="Pular";
+    sk.addEventListener("click",spkAdvance);
+    row.appendChild(ok); row.appendChild(rf); row.appendChild(sk); c.appendChild(row);
+  }
+}
+function renderSim(c){
+  if(spkPhase==="pick"||sim.sc<0){
+    c.innerHTML='<div class="lt">Escolha a cena</div><div class="hintv">Truque do Pimsleur: encarne o personagem, sotaque e tudo. Errar faz parte do papel. As perguntas tocam em voz alta e a resposta é toda sua.</div>';
+    SIMS.forEach((s,i)=>{
+      const b=document.createElement("button"); b.className="scnbtn"; b.textContent=s.n+" · "+s.q.length+" perguntas";
+      b.addEventListener("click",()=>{ simReset(); sim.sc=i; sim.qi=0; spkPhase="q"; renderSpkCard(); });
+      c.appendChild(b);
+    });
+    return;
+  }
+  const sc=SIMS[sim.sc], q=sc.q[sim.qi];
+  if(spkPhase==="q"){
+    c.innerHTML='<div class="lt">'+esc(sc.n)+' · pergunta '+(sim.qi+1)+' de '+sc.q.length+'</div><div class="simq" id="simQ">'+esc(q)+'</div><div class="hintv">Responda como você, no papel. Sem modelo: a resposta é sua.</div>';
+    if(TTS){ $("#simQ").appendChild(spkBtn(q)); speak(q); }
+    const b=document.createElement("button"); b.className="recbtn idle"; b.setAttribute("aria-label","Gravar");
+    b.addEventListener("click",()=>startRec(60000)); c.appendChild(b);
+    const l=document.createElement("div"); l.className="reclab"; l.textContent="Toque para gravar a resposta"; c.appendChild(l);
+  }else if(spkPhase==="rec"){
+    c.innerHTML='<div class="lt">Gravando</div><div class="simq">'+esc(q)+'</div>';
+    const b=document.createElement("button"); b.className="recbtn rec"; b.setAttribute("aria-label","Parar");
+    b.addEventListener("click",stopRecNow); c.appendChild(b);
+    const l=document.createElement("div"); l.className="reclab"; l.textContent="Fale e toque para parar"; c.appendChild(l);
+  }else if(spkPhase==="review"){
+    c.innerHTML='<div class="lt">'+esc(sc.n)+' · sua resposta '+(sim.qi+1)+'</div><div class="spkrow"><audio controls src="'+recURL+'"></audio></div>';
+    const row=document.createElement("div"); row.className="row";
+    const nx=document.createElement("button"); nx.className="cta lnext"; nx.style.marginTop="14px";
+    nx.innerHTML=(sim.qi<sc.q.length-1?"Próxima pergunta":"Encerrar a cena")+" (+4 XP)";
+    nx.addEventListener("click",()=>{
+      sim.urls.push(recURL); recURL=null;
+      S.xp+=4; S.spk=(S.spk||0)+1; bumpStreak(); save();
+      if(sim.qi<sc.q.length-1){ sim.qi++; spkPhase="q"; } else { spkPhase="end"; }
+      renderSpkCard();
+    });
+    const rf=document.createElement("button"); rf.className="ghost"; rf.textContent="Refazer";
+    rf.addEventListener("click",()=>{spkPhase="q";renderSpkCard();});
+    row.appendChild(nx); row.appendChild(rf); c.appendChild(row);
+  }else{
+    c.innerHTML='<div class="lt">'+esc(sc.n)+' · cena concluída</div><div class="hintv">Ouça-se procurando três coisas: contrações, a coreografia (Perfect abre, Past detalha) e os blocos prontos.</div>';
+    const box=document.createElement("div"); box.className="simrev";
+    sc.q.forEach((qq,i)=>{
+      const d=document.createElement("div"); d.style.marginBottom="10px";
+      d.innerHTML='<div class="sq">'+(i+1)+'. '+esc(qq)+'</div>'+(sim.urls[i]?'<audio controls src="'+sim.urls[i]+'"></audio>':'');
+      box.appendChild(d);
+    });
+    c.appendChild(box);
+    const row=document.createElement("div"); row.className="row";
+    const ag=document.createElement("button"); ag.className="cta lnext"; ag.textContent="Refazer a cena";
+    ag.addEventListener("click",()=>{ simReset(); sim.sc=SIMS.indexOf(sc); sim.qi=0; spkPhase="q"; renderSpkCard(); });
+    const ot=document.createElement("button"); ot.className="ghost"; ot.textContent="Outra cena";
+    ot.addEventListener("click",()=>{ simReset(); spkPhase="pick"; renderSpkCard(); });
+    row.appendChild(ag); row.appendChild(ot); c.appendChild(row);
+  }
+}
+
+/* ===== sessão ===== */
+let Q=[],qi=0,locked=false,results=[];
+function startSession(){
+  Q=buildSession(); qi=0; results=[];
+  go("quiz"); renderQ();
+}
+$("#startBtn").addEventListener("click",startSession);
+$("#lessonBtn").addEventListener("click",()=>go("learn"));
+$("#speakBtn").addEventListener("click",()=>go("speak"));
+$("#quitBtn").addEventListener("click",()=>go("home"));
+$("#spkQuit").addEventListener("click",()=>{stopRecNow();simReset();go("home");});
+document.querySelectorAll("#speak .cam").forEach(b=>b.addEventListener("click",()=>{
+  stopRecNow();
+  spkMode=b.dataset.m; simReset(); spkPhase=(spkMode==="s"?"pick":"idle");
+  document.querySelectorAll("#speak .cam").forEach(x=>x.classList.toggle("on",x===b));
+  renderSpkCard();
+}));
+
+const KINDS={c:"Complete a frase",s:"Escolha a frase correta",f:"Digite a forma do verbo",t:"Traduza para o inglês",m:"Reescreva a frase",l:"Ditado: ouça e escreva"};
+function renderTrack(){
+  let h="";
+  for(let i=0;i<Q.length;i++){
+    const cls=i<qi?(results[i]?"ok":"bad"):(i===qi?"cur":"");
+    h+=`<div class="seg ${cls}"></div>`;
+  }
+  h+=`<span class="nowlab">AGORA</span>`;
+  $("#track").innerHTML=h;
+}
+function renderQ(){
+  const it=Q[qi]; locked=false;
+  renderTrack();
+  $("#qKind").textContent=KINDS[it.k];
+  $("#fb").className="fb";
+  $("#qOpts").innerHTML="";
+  $("#qType").classList.add("hidden");
+  $("#qHint").textContent="";
+  if(it.k==="c"||it.k==="s"){
+    $("#qText").innerHTML=it.q?esc(it.q).replace("___",'<span class="gap">&nbsp;</span>'):"Qual frase está correta?";
+    const order=it.o.map((_,i)=>i); shuffle(order);
+    order.forEach((oi,pos)=>{
+      const b=document.createElement("button");
+      b.className="opt";
+      b.innerHTML=`<span class="key">${pos+1}</span><span>${esc(it.o[oi])}</span>`;
+      b.dataset.oi=oi;
+      b.addEventListener("click",()=>choose(b,oi===it.a));
+      $("#qOpts").appendChild(b);
+    });
+  }else if(it.k==="l"){
+    $("#qText").innerHTML="";
+    const p=document.createElement("button");
+    p.className="play"; p.type="button"; p.innerHTML="&#9654;&nbsp;Ouvir a frase";
+    p.addEventListener("click",()=>speak(it.ans));
+    $("#qText").appendChild(p);
+    $("#qHint").textContent="Escreva exatamente o que ouvir. Pode tocar quantas vezes quiser.";
+    $("#qType").classList.remove("hidden");
+    $("#qInput").value="";
+  }else if(it.k==="m"){
+    $("#qText").innerHTML=esc(it.b);
+    $("#qHint").innerHTML="&#8618; "+esc(it.q);
+    $("#qType").classList.remove("hidden");
+    $("#qInput").value="";
+    setTimeout(()=>$("#qInput").focus(),50);
+  }else{
+    $("#qText").innerHTML=esc(it.q).replace("___",'<span class="gap">&nbsp;</span>');
+    $("#qHint").textContent=it.k==="t"?`Use: ${it.v}`:`Verbo: ${it.v}`;
+    $("#qType").classList.remove("hidden");
+    $("#qInput").value="";
+    setTimeout(()=>$("#qInput").focus(),50);
+  }
+}
+function esc(s){ return s.replace(/&/g,"&amp;").replace(/</g,"&lt;"); }
+function choose(btn,ok){
+  if(locked) return; locked=true;
+  const it=Q[qi];
+  document.querySelectorAll(".opt").forEach(b=>{
+    b.disabled=true;
+    const oi=+b.dataset.oi;
+    if(oi===it.a) b.classList.add("right");
+    else if(b===btn) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  finish(ok, it.o[it.a]);
+}
+function checkTyped(){
+  if(locked) return;
+  const it=Q[qi];
+  const raw=$("#qInput").value;
+  if(!canon(raw)) return;
+  locked=true;
+  $("#qInput").disabled=true;
+  const ok=(it.acc||[it.ans]).some(a=>canon(a)===canon(raw));
+  finish(ok, it.ans, raw);
+}
+$("#qCheck").addEventListener("click",checkTyped);
+function finish(ok,answer,userTxt){
+  const it=Q[qi];
+  results[qi]=ok;
+  answered(it.id,ok);
+  renderTrack();
+  const fb=$("#fb");
+  fb.classList.add("show",ok?"good":"poor");
+  $("#fbV").textContent=ok?"Certo":"Quase";
+  const full=it.k==="c"&&it.q?it.q.replace("___",answer):answer;
+  $("#fbA").textContent=full;
+  if(TTS) $("#fbA").appendChild(spkBtn(full));
+  let why=`${esc(it.x)} <span class="tag ${RULES[it.r].t}" style="margin-left:6px">${RULES[it.r].n}</span>`;
+  if(!ok&&userTxt) why=`<div class="youwrote">Sua resposta: ${esc(userTxt)}</div>`+why;
+  $("#fbW").innerHTML=why;
+  $("#nextBtn").focus();
+}
+$("#nextBtn").addEventListener("click",next);
+function next(){
+  $("#qInput").disabled=false;
+  if(qi<Q.length-1){ qi++; renderQ(); }
+  else renderDone();
+}
+function renderDone(){
+  const ok=results.filter(Boolean).length;
+  const missed=Q.filter((it,i)=>!results[i]);
+  const missTxt=missed.length
+    ? `Para revisar em breve: ${[...new Set(missed.map(m=>RULES[m.r].n))].join(", ")}.`
+    : "Sessão limpa. Esses itens agora voltam em intervalos maiores.";
+  $("#done").innerHTML=`
+    <h2 class="big">${ok} de ${Q.length}</h2>
+    <p class="sub">${missTxt}</p>
+    <div class="score">
+      <span class="chip">XP: <b>+${ok*10+(Q.length-ok)*3}</b></span>
+      <span class="chip">Sequência: <b class="g">${S.sd} ${S.sd===1?"dia":"dias"}</b></span>
+    </div>
+    <div class="row">
+      <button class="cta" data-again>Nova sessão<span aria-hidden="true">→</span></button>
+      <button class="ghost" data-prog2>Ver progresso</button>
+      <button class="ghost" data-home2>Início</button>
+    </div>`;
+  go("done");
+  $("#done [data-again]").addEventListener("click",startSession);
+  $("#done [data-prog2]").addEventListener("click",()=>go("prog"));
+  $("#done [data-home2]").addEventListener("click",()=>go("home"));
+}
+
+/* ===== teclado ===== */
+document.addEventListener("keydown",e=>{
+  if($("#quiz").classList.contains("hidden")) return;
+  const fbOpen=$("#fb").classList.contains("show");
+  if(e.key==="Enter"){
+    if(fbOpen){ e.preventDefault(); next(); }
+    else if(!$("#qType").classList.contains("hidden")){ e.preventDefault(); checkTyped(); }
+    return;
+  }
+  if(!fbOpen&&(e.key==="1"||e.key==="2"||e.key==="3")&&document.activeElement.tagName!=="INPUT"){
+    const b=$("#qOpts").children[+e.key-1];
+    if(b) b.click();
+  }
+});
+
+/* ===== início ===== */
+(async function init(){
+  const loaded=await load();
+  if(loaded&&loaded.v===1) S=loaded;
+  renderHome();
+})();
+</script>
+</body>
+</html>
