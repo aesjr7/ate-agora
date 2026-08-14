@@ -255,6 +255,16 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
 .mk:first-of-type{border-top:none}
 .mk .st{color:var(--mut);font-size:.86rem;margin-top:2px}
 .mk.done .st{color:var(--ok);font-weight:600}
+.ck{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px dashed var(--line)}
+.ck:first-of-type{border-top:none}
+.cki{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem;color:var(--ok);margin-top:2px}
+.ck.done .cki{border-color:var(--ok);background:var(--ok-soft)}
+.ckt{flex:1}
+.ckt b{font-size:1rem}
+.ck.done .ckt b{color:var(--mut)}
+.cks{color:var(--mut);font-size:.88rem;margin-top:3px}
+.ckbtn{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;font-size:.82rem;background:#1C231F;color:var(--ink);flex:none;margin-top:2px}
+.ckbtn:hover{border-color:var(--ink)}
 .play{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--btntx);border-radius:999px;padding:13px 24px;font-weight:600;font-size:1rem;font-family:var(--ui)}
 .play:active{transform:scale(.98)}
 .spk{border:1.5px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;font-family:var(--ui);color:var(--mut);margin-left:8px;vertical-align:2px}
@@ -304,11 +314,11 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
       <text class="lab" x="500" y="46" fill="var(--pp)">have done</text>
     </svg>
     <section class="hero">
-      <h1>Três tempos, uma pergunta: toca o agora?</h1>
-      <p>Sim: Perfect. Não: Simple Past. Uma lição de 3 minutos para entender, sessões de 4 para nunca mais esquecer.</p>
+      <h1>Fale inglês de trabalho sem medo.</h1>
+      <p>A gramática cabe num teste: toca o agora? A fluência cabe num hábito: um pouco todo dia, em voz alta. O Aprender já montou o seu dia de hoje.</p>
     </section>
     <div class="stats" id="homeStats"></div>
-    <div class="row" style="margin-top:2px"><button class="cta" id="startBtn">Começar sessão<span aria-hidden="true">→</span></button><button class="ghost" id="lessonBtn">Lição de 3 min</button><button class="ghost" id="speakBtn">Treinar a fala</button></div>
+    <div class="row" style="margin-top:2px"><button class="cta" id="todayBtn">Fazer o de hoje<span aria-hidden="true">→</span></button><button class="ghost" id="startBtn">Sessão avulsa</button><button class="ghost" id="speakBtn">Treinar a fala</button></div>
       </main>
 
   <main id="learn" class="screen hidden"></main>
@@ -354,7 +364,7 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
   <main id="plan" class="screen hidden"></main>
   <main id="prog" class="screen hidden"></main>
 
-  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v10.1 · plano</footer>
+  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v11 · hoje</footer>
 </div>
 <script>
 /* ===== dados ===== */
@@ -660,39 +670,7 @@ const THEORY = `
   <p class="lede">O português arquiva quase tudo num passado só: perdi, liguei, trabalhei. O inglês não. Antes de conjugar, ele exige uma decisão que o português nunca pediu de você: <b>isso ainda toca o agora?</b> Os três tempos são três câmeras apontadas para o mesmo fato.</p>
 </section>
 
-<section class="sec">
-  <h2>Uma história, três câmeras</h2>
-  <p class="sub">Suas chaves sumiram. Toque em cada câmera e veja o mesmo fato mudar de sentido.</p>
-  <div class="cams">
-    <button class="cam sp on" data-cam="sp"><small>Simple Past</small><span>A foto no álbum</span></button>
-    <button class="cam pp" data-cam="pp"><small>Present Perfect</small><span>O ímã na geladeira</span></button>
-    <button class="cam ppc" data-cam="ppc"><small>Perfect Continuous</small><span><i class="rec"></i>A câmera gravando</span></button>
-  </div>
-  <div class="stage">
-    <svg class="tl" viewBox="0 0 600 96" aria-hidden="true" style="height:auto">
-      <line x1="20" y1="52" x2="580" y2="52" stroke="var(--ink)" stroke-width="2"/>
-      <polygon points="580,52 568,46 568,58" fill="var(--ink)"/>
-      <text class="lab" x="20" y="80">PASSADO</text>
-      <text class="now" x="470" y="80">AGORA</text>
-      <g class="g on" id="gSp">
-        <circle cx="120" cy="52" r="8" fill="var(--sp)"/>
-        <text class="lab" x="96" y="30" fill="var(--sp)">yesterday</text>
-        <line x1="120" y1="38" x2="120" y2="44" stroke="var(--sp)" stroke-width="2"/>
-      </g>
-      <g class="g" id="gPp">
-        <circle class="pulse" cx="486" cy="52" r="9" fill="none" stroke="var(--pp)" stroke-width="2"/>
-        <circle cx="486" cy="52" r="8" fill="var(--pp)"/>
-        <text class="lab" x="452" y="30" fill="var(--pp)">ainda vale</text>
-      </g>
-      <g class="g" id="gPpc">
-        <line class="flowline" x1="160" y1="52" x2="486" y2="52" stroke="var(--ppc)" stroke-width="7" stroke-linecap="round"/>
-        <text class="lab" x="160" y="30" fill="var(--ppc)">all morning</text>
-      </g>
-    </svg>
-    <div class="camsent" id="camSent">I lost my keys yesterday.</div>
-    <div class="capn" id="camCap">Fato datado e arquivado. Aconteceu, acabou, virou registro. Se a frase diz quando, a câmera é essa.</div>
-  </div>
-</section>
+
 
 <section class="sec">
   <h2>O teste do agora</h2>
@@ -724,56 +702,11 @@ const THEORY = `
   <div class="ansl" id="flowAns"><div class="en" id="flowEn"></div><div class="nt" id="flowNt"></div></div>
 </section>
 
-<section class="sec spc">
-  <div class="emb">A foto no álbum</div>
-  <h2>Simple Past <span class="tag sp">verbo no passado · did</span></h2>
-  <p class="sub">Fato encerrado, com hora e lugar. Você olha para o passado e ele fica lá.</p>
-  <div class="bridge">
-    <div class="br"><span class="pt">Liguei para o cliente ontem.</span><span class="ar">→</span><span class="en">I called the client yesterday.</span></div>
-    <div class="br"><span class="pt">Ela saiu há dez minutos.</span><span class="ar">→</span><span class="en">She left ten minutes ago.</span></div>
-    <div class="br"><span class="pt">Quando você chegou?</span><span class="ar">→</span><span class="en">When did you arrive?</span></div>
-  </div>
-  <ul class="use">
-    <li><b>Narrativa: um fato após o outro.</b><span class="en">She opened the door, saw the mess and called security.</span></li>
-    <li><b>Capítulos encerrados.</b><span class="en">Steve Jobs created the iPhone.</span><span class="ptt">Pessoa falecida ou fase concluída da vida.</span></li>
-  </ul>
-  <div class="alert"><b>O há do português engana:</b> saiu há 10 minutos (ponto) vira <span class="en" style="display:inline">She left ten minutes ago.</span> Moro aqui há 2 anos (duração até agora) vira <span class="en" style="display:inline">I've been living here for two years.</span></div>
-</section>
 
-<section class="sec ppcd">
-  <div class="emb">O ímã na geladeira</div>
-  <h2>Present Perfect <span class="tag pp">have + particípio</span></h2>
-  <p class="sub">A foto é antiga, mas está colada no seu presente. Ninguém pergunta quando: pergunta e agora?</p>
-  <div class="bridge">
-    <div class="br"><span class="pt">Perdi minhas chaves (estou sem elas).</span><span class="ar">→</span><span class="en">I've lost my keys.</span></div>
-    <div class="br"><span class="pt">Já almocei.</span><span class="ar">→</span><span class="en">I've already had lunch.<span class="ptt">No falado: I already had lunch.</span></span></div>
-    <div class="br"><span class="pt">Fiz três reuniões hoje.</span><span class="ar">→</span><span class="en">I've had three meetings today.</span></div>
-  </div>
-  <ul class="use">
-    <li><b>Resultado de pé agora.</b><span class="en">Someone has broken the window.</span><span class="ptt">O vidro está no chão.</span></li>
-    <li><b>Experiência de vida, sem data.</b><span class="en">She has visited Japan twice.</span><span class="ptt">Com ever, never, times.</span></li>
-    <li><b>just, already, yet.</b><span class="en">They've just arrived. Have you finished yet?</span></li>
-    <li><b>Conta em período ainda aberto.</b><span class="en">I've read ten books this year.</span><span class="ptt">this year segue valendo; last year fecharia e viraria Simple Past.</span></li>
-  </ul>
-  <div class="alert"><b>Regra de ouro:</b> marcador de tempo fechado mata o Perfect. "I've seen it yesterday" não existe: com data dita, volte para o Simple Past. E o particípio americano de get é gotten: It's gotten cold, I've gotten better.</div>
-</section>
 
-<section class="sec ppcc">
-  <div class="emb">A câmera gravando</div>
-  <h2>Present Perfect Continuous <span class="tag ppc">have been + ing</span></h2>
-  <p class="sub">A luz vermelha ainda pisca: a ação escorre do passado e chega ao agora quente, talvez inacabada.</p>
-  <div class="bridge">
-    <div class="br"><span class="pt">Trabalho aqui há dois anos.</span><span class="ar">→</span><span class="en">I've been working here for two years.</span></div>
-    <div class="br"><span class="pt">Ando lendo o relatório.</span><span class="ar">→</span><span class="en">I've been reading the report.</span></div>
-    <div class="br"><span class="pt">Você andou chorando?</span><span class="ar">→</span><span class="en">Have you been crying?</span></div>
-  </div>
-  <ul class="use">
-    <li><b>Duração até agora.</b><span class="en">How long have you been waiting?</span><span class="ptt">Com for, since, all morning.</span></li>
-    <li><b>Evidência recente.</b><span class="en">The ground is wet. It's been raining.</span><span class="ptt">A atividade parou, a marca ficou.</span></li>
-    <li><b>Processo em aberto.</b><span class="en">I've been writing the proposal.</span><span class="ptt">Ainda não terminei.</span></li>
-  </ul>
-  <div class="alert"><b>Verbos de estado</b> (know, own, believe, need, love...) não gravam vídeo: ficam no Perfect simples mesmo com duração. <span class="en" style="display:inline">I've known him for years.</span> Nunca "I've been knowing".</div>
-</section>
+
+
+
 
 <section class="sec">
   <h2>for e since, de uma vez por todas <span class="tag mix">a dupla da duração</span></h2>
@@ -834,17 +767,7 @@ const THEORY = `
   <div class="alert"><b>As perguntas que você vai ouvir já escolhem o tempo da resposta:</b> Tell me about yourself (manchete no Perfect) · Have you ever...? (Yes, I have + caso no passado) · How long have you been...? (for/since) · What have you been working on? (contínuo) · Why did you leave...? (passado, capítulo fechado). Erro que denuncia na hora: I am at the company since 2025. O certo: <span class="en" style="display:inline">I've been at the company since 2025.</span></div>
 </section>
 
-<section class="sec">
-  <h2>A mesma frase, outro filme <span class="tag mix">pares mínimos</span></h2>
-  <p class="sub">Trocar o tempo não muda o fato: muda o que você quer dizer sobre ele.</p>
-  <table class="vs">
-    <tr><td><span class="who pp">perfect</span><span class="en">She has read the novel.</span><span class="ptt">Sabe o final.</span></td><td><span class="who ppc">contínuo</span><span class="en">She has been reading the novel.</span><span class="ptt">Está no capítulo cinco.</span></td></tr>
-    <tr><td><span class="who pp">perfect</span><span class="en">I've painted the room.</span><span class="ptt">Sala pronta.</span></td><td><span class="who ppc">contínuo</span><span class="en">I've been painting the room.</span><span class="ptt">Estou coberto de tinta.</span></td></tr>
-    <tr><td><span class="who sp">simple past</span><span class="en">I lost my keys, but I found them.</span><span class="ptt">História encerrada.</span></td><td><span class="who pp">perfect</span><span class="en">I've lost my keys.</span><span class="ptt">Resultado ainda de pé.</span></td></tr>
-    <tr><td><span class="who sp">simple past</span><span class="en">I read ten books last year.</span><span class="ptt">Período fechado.</span></td><td><span class="who pp">perfect</span><span class="en">I've read ten books this year.</span><span class="ptt">Período ainda aberto.</span></td></tr>
-  </table>
-  <div class="alert"><b>O inglês falado da América:</b> com just, already e yet, os dois tempos são padrão: I just got here e I've just gotten here, Did you eat yet? e Have you eaten yet?. O app aceita os dois nas respostas digitadas; na escrita profissional, o Perfect soa mais polido. Onde a troca não acontece: duração até agora com for, since e How long, que vivem no Perfect: I've been here since March.</div>
-</section>
+
 
 <section class="sec">
   <h2>Cola de bolso</h2>
@@ -1005,6 +928,11 @@ function renderHome(){
   if(S.sd>0) parts.push(`<span class="chip">Sequência: <b class="g">${S.sd} ${S.sd===1?"dia":"dias"}</b></span>`);
   parts.push(`<span class="chip">XP: <b>${S.xp}</b></span>`);
   parts.push(`<span class="chip">Para hoje: <b class="t">${c.d} ${c.d===1?"revisão":"revisões"}</b> · ${c.n} novas</span>`);
+  const ck=ckState(), wd=new Date().getDay();
+  const keys=wd===0?["m","s","l"]:["m","s","x","l"];
+  const dn=keys.filter(k=>ck[k]).length;
+  parts.push(`<span class="chip">Hoje: <b class="${dn===keys.length?"g":""}">${dn} de ${keys.length}</b> no Aprender</span>`);
+  if(S.spk) parts.push(`<span class="chip">Falas: <b>${S.spk}</b></span>`);
   $("#homeStats").innerHTML=parts.join("");
 }
 const FSQ=[
@@ -1087,22 +1015,21 @@ const CAMS={
   ppc:{s:"I've been looking for them all morning.",c:"A luz vermelha ainda pisca: a busca escorre pelo tempo e chega ao agora, ainda quente e inacabada."}
 };
 function renderLearn(){
-  $("#learn").innerHTML=lessonShell()+THEORY+'</div>';
-  li=0; lShow();
+  $("#learn").innerHTML=hojeHTML()
+   +'<div class="refbar"><button class="ghost" id="lesToggle">Fazer a lição de 3 min</button> <button class="ghost" id="refToggle">Abrir a consulta</button></div>'
+   +'<div id="lesWrap" class="hidden"><div class="ldots" id="lDots"></div><div class="lcard" id="lCard"></div></div>'
+   +'<div id="refWrap" class="hidden">'+THEORY+'</div>';
+  bindHoje();
+  $("#lesToggle").addEventListener("click",()=>{
+    const on=$("#lesWrap").classList.toggle("hidden");
+    if(!on){ li=0; lShow(); }
+    $("#lesToggle").textContent=on?"Fazer a lição de 3 min":"Fechar a lição";
+  });
   $("#refToggle").addEventListener("click",()=>{
     const on=$("#refWrap").classList.toggle("hidden");
-    $("#refToggle").textContent=on?"Abrir a consulta completa":"Fechar a consulta";
+    $("#refToggle").textContent=on?"Abrir a consulta":"Fechar a consulta";
   });
   $("#learn [data-go-practice]").addEventListener("click",startSession);
-  if(TTS) $("#camSent").appendChild(spkBtn($("#camSent").textContent));
-  document.querySelectorAll("#learn .cam").forEach(b=>b.addEventListener("click",()=>{
-    const m=b.dataset.cam;
-    document.querySelectorAll("#learn .cam").forEach(x=>x.classList.toggle("on",x===b));
-    ["Sp","Pp","Ppc"].forEach(g=>$("#g"+g).classList.toggle("on",g.toLowerCase()===m));
-    $("#camSent").textContent=CAMS[m].s;
-    if(TTS) $("#camSent").appendChild(spkBtn(CAMS[m].s));
-    $("#camCap").textContent=CAMS[m].c;
-  }));
   let fi=0,fscore=0,flock=false;
   const fsShow=()=>{
     $("#fsScore").textContent=(fi+1)+" de "+FSQ.length;
@@ -1185,6 +1112,37 @@ function renderProg(){
   });
 }
 
+/* ===== o dia de hoje ===== */
+const MODE_N={b:"Blocos",e:"Eco",r:"Responder",s:"Simulação"};
+const MODE_H={b:"Português na tela: fale o bloco em inglês e confira com o modelo.",e:"Ouça o modelo e repita gravando, imitando o ritmo.",r:"Traduza falando, grave, e só depois veja o modelo.",s:"Encarne o personagem: as perguntas tocam, as respostas são suas."};
+const DAY_M=[null,"b","e","r","e","b","s"];
+function ckState(){ if(!S.day||S.day.d!==today()) S.day={d:today(),m:0,s:0,x:0,l:0}; return S.day; }
+function dayCk(k){ const c=ckState(); if(!c[k]){ c[k]=1; save(); } }
+function todayMonoIdx(){ const n=new Date(); return Math.floor((n-new Date(n.getFullYear(),0,0))/864e5)%SPK_M.length; }
+function hojeHTML(){
+  const c=ckState(); const d=new Date().getDay();
+  const row=(key,t,sub,act,lab)=>{
+    const done=key?!!c[key]:false;
+    return '<div class="ck'+(done?" done":"")+'"><div class="cki">'+(done?"&#10003;":"")+'</div><div class="ckt"><b>'+t+'</b><div class="cks">'+sub+'</div></div>'+(act&&!(act==="l"&&done)?'<button class="ckbtn" data-ck="'+act+'">'+(done?"De novo":lab)+'</button>':"")+'</div>';
+  };
+  let rows=row("m","Monólogo · 1 min","Roteiro de hoje: "+esc(SPK_M[todayMonoIdx()])+" Se travar, use um bloco: Let me put it another way.","m","Fazer");
+  rows+=row("s","Sessão · 4 min","Dez questões. Responda em voz alta antes de tocar.","sess","Fazer");
+  if(d===0) rows+=row(null,"Domingo leve","Sem exercício de fala hoje. Se houver revisões, a sessão acima resolve.",null,"");
+  else rows+=row("x",MODE_N[DAY_M[d]]+" · 5 min",MODE_H[DAY_M[d]],DAY_M[d],"Fazer");
+  rows+=row("l","Escuta · 20 min","Um podcast de tecnologia em inglês, do seu gosto. Só dar play: entender 60% já treina o ouvido.","l","Feito");
+  return '<section class="sec"><h2>O dia de hoje <span class="tag mix">'+PLAN_D[d]+'</span></h2>'+rows+'</section>';
+}
+function bindHoje(){
+  document.querySelectorAll("#learn .ckbtn").forEach(b=>b.addEventListener("click",()=>{
+    const k=b.dataset.ck;
+    if(k==="sess") startSession();
+    else if(k==="l"){ dayCk("l"); renderLearn(); }
+    else openSpeak(k);
+  }));
+}
+let spkGo=null;
+function openSpeak(m){ spkGo=m; go("speak"); }
+
 /* ===== plano ===== */
 const PLAN_D=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
 const PLAN_X=["","Blocos (5 min)","Eco (5 min)","Responder (5 min)","Eco (5 min)","Blocos (5 min)","Simulação: uma cena completa (10 min)"];
@@ -1199,7 +1157,7 @@ function renderPlan(){
   $("#plan").innerHTML=`
    <div class="epi">"Language is the only thing worth knowing even poorly."</div>
    <div class="epia">Kató Lomb. Em bom português: a língua é a única coisa que vale a pena saber, mesmo que mal. Falando errado, você já está ganhando.</div>
-   <section class="sec"><h2>Hoje</h2><p class="ptoday">${hoje}</p><p class="sub" style="margin-top:8px">A base diária nunca muda: monólogo ao acordar (a manhã é da palavra, diz a Lomb), uma sessão de prática e 20 minutos de inglês real no ouvido, um podcast de tecnologia que você seguiria por gosto.</p></section>
+   <section class="sec"><h2>Hoje</h2><p class="ptoday">${hoje}</p><p class="sub" style="margin-top:8px">A base diária nunca muda: monólogo ao acordar (a manhã é da palavra, diz a Lomb), uma sessão de prática e 20 minutos de inglês real no ouvido, um podcast de tecnologia que você seguiria por gosto. Tudo já montado, com um toque, na aba Aprender.</p></section>
    <section class="sec"><h2>A semana</h2>${dias}</section>
    <section class="sec"><h2>Marcos</h2>
     ${mk(S.sd>=7,"1. Sete dias seguidos","O hábito instalado. Agora: "+S.sd+" "+(S.sd===1?"dia":"dias")+".")}
@@ -1306,7 +1264,7 @@ function spkCue(){
   return {cue:SPK_M[spkOrd.m[spkIdx.m]]};
 }
 function spkAdvance(){ spkIdx[spkMode]=(spkIdx[spkMode]+1)%spkLen(); spkPhase="idle"; renderSpkCard(); }
-function spkDone(xp){ S.xp+=xp; S.spk=(S.spk||0)+1; bumpStreak(); save(); spkAdvance(); }
+function spkDone(xp){ S.xp+=xp; S.spk=(S.spk||0)+1; bumpStreak(); dayCk(spkMode==="m"?"m":"x"); save(); spkAdvance(); }
 function renderSpeak(){
   if(!ECO.length) ECO=SPK_E.map(id=>ITEMS.find(x=>x.id===id).ans).concat(SPK_E2);
   ["r","b","e","m"].forEach(m=>{
@@ -1314,7 +1272,12 @@ function renderSpeak(){
     spkOrd[m]=Array.from({length:n},(_,i)=>i); shuffle(spkOrd[m]); spkIdx[m]=0;
   });
   spkMode="r"; spkPhase="idle"; simReset();
-  document.querySelectorAll("#speak .cam").forEach(b=>b.classList.toggle("on",b.dataset.m==="r"));
+  if(spkGo){
+    spkMode=spkGo; spkGo=null;
+    if(spkMode==="m"){ const t=todayMonoIdx(); const p=spkOrd.m.indexOf(t); if(p>0){ spkOrd.m.splice(p,1); spkOrd.m.unshift(t); } spkIdx.m=0; }
+    spkPhase=(spkMode==="s"?"pick":"idle");
+  }
+  document.querySelectorAll("#speak .cam").forEach(b=>b.classList.toggle("on",b.dataset.m===spkMode));
   renderSpkCard();
 }
 function renderSpkCard(){
@@ -1394,7 +1357,7 @@ function renderSim(c){
     nx.innerHTML=(sim.qi<sc.q.length-1?"Próxima pergunta":"Encerrar a cena")+" (+4 XP)";
     nx.addEventListener("click",()=>{
       sim.urls.push(recURL); recURL=null;
-      S.xp+=4; S.spk=(S.spk||0)+1; bumpStreak(); save();
+      S.xp+=4; S.spk=(S.spk||0)+1; bumpStreak(); dayCk("x"); save();
       if(sim.qi<sc.q.length-1){ sim.qi++; spkPhase="q"; } else { spkPhase="end"; }
       renderSpkCard();
     });
@@ -1426,7 +1389,7 @@ function startSession(){
   go("quiz"); renderQ();
 }
 $("#startBtn").addEventListener("click",startSession);
-$("#lessonBtn").addEventListener("click",()=>go("learn"));
+$("#todayBtn").addEventListener("click",()=>go("learn"));
 $("#speakBtn").addEventListener("click",()=>go("speak"));
 $("#quitBtn").addEventListener("click",()=>go("home"));
 $("#spkQuit").addEventListener("click",()=>{stopRecNow();simReset();go("home");});
@@ -1536,6 +1499,7 @@ function next(){
   else renderDone();
 }
 function renderDone(){
+  dayCk("s");
   const ok=results.filter(Boolean).length;
   const missed=Q.filter((it,i)=>!results[i]);
   const missTxt=missed.length
