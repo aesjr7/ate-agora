@@ -265,6 +265,12 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
 .cks{color:var(--mut);font-size:.88rem;margin-top:3px}
 .ckbtn{border:1.5px solid var(--line);border-radius:999px;padding:8px 14px;font-weight:700;font-size:.82rem;background:#1C231F;color:var(--ink);flex:none;margin-top:2px}
 .ckbtn:hover{border-color:var(--ink)}
+.rtimer{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:12px;font-variant-numeric:tabular-nums;font-weight:700}
+.rlight{width:12px;height:12px;border-radius:50%;background:var(--mut);flex:none}
+.rlight.g{background:var(--ok)}
+.rlight.y{background:var(--gold)}
+.rlight.r{background:var(--bad)}
+.rlab{color:var(--mut);font-size:.85rem;font-weight:400}
 .play{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--btntx);border-radius:999px;padding:13px 24px;font-weight:600;font-size:1rem;font-family:var(--ui)}
 .play:active{transform:scale(.98)}
 .spk{border:1.5px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;font-family:var(--ui);color:var(--mut);margin-left:8px;vertical-align:2px}
@@ -364,7 +370,7 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
   <main id="plan" class="screen hidden"></main>
   <main id="prog" class="screen hidden"></main>
 
-  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v11 · hoje</footer>
+  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v11.1 · hoje</footer>
 </div>
 <script>
 /* ===== dados ===== */
@@ -1233,29 +1239,54 @@ const SIMS=[
 let ECO=[];
 let spkMode="r",spkIdx={r:0,b:0,e:0,m:0},spkOrd={},spkPhase="idle",recURL=null;
 let sim={sc:-1,qi:0,urls:[]};
-let mediaStream=null,recDev=null,recChunks=[],recTimer=null;
+let mediaStream=null,recDev=null,recChunks=[],recTimer=null,recTick=null,recStart=0,recCfg=null;
 function simReset(){ sim.urls.forEach(u=>{try{URL.revokeObjectURL(u)}catch(e){}}); sim={sc:-1,qi:0,urls:[]}; }
 function stopTracks(){ if(mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; } }
-async function startRec(maxMs){
+function updTimer(){
+  const el=Date.now()-recStart, s=Math.floor(el/1000);
+  const t=$("#rTime"), li=$("#rLight"), la=$("#rLab");
+  if(!t) return;
+  t.textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+  let cl="g", tx="no tempo";
+  if(recCfg==="m"){
+    if(el<60000){ cl="y"; tx="faltam "+Math.ceil((60000-el)/1000)+"s para 1 min"; }
+    else if(el<70000){ cl="g"; tx="meta batida"; }
+    else { cl="r"; tx="encerrando em "+Math.ceil((75000-el)/1000)+"s"; }
+  }else if(recCfg==="s"){
+    if(el<40000){ cl="g"; tx="no tempo"; }
+    else if(el<52000){ cl="y"; tx="fechando"; }
+    else { cl="r"; tx="encerra em "+Math.ceil((60000-el)/1000)+"s"; }
+  }else{
+    if(el<12000){ cl="g"; tx="no tempo"; }
+    else if(el<17000){ cl="y"; tx="fechando"; }
+    else { cl="r"; tx="encerra em "+Math.ceil((20000-el)/1000)+"s"; }
+  }
+  li.className="rlight "+cl; la.textContent=tx;
+}
+async function startRec(maxMs,cfg){
   if(TTS) try{speechSynthesis.cancel();}catch(e){}
   try{ mediaStream=await navigator.mediaDevices.getUserMedia({audio:true}); }
   catch(e){ spkPhase="denied"; renderSpkCard(); return; }
+  recCfg=cfg||null;
   recChunks=[];
   const mime=MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/mp4")?"audio/mp4":(MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported("audio/webm")?"audio/webm":"");
   try{ recDev=mime?new MediaRecorder(mediaStream,{mimeType:mime}):new MediaRecorder(mediaStream); }
   catch(e){ stopTracks(); spkPhase="denied"; renderSpkCard(); return; }
   recDev.ondataavailable=e=>{ if(e.data&&e.data.size) recChunks.push(e.data); };
   recDev.onstop=()=>{
+    clearInterval(recTick);
     stopTracks();
     if(recURL) URL.revokeObjectURL(recURL);
     recURL=URL.createObjectURL(new Blob(recChunks,{type:recDev.mimeType||"audio/mp4"}));
     spkPhase="review"; renderSpkCard();
   };
   recDev.start();
+  recStart=Date.now();
   spkPhase="rec"; renderSpkCard();
+  recTick=setInterval(updTimer,250); updTimer();
   recTimer=setTimeout(stopRecNow,maxMs);
 }
-function stopRecNow(){ clearTimeout(recTimer); if(recDev&&recDev.state==="recording") recDev.stop(); }
+function stopRecNow(){ clearTimeout(recTimer); clearInterval(recTick); if(recDev&&recDev.state==="recording") recDev.stop(); }
 function spkLen(){ return spkMode==="r"?SPK_R.length:spkMode==="b"?SPK_B.length:spkMode==="e"?ECO.length:SPK_M.length; }
 function spkCue(){
   if(spkMode==="r"){ const it=ITEMS.find(x=>x.id===SPK_R[spkOrd.r[spkIdx.r]]); return {cue:it.q,model:it.ans,hint:"Grave sua resposta antes de ver o modelo. Use: "+it.v}; }
@@ -1293,20 +1324,30 @@ function renderSpkCard(){
       c.innerHTML='<div class="lt">Ouça o modelo e repita gravando</div><div class="spkmodel" id="ecoTxt">'+esc(cur.model)+'</div><div class="hintv">Pimsleur: imite o ritmo, não só as palavras.</div>';
       if(TTS) $("#ecoTxt").appendChild(spkBtn(cur.model));
     }else if(spkMode==="m"){
-      c.innerHTML='<div class="lt">Monólogo de um minuto (Lomb)</div><div class="qtext" style="font-size:1.08rem">'+esc(cur.cue)+'</div><div class="hintv">Fale sem medo de errar: o objetivo é destravar, não sair perfeito.</div>';
+      c.innerHTML='<div class="lt">Monólogo de um minuto (Lomb)</div><div class="qtext" style="font-size:1.08rem">'+esc(cur.cue)+'</div><div class="hintv">Como falar: frases inteiras, cada uma num fôlego só. Simples e comunicando vale mais que perfeito e travado. Se travar, um bloco (Let me put it another way) e siga. Meta: 1 minuto no verde.</div>';
     }else{
       c.innerHTML='<div class="lt">Diga em inglês, em voz alta</div><div class="qtext">'+esc(cur.cue)+'</div><div class="hintv">'+esc(cur.hint)+'</div>';
     }
     const b=document.createElement("button"); b.className="recbtn idle"; b.setAttribute("aria-label","Gravar");
-    b.addEventListener("click",()=>startRec(spkMode==="m"?75000:20000));
+    b.addEventListener("click",()=>startRec(spkMode==="m"?75000:20000,spkMode==="m"?"m":"q"));
     c.appendChild(b);
     const l=document.createElement("div"); l.className="reclab"; l.textContent="Toque para gravar"; c.appendChild(l);
   }else if(spkPhase==="rec"){
     const tt=spkMode==="e"?cur.model:cur.cue;
-    c.innerHTML='<div class="lt">Gravando</div><div class="qtext" style="font-size:1.05rem">'+esc(tt)+'</div>';
+    c.innerHTML='<div class="lt">Gravando</div><div class="qtext" style="font-size:1.05rem">'+esc(tt)+'</div>'+'<div class="rtimer"><span class="rlight g" id="rLight"></span><span id="rTime">0:00</span><span class="rlab" id="rLab"></span></div>';
     const b=document.createElement("button"); b.className="recbtn rec"; b.setAttribute("aria-label","Parar");
     b.addEventListener("click",stopRecNow); c.appendChild(b);
     const l=document.createElement("div"); l.className="reclab"; l.textContent="Fale e toque para parar"; c.appendChild(l);
+  }else if(spkPhase==="mdone"){
+    c.innerHTML='<div class="lt">Monólogo do dia feito</div><div class="lq">O checklist já marcou. A próxima tarefa espera por você.</div><div class="spkrow"><audio controls src="'+recURL+'"></audio></div>';
+    const row=document.createElement("div"); row.className="row";
+    const vb=document.createElement("button"); vb.className="cta lnext"; vb.innerHTML='Voltar para o dia<span aria-hidden="true">&#8594;</span>';
+    vb.addEventListener("click",()=>go("learn"));
+    const ob=document.createElement("button"); ob.className="ghost"; ob.textContent="Outro monólogo";
+    ob.addEventListener("click",spkAdvance);
+    const rb=document.createElement("button"); rb.className="ghost"; rb.textContent="Refazer";
+    rb.addEventListener("click",()=>{spkPhase="idle";renderSpkCard();});
+    row.appendChild(vb); row.appendChild(ob); row.appendChild(rb); c.appendChild(row);
   }else{
     c.innerHTML='<div class="spkrow"><div class="spklab">Sua gravação</div><audio controls src="'+recURL+'"></audio></div>';
     if(spkMode!=="m"){
@@ -1320,7 +1361,10 @@ function renderSpkCard(){
     const row=document.createElement("div"); row.className="row";
     const ok=document.createElement("button"); ok.className="cta lnext"; ok.style.marginTop="14px";
     ok.innerHTML=spkMode==="m"?"Concluir (+10 XP)":"Consegui (+5 XP)";
-    ok.addEventListener("click",()=>spkDone(spkMode==="m"?10:5));
+    ok.addEventListener("click",()=>{
+      if(spkMode==="m"){ S.xp+=10; S.spk=(S.spk||0)+1; bumpStreak(); dayCk("m"); save(); spkPhase="mdone"; renderSpkCard(); }
+      else spkDone(5);
+    });
     const rf=document.createElement("button"); rf.className="ghost"; rf.textContent="Refazer";
     rf.addEventListener("click",()=>{spkPhase="idle";renderSpkCard();});
     const sk=document.createElement("button"); sk.className="ghost"; sk.textContent="Pular";
@@ -1343,10 +1387,10 @@ function renderSim(c){
     c.innerHTML='<div class="lt">'+esc(sc.n)+' · pergunta '+(sim.qi+1)+' de '+sc.q.length+'</div><div class="simq" id="simQ">'+esc(q)+'</div><div class="hintv">Responda como você, no papel. Sem modelo: a resposta é sua.</div>';
     if(TTS){ $("#simQ").appendChild(spkBtn(q)); speak(q); }
     const b=document.createElement("button"); b.className="recbtn idle"; b.setAttribute("aria-label","Gravar");
-    b.addEventListener("click",()=>startRec(60000)); c.appendChild(b);
+    b.addEventListener("click",()=>startRec(60000,"s")); c.appendChild(b);
     const l=document.createElement("div"); l.className="reclab"; l.textContent="Toque para gravar a resposta"; c.appendChild(l);
   }else if(spkPhase==="rec"){
-    c.innerHTML='<div class="lt">Gravando</div><div class="simq">'+esc(q)+'</div>';
+    c.innerHTML='<div class="lt">Gravando</div><div class="simq">'+esc(q)+'</div>'+'<div class="rtimer"><span class="rlight g" id="rLight"></span><span id="rTime">0:00</span><span class="rlab" id="rLab"></span></div>';
     const b=document.createElement("button"); b.className="recbtn rec"; b.setAttribute("aria-label","Parar");
     b.addEventListener("click",stopRecNow); c.appendChild(b);
     const l=document.createElement("div"); l.className="reclab"; l.textContent="Fale e toque para parar"; c.appendChild(l);
