@@ -360,6 +360,7 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
         <button class="cam ppc on" data-m="r"><small>Responder</small><span>PT para EN</span></button>
         <button class="cam pp" data-m="b"><small>Blocos</small><span>Frases prontas</span></button>
         <button class="cam sp" data-m="e"><small>Eco</small><span>Ouça e repita</span></button>
+        <button class="cam" data-m="t"><small>Treino</small><span>Entrevista com modelo</span></button>
         <button class="cam" data-m="s"><small>Simulação</small><span>Cena real</span></button>
         <button class="cam" data-m="m"><small>Monólogo</small><span>Um minuto seu</span></button>
       </div>
@@ -370,7 +371,7 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
   <main id="plan" class="screen hidden"></main>
   <main id="prog" class="screen hidden"></main>
 
-  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v11.1 · hoje</footer>
+  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v12 · treino</footer>
 </div>
 <script>
 /* ===== dados ===== */
@@ -1174,7 +1175,24 @@ function renderPlan(){
 
 /* ===== estúdio de fala ===== */
 const MIC=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
-const SPK_R=["job1","job5","job10","job12","conv1","conv3","conv6","conv9","jay5","jay11","dur4","sta6","evi9","spp16","res4","pvr6"];
+const SPK_R=[
+ ["Trabalho com tecnologia há quinze anos.","I've been in tech for fifteen years."],
+ ["Estou na empresa atual desde abril de 2025.","I've been at my current company since April 2025."],
+ ["Acabei de sair de uma reunião.","I just got out of a meeting."],
+ ["Ainda não tive tempo de revisar o documento.","I haven't had a chance to review the document yet."],
+ ["Como você tem passado?","How have you been?"],
+ ["Faz tempo que a gente não se fala.","It's been a while."],
+ ["Ando muito ocupado ultimamente.","I've been really busy lately."],
+ ["Podemos voltar cinco minutos? Minha conexão caiu.","Can we go back five minutes? My connection dropped."],
+ ["Ainda não terminei a apresentação.","I haven't finished the deck yet."],
+ ["Estou nessa função há dois anos.","I've been in this role for two years."],
+ ["Vou precisar de mais um dia para isso.","I'll need one more day on this."],
+ ["Você já leu o contrato?","Have you read the contract?"],
+ ["A gente já resolveu isso ontem.","We already fixed that yesterday."],
+ ["Estou passando o relatório a limpo agora.","I've been going through the report."],
+ ["O time entregou tudo no prazo.","The team delivered everything on time."],
+ ["Te mando o resumo depois da call.","I'll send you a recap after the call."]
+];
 const SPK_B=[
  ["Oi, tudo bem? (informal de trabalho)","Hey, how's it going?"],
  ["Obrigado por reservar um tempo.","Thanks for taking the time."],
@@ -1205,7 +1223,7 @@ const SPK_B=[
  ["Qualquer coisa, me chama.","If anything comes up, just ping me."],
  ["Foi ótimo falar com você.","It was great talking to you."]
 ];
-const SPK_E=["dit1","dit3","dit7","dit9","dit10","dit15","dit16","conv2","conv5","conv8","job8","job9","job13","pas12"];
+const SPK_E=["dit1","dit3","dit7","dit9","dit10","dit15","conv2","conv5","conv8","job8","job9","job13"];
 const SPK_E2=[
  "That's a really good question. Let me think for a second.",
  "Here's the thing: we've been growing faster than expected.",
@@ -1214,7 +1232,9 @@ const SPK_E2=[
  "Correct me if I'm wrong, but that deadline has changed.",
  "At the end of the day, it's about the customer.",
  "Let me walk you through what we've been building.",
- "Sounds good. Let's touch base on Friday."
+ "Sounds good. Let's touch base on Friday.",
+ "The contract's been signed.",
+ "We've been getting a lot of questions about the deadline."
 ];
 const SPK_M=[
  "Um minuto: o que você anda fazendo no trabalho esta semana (I've been...), uma coisa que já concluiu (I've...) e um caso com data (Last week I...).",
@@ -1236,8 +1256,18 @@ const SIMS=[
  {n:"Reunião com fornecedor",q:["Thanks for joining. Where are we on the delivery?","The deadline was last Friday. What happened?","What can you commit to for next week?","Is there anything you need from our side?"]},
  {n:"Café e corredor",q:["Hey! How have you been?","How was your weekend?","Have you been to the new office yet?","Any plans for the holidays?"]}
 ];
+const TREINO=[
+ {q:"Tell me about yourself.",st:"Manchete, um capítulo, o agora. Quarenta segundos e pare.",a:"So, I've been in tech for about fifteen years. I started in infrastructure, spent six years at Buscapé running data and security, then moved into leadership at a couple of fintechs. Today I'm the CTO at a betting startup called UPBET. I run tech and product, a team of about fifty. That's the short version."},
+ {q:"Why are you looking to leave your current company?",st:"Sem falar mal de ninguém. Ciclo fechado, próximo desafio.",a:"Honestly, I've done what I came to do there. The platform's stable and the team runs well without me in the middle of everything. I want a bigger product challenge, and I'd rather move while things are good."},
+ {q:"What's your biggest strength?",st:"Uma força só, com prova concreta.",a:"I make messy things simple. When I joined, deploys took a full day and everyone was scared of them. Now we ship every day without drama. That's kind of my thing."},
+ {q:"What's your biggest weakness?",st:"Fraqueza real e o que você faz a respeito. Sem clichê.",a:"I still try to do too much myself. I've gotten better at delegating, but when there's a fire I catch myself grabbing the keyboard. My leads call me out on it, which helps."},
+ {q:"Tell me about a time something went wrong.",st:"História curta: o problema, o que você fez, o que mudou.",a:"We had a payment outage on a big game day. Worst possible timing. I got everyone on a call, we rolled back in twenty minutes, and the next week we changed the whole release process. It hasn't happened again."},
+ {q:"Why should we hire you?",st:"O que você entrega, em números simples.",a:"I've grown a team from fifteen to fifty without losing speed. I keep systems up, I ship, and I talk to the board in plain language. If that's what you need, I'm your guy."},
+ {q:"Where do you see yourself in a few years?",st:"Ambição clara, ligada à vaga.",a:"Running product and tech together. I like building the thing, and building the team that builds it. This role's a step in that direction."},
+ {q:"Do you have any questions for us?",st:"Tenha sempre duas na manga.",a:"Yeah, two. What does success look like for this role in the first six months? And what's the one thing slowing the team down the most right now?"}
+];
 let ECO=[];
-let spkMode="r",spkIdx={r:0,b:0,e:0,m:0},spkOrd={},spkPhase="idle",recURL=null;
+let spkMode="r",spkIdx={r:0,b:0,e:0,t:0,m:0},spkOrd={},spkPhase="idle",recURL=null;
 let sim={sc:-1,qi:0,urls:[]};
 let mediaStream=null,recDev=null,recChunks=[],recTimer=null,recTick=null,recStart=0,recCfg=null;
 function simReset(){ sim.urls.forEach(u=>{try{URL.revokeObjectURL(u)}catch(e){}}); sim={sc:-1,qi:0,urls:[]}; }
@@ -1287,9 +1317,9 @@ async function startRec(maxMs,cfg){
   recTimer=setTimeout(stopRecNow,maxMs);
 }
 function stopRecNow(){ clearTimeout(recTimer); clearInterval(recTick); if(recDev&&recDev.state==="recording") recDev.stop(); }
-function spkLen(){ return spkMode==="r"?SPK_R.length:spkMode==="b"?SPK_B.length:spkMode==="e"?ECO.length:SPK_M.length; }
+function spkLen(){ return spkMode==="r"?SPK_R.length:spkMode==="b"?SPK_B.length:spkMode==="e"?ECO.length:spkMode==="t"?TREINO.length:SPK_M.length; }
 function spkCue(){
-  if(spkMode==="r"){ const it=ITEMS.find(x=>x.id===SPK_R[spkOrd.r[spkIdx.r]]); return {cue:it.q,model:it.ans,hint:"Grave sua resposta antes de ver o modelo. Use: "+it.v}; }
+  if(spkMode==="r"){ const p=SPK_R[spkOrd.r[spkIdx.r]]; return {cue:p[0],model:p[1],hint:"Grave a sua versão antes de ver o modelo."}; }
   if(spkMode==="b"){ const p=SPK_B[spkOrd.b[spkIdx.b]]; return {cue:p[0],model:p[1],hint:"Bloco pronto (Lomb): ele compra tempo enquanto o resto do inglês chega."}; }
   if(spkMode==="e"){ const s=ECO[spkOrd.e[spkIdx.e]]; return {model:s}; }
   return {cue:SPK_M[spkOrd.m[spkIdx.m]]};
@@ -1298,8 +1328,8 @@ function spkAdvance(){ spkIdx[spkMode]=(spkIdx[spkMode]+1)%spkLen(); spkPhase="i
 function spkDone(xp){ S.xp+=xp; S.spk=(S.spk||0)+1; bumpStreak(); dayCk(spkMode==="m"?"m":"x"); save(); spkAdvance(); }
 function renderSpeak(){
   if(!ECO.length) ECO=SPK_E.map(id=>ITEMS.find(x=>x.id===id).ans).concat(SPK_E2);
-  ["r","b","e","m"].forEach(m=>{
-    const n=m==="r"?SPK_R.length:m==="b"?SPK_B.length:m==="e"?ECO.length:SPK_M.length;
+  ["r","b","e","t","m"].forEach(m=>{
+    const n=m==="r"?SPK_R.length:m==="b"?SPK_B.length:m==="e"?ECO.length:m==="t"?TREINO.length:SPK_M.length;
     spkOrd[m]=Array.from({length:n},(_,i)=>i); shuffle(spkOrd[m]); spkIdx[m]=0;
   });
   spkMode="r"; spkPhase="idle"; simReset();
@@ -1318,6 +1348,7 @@ function renderSpkCard(){
     return;
   }
   if(spkMode==="s"){ renderSim(c); return; }
+  if(spkMode==="t"){ renderTreino(c); return; }
   const cur=spkCue();
   if(spkPhase==="idle"){
     if(spkMode==="e"){
@@ -1423,6 +1454,30 @@ function renderSim(c){
     const ot=document.createElement("button"); ot.className="ghost"; ot.textContent="Outra cena";
     ot.addEventListener("click",()=>{ simReset(); spkPhase="pick"; renderSpkCard(); });
     row.appendChild(ag); row.appendChild(ot); c.appendChild(row);
+  }
+}
+
+function renderTreino(c){
+  const it=TREINO[spkOrd.t[spkIdx.t]], n=spkIdx.t+1;
+  if(spkPhase==="idle"){
+    c.innerHTML='<div class="lt">Treino · pergunta '+n+' de '+TREINO.length+'</div><div class="simq" id="trQ">'+esc(it.q)+'</div><div class="hintv">'+esc(it.st)+'</div><div class="spkrow"><div class="spklab">Resposta modelo (adapte os números para os seus)</div><div class="spkmodel" id="trA">'+esc(it.a)+'</div></div>';
+    if(TTS){ $("#trQ").appendChild(spkBtn(it.q)); $("#trA").appendChild(spkBtn(it.a)); speak(it.q); }
+    const b=document.createElement("button"); b.className="recbtn idle"; b.setAttribute("aria-label","Gravar");
+    b.addEventListener("click",()=>startRec(60000,"s")); c.appendChild(b);
+    const l=document.createElement("div"); l.className="reclab"; l.textContent="Leia, ouça e grave a sua versão"; c.appendChild(l);
+  }else if(spkPhase==="rec"){
+    c.innerHTML='<div class="lt">Gravando</div><div class="simq">'+esc(it.q)+'</div>'+'<div class="rtimer"><span class="rlight g" id="rLight"></span><span id="rTime">0:00</span><span class="rlab" id="rLab"></span></div>';
+  }else{
+    c.innerHTML='<div class="spkrow"><div class="spklab">Sua versão</div><audio controls src="'+recURL+'"></audio></div><div class="spkrow"><div class="spklab">Modelo</div><div class="spkmodel" id="trA2">'+esc(it.a)+'</div></div><div class="hintv">Compare o ritmo e as contrações. Bateu perto? Conclua e siga.</div>';
+    if(TTS) $("#trA2").appendChild(spkBtn(it.a));
+    const row=document.createElement("div"); row.className="row";
+    const ok=document.createElement("button"); ok.className="cta lnext"; ok.style.marginTop="14px"; ok.textContent="Consegui (+5 XP)";
+    ok.addEventListener("click",()=>spkDone(5));
+    const rf=document.createElement("button"); rf.className="ghost"; rf.textContent="Refazer";
+    rf.addEventListener("click",()=>{spkPhase="idle";renderSpkCard();});
+    const sk=document.createElement("button"); sk.className="ghost"; sk.textContent="Pular";
+    sk.addEventListener("click",spkAdvance);
+    row.appendChild(ok); row.appendChild(rf); row.appendChild(sk); c.appendChild(row);
   }
 }
 
