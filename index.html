@@ -244,6 +244,9 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
 .simq{font-family:var(--serif);font-size:1.22rem;margin-top:6px}
 .simrev{margin-top:14px;border-top:1px dashed var(--line);padding-top:10px}
 .simrev .sq{font-size:.88rem;color:var(--mut)}
+.off{margin-top:28px}
+.offl{font-size:.92rem;color:var(--mut);margin:9px 0 0;line-height:1.55}
+.offl b{color:var(--ink);font-weight:700}
 .epi{font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.5;margin:8px 0 4px}
 .epia{color:var(--mut);font-size:.88rem;margin-bottom:20px}
 .ptoday{font-size:1.08rem;line-height:1.7}
@@ -271,6 +274,13 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
 .rlight.y{background:var(--gold)}
 .rlight.r{background:var(--bad)}
 .rlab{color:var(--mut);font-size:.85rem;font-weight:400}
+.trcat{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:16px 0 4px}
+.trrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;background:#1C231F;color:var(--ink);font-weight:600;font-size:.92rem}
+.trrow:hover{border-color:var(--ink)}
+.trrow.done{opacity:.75}
+.trn{color:var(--mut);font-size:.78rem;min-width:20px}
+.trq{flex:1}
+.trok{color:var(--ok);font-weight:700}
 .play{display:inline-flex;align-items:center;gap:10px;background:var(--btn);color:var(--btntx);border-radius:999px;padding:13px 24px;font-weight:600;font-size:1rem;font-family:var(--ui)}
 .play:active{transform:scale(.98)}
 .spk{border:1.5px solid var(--line);border-radius:999px;padding:3px 12px;font-size:.78rem;font-weight:700;font-family:var(--ui);color:var(--mut);margin-left:8px;vertical-align:2px}
@@ -325,6 +335,14 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
     </section>
     <div class="stats" id="homeStats"></div>
     <div class="row" style="margin-top:2px"><button class="cta" id="todayBtn">Fazer o de hoje<span aria-hidden="true">→</span></button><button class="ghost" id="startBtn">Sessão avulsa</button><button class="ghost" id="speakBtn">Treinar a fala</button></div>
+
+      <section class="sec off">
+        <h2>Fora do app</h2>
+        <p class="offl"><b>Leitura · 10 min por dia.</b> Tecnologia em inglês: um artigo, um changelog, uma doc. Sem dicionário: pule a palavra desconhecida até ela se impor.</p>
+        <p class="offl"><b>Escuta · 20 min por dia.</b> Podcast ou vídeo com vozes nativas. O áudio daqui é sintético; o ouvido de verdade se treina em voz de gente.</p>
+        <p class="offl"><b>Correção viva.</b> O app grava, mas não corrige a sua fala. Quando o marco 2 do Plano acender, simule a entrevista comigo no chat.</p>
+        <p class="offl"><b>Gente de verdade.</b> Uma conversa real em inglês por semana, quando der. Errar na frente de alguém é o treino que nenhum app entrega.</p>
+      </section>
       </main>
 
   <main id="learn" class="screen hidden"></main>
@@ -371,7 +389,7 @@ footer{margin-top:40px;font-size:.78rem;color:var(--mut);text-align:center}
   <main id="plan" class="screen hidden"></main>
   <main id="prog" class="screen hidden"></main>
 
-  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v12 · treino</footer>
+  <footer>Atalhos: 1, 2 e 3 respondem, Enter confirma e continua. Toque em ouvir para treinar o ouvido.<br>até agora · v13.1 · fora do app</footer>
 </div>
 <script>
 /* ===== dados ===== */
@@ -1120,9 +1138,9 @@ function renderProg(){
 }
 
 /* ===== o dia de hoje ===== */
-const MODE_N={b:"Blocos",e:"Eco",r:"Responder",s:"Simulação"};
-const MODE_H={b:"Português na tela: fale o bloco em inglês e confira com o modelo.",e:"Ouça o modelo e repita gravando, imitando o ritmo.",r:"Traduza falando, grave, e só depois veja o modelo.",s:"Encarne o personagem: as perguntas tocam, as respostas são suas."};
-const DAY_M=[null,"b","e","r","e","b","s"];
+const MODE_N={b:"Blocos",e:"Eco",r:"Responder",s:"Simulação",t:"Treino de entrevista"};
+const MODE_H={b:"Português na tela: fale o bloco em inglês e confira com o modelo.",e:"Ouça o modelo e repita gravando, imitando o ritmo.",r:"Traduza falando, grave, e só depois veja o modelo.",s:"Encarne o personagem: as perguntas tocam, as respostas são suas.",t:"Escolha duas perguntas da lista: leia o modelo, grave a sua versão e compare."};
+const DAY_M=[null,"b","t","e","t","r","s"];
 function ckState(){ if(!S.day||S.day.d!==today()) S.day={d:today(),m:0,s:0,x:0,l:0}; return S.day; }
 function dayCk(k){ const c=ckState(); if(!c[k]){ c[k]=1; save(); } }
 function todayMonoIdx(){ const n=new Date(); return Math.floor((n-new Date(n.getFullYear(),0,0))/864e5)%SPK_M.length; }
@@ -1152,7 +1170,7 @@ function openSpeak(m){ spkGo=m; go("speak"); }
 
 /* ===== plano ===== */
 const PLAN_D=["Dom","Seg","Ter","Qua","Qui","Sex","Sáb"];
-const PLAN_X=["","Blocos (5 min)","Eco (5 min)","Responder (5 min)","Eco (5 min)","Blocos (5 min)","Simulação: uma cena completa (10 min)"];
+const PLAN_X=["","Blocos (5 min)","Treino de entrevista (5 min)","Eco (5 min)","Treino de entrevista (5 min)","Responder (5 min)","Simulação: uma cena completa (10 min)"];
 function renderPlan(){
   const d=new Date().getDay();
   const jm=ruleMastery("job"), dm=ruleMastery("dur");
@@ -1257,20 +1275,47 @@ const SIMS=[
  {n:"Café e corredor",q:["Hey! How have you been?","How was your weekend?","Have you been to the new office yet?","Any plans for the holidays?"]}
 ];
 const TREINO=[
- {q:"Tell me about yourself.",st:"Manchete, um capítulo, o agora. Quarenta segundos e pare.",a:"So, I've been in tech for about fifteen years. I started in infrastructure, spent six years at Buscapé running data and security, then moved into leadership at a couple of fintechs. Today I'm the CTO at a betting startup called UPBET. I run tech and product, a team of about fifty. That's the short version."},
- {q:"Why are you looking to leave your current company?",st:"Sem falar mal de ninguém. Ciclo fechado, próximo desafio.",a:"Honestly, I've done what I came to do there. The platform's stable and the team runs well without me in the middle of everything. I want a bigger product challenge, and I'd rather move while things are good."},
- {q:"What's your biggest strength?",st:"Uma força só, com prova concreta.",a:"I make messy things simple. When I joined, deploys took a full day and everyone was scared of them. Now we ship every day without drama. That's kind of my thing."},
- {q:"What's your biggest weakness?",st:"Fraqueza real e o que você faz a respeito. Sem clichê.",a:"I still try to do too much myself. I've gotten better at delegating, but when there's a fire I catch myself grabbing the keyboard. My leads call me out on it, which helps."},
- {q:"Tell me about a time something went wrong.",st:"História curta: o problema, o que você fez, o que mudou.",a:"We had a payment outage on a big game day. Worst possible timing. I got everyone on a call, we rolled back in twenty minutes, and the next week we changed the whole release process. It hasn't happened again."},
- {q:"Why should we hire you?",st:"O que você entrega, em números simples.",a:"I've grown a team from fifteen to fifty without losing speed. I keep systems up, I ship, and I talk to the board in plain language. If that's what you need, I'm your guy."},
- {q:"Where do you see yourself in a few years?",st:"Ambição clara, ligada à vaga.",a:"Running product and tech together. I like building the thing, and building the team that builds it. This role's a step in that direction."},
- {q:"Do you have any questions for us?",st:"Tenha sempre duas na manga.",a:"Yeah, two. What does success look like for this role in the first six months? And what's the one thing slowing the team down the most right now?"}
+ {cat:"Abertura",q:"Tell me about yourself.",st:"Manchete, um capítulo, o agora. Quarenta segundos e pare.",a:"So, I've been in tech for about fifteen years. I started in infrastructure, spent six years at Buscapé running data and security, then moved into leadership at a couple of fintechs. Today I'm the CTO at a betting startup called UPBET. I run tech and product, a team of about fifty. That's the short version."},
+ {cat:"Abertura",q:"Walk me through your resume.",st:"Cronologia rápida, três paradas, sem ler o currículo.",a:"Sure. Air Force IT early on, then databases for a few years. Six years at Buscapé, where I grew into security and data. After that, Banco Inter and a payments startup. And since last year I've been running tech and product at UPBET."},
+ {cat:"Abertura",q:"What do you know about our company?",st:"Duas coisas concretas. Pesquise antes, sempre.",a:"I did my homework. I know the product, I know roughly how you make money, and I've read what your CEO's been saying this year. What I'd love to hear from you is what's working and what isn't."},
+ {cat:"Abertura",q:"Why do you want to work here?",st:"Ligue o que eles têm ao que você quer construir.",a:"Two reasons. The problem's interesting, and you're at a size where a CTO can still touch the product. I've done the from-scratch phase and the big-company phase. This is the stage I like best."},
+ {cat:"Motivação",q:"Why are you looking to leave your current company?",st:"Sem falar mal de ninguém. Ciclo fechado, próximo desafio.",a:"Honestly, I've done what I came to do there. The platform's stable and the team runs well without me in the middle of everything. I want a bigger product challenge, and I'd rather move while things are good."},
+ {cat:"Motivação",q:"What are you looking for in your next role?",st:"Seja específico. Vago soa desesperado.",a:"Ownership of both tech and product, a real seat at the table, and a business that's growing. The title matters less than the scope."},
+ {cat:"Motivação",q:"Why should we hire you?",st:"O que você entrega, em números simples.",a:"I've grown a team from fifteen to fifty without losing speed. I keep systems up, I ship, and I talk to the board in plain language. If that's what you need, I'm your guy."},
+ {cat:"Motivação",q:"Where do you see yourself in a few years?",st:"Ambição clara, ligada à vaga.",a:"Running product and tech together. I like building the thing, and building the team that builds it. This role's a step in that direction."},
+ {cat:"Liderança",q:"What's your leadership style?",st:"Nomeie o estilo e prove com um hábito.",a:"Clear goals, short feedback loops, no micromanaging. I do weekly one-on-ones and I'm honest to a fault. People always know where they stand with me."},
+ {cat:"Liderança",q:"How do you handle underperformers?",st:"Processo humano e firme, com prazo.",a:"First a direct conversation, in private. We agree on what needs to change and we set a date. Most people turn it around. When they don't, I move fast, because the team's always watching."},
+ {cat:"Liderança",q:"Tell me about a conflict with a peer.",st:"Conflito real, resolvido como adulto.",a:"Our head of marketing wanted a launch date I thought was unsafe. We argued, then I showed him what could go wrong and we took a middle path: soft launch first. We shipped a week later and it went clean. He's still a friend, by the way."},
+ {cat:"Liderança",q:"How do you keep a team motivated under pressure?",st:"Pressão se administra com clareza, não com pizza.",a:"I'm honest about the situation, I cut everything that isn't critical, and I'm in the trenches with them. Afterwards, real rest and real credit. People don't burn out from work; they burn out from confusion."},
+ {cat:"Liderança",q:"How do you delegate?",st:"Delegue o resultado, não a tarefa.",a:"I hand people the problem, not the to-do list. We agree on the outcome and the deadline, and they own the how. I don't hover; I check at milestones."},
+ {cat:"Liderança",q:"Have you ever had to let someone go?",st:"Sim, com respeito e sem drama.",a:"Yes, more than once. It never gets easy, and it shouldn't. I do it face to face, I'm straight about the reasons, and I make sure the exit is fair. The worst thing you can do is drag it out."},
+ {cat:"Técnica e produto",q:"How do you decide between building and buying?",st:"Critério simples: o que é core, você constrói.",a:"If it's core to the business, we build. If it's a commodity, we buy and move on. At UPBET we built the betting engine and bought almost everything around it."},
+ {cat:"Técnica e produto",q:"How do you handle technical debt?",st:"Débito é decisão de negócio, não pecado.",a:"Debt's a loan, and loans can be smart. I keep a list, we pay some of it every sprint, and I'm loud when a shortcut is about to bite us. What I don't do is stop the roadmap for a rewrite."},
+ {cat:"Técnica e produto",q:"Tell me about a system you're proud of.",st:"Um sistema, um número de impacto.",a:"The betting platform we run today. It went from falling over on big game days to handling ten times the load without anyone losing sleep. That one's mine and the team's."},
+ {cat:"Técnica e produto",q:"How do you keep systems reliable?",st:"Prevenção, observabilidade e resposta.",a:"Boring deploys, good monitoring, and a clear on-call. When something breaks, we fix it, then we fix the process that let it happen. Uptime's a habit, not a project."},
+ {cat:"Técnica e produto",q:"How do you work with product?",st:"Sem guerra entre tech e produto: um roadmap só.",a:"At UPBET I actually run both, so the war doesn't exist: one roadmap, one set of priorities. Engineers sit in discovery calls. It's harder to build the wrong thing when you've heard the customer."},
+ {cat:"Técnica e produto",q:"How is your team using AI?",st:"Uso real, com controle. Nada de hype.",a:"Everyone codes with AI assistants now, and it shows in our speed. We also use it for support and fraud checks. The rule's simple: AI drafts, a human owns the result."},
+ {cat:"Comportamental",q:"Tell me about a time something went wrong.",st:"História curta: o problema, o que você fez, o que mudou.",a:"We had a payment outage on a big game day. Worst possible timing. I got everyone on a call, we rolled back in twenty minutes, and the next week we changed the whole release process. It hasn't happened again."},
+ {cat:"Comportamental",q:"What's your biggest strength?",st:"Uma força só, com prova concreta.",a:"I make messy things simple. When I joined, deploys took a full day and everyone was scared of them. Now we ship every day without drama. That's kind of my thing."},
+ {cat:"Comportamental",q:"What's your biggest weakness?",st:"Fraqueza real e o que você faz a respeito. Sem clichê.",a:"I still try to do too much myself. I've gotten better at delegating, but when there's a fire I catch myself grabbing the keyboard. My leads call me out on it, which helps."},
+ {cat:"Comportamental",q:"Tell me about a decision you got wrong.",st:"Erro verdadeiro e aprendizado aplicado.",a:"I once hired too fast to hit a deadline. Wrong person, bad six months. Now I'd rather run short-handed for a quarter than force a hire. That mistake made me slow down where it matters."},
+ {cat:"Comportamental",q:"Tell me about a time you disagreed with your boss.",st:"Discorde com dados, comprometa-se com a decisão.",a:"My CEO wanted to cut QA to move faster. I disagreed, showed what bugs were costing us, and we met in the middle: automation instead of headcount. And when I lose one of those, I commit anyway. That's the job."},
+ {cat:"Comportamental",q:"How do you handle tight deadlines?",st:"Escopo é a única variável honesta.",a:"Scope is the lever. The date and the quality don't move, so we cut features until it fits. I'd rather ship something small that works than something big that doesn't."},
+ {cat:"Rotina e comunicação",q:"What does your typical day look like?",st:"Manhã de decisões, tarde com pessoas.",a:"Mornings are for decisions: metrics, blockers, one or two deep topics. Afternoons are for people: one-on-ones, hiring, product reviews. And I'm hands-on a couple of hours a week, just to stay honest."},
+ {cat:"Rotina e comunicação",q:"How do you run remote teams?",st:"Remoto funciona com escrita e ritmo.",a:"Writing over meetings, a short daily, and everything important in one place anyone can read. I fly to São Paulo every week, so half my leadership is already remote. It works if the rhythm's sacred."},
+ {cat:"Rotina e comunicação",q:"How do you explain technical topics to non-technical people?",st:"Traduza para dinheiro, risco e tempo.",a:"I translate everything into money, risk, or time. The board doesn't care about Kubernetes; they care what happens if we don't do it. If I can't explain it simply, I don't understand it yet."},
+ {cat:"Rotina e comunicação",q:"How's your English?",st:"Honestidade desarmante, com prova de que funciona.",a:"It's a work in progress, honestly. I read and write every day, meetings are fine, and I've been training the speaking part hard. Bear with my accent and I'll get you the right answer."},
+ {cat:"Fecho",q:"What are your salary expectations?",st:"Devolva a pergunta ou dê faixa. Nunca um número seco.",a:"I'd rather understand the full package first: base, bonus, equity. What's the range you have for this role? I'm sure we'll find common ground if the fit is right."},
+ {cat:"Fecho",q:"When could you start?",st:"Disponível, mas profissional.",a:"I'd need about thirty days to hand things over properly. I wouldn't leave my current team in the dark, and you wouldn't want a CTO who would."},
+ {cat:"Fecho",q:"Are you open to relocation or travel?",st:"Resposta real: base em Porto Alegre, viaja bem.",a:"I'm based in Porto Alegre and I already fly to São Paulo every week, so travel's not a problem. Relocation depends on the role. I'm open to that conversation."},
+ {cat:"Fecho",q:"Do you have any questions for us?",st:"Tenha sempre duas na manga.",a:"Yeah, two. What does success look like for this role in the first six months? And what's the one thing slowing the team down the most right now?"}
 ];
 let ECO=[];
 let spkMode="r",spkIdx={r:0,b:0,e:0,t:0,m:0},spkOrd={},spkPhase="idle",recURL=null;
 let sim={sc:-1,qi:0,urls:[]};
+let trIdx=-1,trDone=new Set();
 let mediaStream=null,recDev=null,recChunks=[],recTimer=null,recTick=null,recStart=0,recCfg=null;
-function simReset(){ sim.urls.forEach(u=>{try{URL.revokeObjectURL(u)}catch(e){}}); sim={sc:-1,qi:0,urls:[]}; }
+function simReset(){ sim.urls.forEach(u=>{try{URL.revokeObjectURL(u)}catch(e){}}); sim={sc:-1,qi:0,urls:[]}; trIdx=-1; }
 function stopTracks(){ if(mediaStream){ mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; } }
 function updTimer(){
   const el=Date.now()-recStart, s=Math.floor(el/1000);
@@ -1332,7 +1377,7 @@ function renderSpeak(){
     const n=m==="r"?SPK_R.length:m==="b"?SPK_B.length:m==="e"?ECO.length:m==="t"?TREINO.length:SPK_M.length;
     spkOrd[m]=Array.from({length:n},(_,i)=>i); shuffle(spkOrd[m]); spkIdx[m]=0;
   });
-  spkMode="r"; spkPhase="idle"; simReset();
+  spkMode="r"; spkPhase="idle"; simReset(); trDone=new Set();
   if(spkGo){
     spkMode=spkGo; spkGo=null;
     if(spkMode==="m"){ const t=todayMonoIdx(); const p=spkOrd.m.indexOf(t); if(p>0){ spkOrd.m.splice(p,1); spkOrd.m.unshift(t); } spkIdx.m=0; }
@@ -1458,26 +1503,43 @@ function renderSim(c){
 }
 
 function renderTreino(c){
-  const it=TREINO[spkOrd.t[spkIdx.t]], n=spkIdx.t+1;
-  if(spkPhase==="idle"){
-    c.innerHTML='<div class="lt">Treino · pergunta '+n+' de '+TREINO.length+'</div><div class="simq" id="trQ">'+esc(it.q)+'</div><div class="hintv">'+esc(it.st)+'</div><div class="spkrow"><div class="spklab">Resposta modelo (adapte os números para os seus)</div><div class="spkmodel" id="trA">'+esc(it.a)+'</div></div>';
+  if(trIdx<0){
+    let hh='<div class="lt">Treino de entrevista · '+trDone.size+' de '+TREINO.length+' nesta visita</div><div class="hintv">Toque numa pergunta: estratégia, resposta modelo e a sua gravação na mesma tela. No dia do plano, duas bastam.</div>';
+    let cat="";
+    TREINO.forEach((t,ix)=>{
+      if(t.cat!==cat){ cat=t.cat; hh+='<div class="trcat">'+cat+'</div>'; }
+      hh+='<button class="trrow'+(trDone.has(ix)?" done":"")+'" data-i="'+ix+'"><span class="trn">'+(ix+1)+'</span><span class="trq">'+esc(t.q)+'</span>'+(trDone.has(ix)?'<span class="trok">&#10003;</span>':'')+'</button>';
+    });
+    c.innerHTML=hh;
+    c.querySelectorAll(".trrow").forEach(b=>b.addEventListener("click",()=>{ trIdx=+b.dataset.i; spkPhase="q"; renderSpkCard(); }));
+    return;
+  }
+  const it=TREINO[trIdx];
+  if(spkPhase==="rec"){
+    c.innerHTML='<div class="lt">Gravando</div><div class="simq">'+esc(it.q)+'</div>'+'<div class="rtimer"><span class="rlight g" id="rLight"></span><span id="rTime">0:00</span><span class="rlab" id="rLab"></span></div>';
+    const b=document.createElement("button"); b.className="recbtn rec"; b.setAttribute("aria-label","Parar");
+    b.addEventListener("click",stopRecNow); c.appendChild(b);
+    const l=document.createElement("div"); l.className="reclab"; l.textContent="Fale e toque para parar"; c.appendChild(l);
+  }else if(spkPhase==="review"){
+    c.innerHTML='<div class="spkrow"><div class="spklab">Sua versão</div><audio controls src="'+recURL+'"></audio></div><div class="spkrow"><div class="spklab">Modelo</div><div class="spkmodel" id="trA2">'+esc(it.a)+'</div></div><div class="hintv">Compare o ritmo e as contrações. Bateu perto? Conclua e volte à lista.</div>';
+    if(TTS) $("#trA2").appendChild(spkBtn(it.a));
+    const row=document.createElement("div"); row.className="row";
+    const ok=document.createElement("button"); ok.className="cta lnext"; ok.style.marginTop="14px"; ok.textContent="Consegui (+5 XP)";
+    ok.addEventListener("click",()=>{ S.xp+=5; S.spk=(S.spk||0)+1; bumpStreak(); dayCk("x"); save(); trDone.add(trIdx); trIdx=-1; spkPhase="idle"; renderSpkCard(); });
+    const rf=document.createElement("button"); rf.className="ghost"; rf.textContent="Refazer";
+    rf.addEventListener("click",()=>{spkPhase="q";renderSpkCard();});
+    const vv=document.createElement("button"); vv.className="ghost"; vv.textContent="Voltar à lista";
+    vv.addEventListener("click",()=>{ trIdx=-1; spkPhase="idle"; renderSpkCard(); });
+    row.appendChild(ok); row.appendChild(rf); row.appendChild(vv); c.appendChild(row);
+  }else{
+    c.innerHTML='<div class="lt">Pergunta '+(trIdx+1)+' · '+esc(it.cat)+'</div><div class="simq" id="trQ">'+esc(it.q)+'</div><div class="hintv">'+esc(it.st)+'</div><div class="spkrow"><div class="spklab">Resposta modelo (adapte os números para os seus)</div><div class="spkmodel" id="trA">'+esc(it.a)+'</div></div>';
     if(TTS){ $("#trQ").appendChild(spkBtn(it.q)); $("#trA").appendChild(spkBtn(it.a)); speak(it.q); }
     const b=document.createElement("button"); b.className="recbtn idle"; b.setAttribute("aria-label","Gravar");
     b.addEventListener("click",()=>startRec(60000,"s")); c.appendChild(b);
     const l=document.createElement("div"); l.className="reclab"; l.textContent="Leia, ouça e grave a sua versão"; c.appendChild(l);
-  }else if(spkPhase==="rec"){
-    c.innerHTML='<div class="lt">Gravando</div><div class="simq">'+esc(it.q)+'</div>'+'<div class="rtimer"><span class="rlight g" id="rLight"></span><span id="rTime">0:00</span><span class="rlab" id="rLab"></span></div>';
-  }else{
-    c.innerHTML='<div class="spkrow"><div class="spklab">Sua versão</div><audio controls src="'+recURL+'"></audio></div><div class="spkrow"><div class="spklab">Modelo</div><div class="spkmodel" id="trA2">'+esc(it.a)+'</div></div><div class="hintv">Compare o ritmo e as contrações. Bateu perto? Conclua e siga.</div>';
-    if(TTS) $("#trA2").appendChild(spkBtn(it.a));
-    const row=document.createElement("div"); row.className="row";
-    const ok=document.createElement("button"); ok.className="cta lnext"; ok.style.marginTop="14px"; ok.textContent="Consegui (+5 XP)";
-    ok.addEventListener("click",()=>spkDone(5));
-    const rf=document.createElement("button"); rf.className="ghost"; rf.textContent="Refazer";
-    rf.addEventListener("click",()=>{spkPhase="idle";renderSpkCard();});
-    const sk=document.createElement("button"); sk.className="ghost"; sk.textContent="Pular";
-    sk.addEventListener("click",spkAdvance);
-    row.appendChild(ok); row.appendChild(rf); row.appendChild(sk); c.appendChild(row);
+    const vv=document.createElement("button"); vv.className="ghost"; vv.textContent="Voltar à lista"; vv.style.display="block"; vv.style.margin="10px auto 0";
+    vv.addEventListener("click",()=>{ trIdx=-1; spkPhase="idle"; renderSpkCard(); });
+    c.appendChild(vv);
   }
 }
 
